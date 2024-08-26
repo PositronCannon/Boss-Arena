@@ -1,0 +1,7 @@
+title = "ESDStudioProject"
+[project_info]
+name = "bossarenadevprogression"
+base_directory = "D:\\Juegos HDD\\Mods\\ER mods\\ESDStudio_v0.6.1\\net6.0-windows\\Projects\\bossarenadevprogression"
+game_directory = "D:\\Juegos HDD\\ELDEN RING modded\\Game"
+mod_directory = "D:\\Juegos HDD\\Mods\\ER mods\\Boss Arena\\ModEngine-2.1.0.0-win64 - boss arena dev (progression)\\mod"
+game = "er"
