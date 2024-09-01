@@ -95,89 +95,84 @@ def t314001110_x5(actionbutton1=6000, flag1=6001, flag2=6000, flag3=6000, flag4=
     
 def t314001110_x3():
     while True:
-        """State 0"""
         c1_110()
         ClearTalkActionState()
         ClearTalkListData()
         # action:99999000:"weapons"
         AddTalkListData(1, 99999000, -1)
+        #upgraded weapons
+        AddTalkListData(2, 99999029, -1)
         # action:99999001:"armor"
-        AddTalkListData(2, 99999001, -1)
+        AddTalkListData(3, 99999001, -1)
         # action:99999002:"spells"
-        AddTalkListData(3, 99999002, -1)
+        AddTalkListData(4, 99999002, -1)
         # action:99999005:"ashes of war"
-        AddTalkListData(4, 99999005, -1)
+        AddTalkListData(5, 99999005, -1)
         # action:99999003:"talismans"
-        AddTalkListData(5, 99999003, -1)
+        AddTalkListData(6, 99999003, -1)
         # action:99999007:"spirit ashes"
-        AddTalkListData(6, 99999007, -1)
+        AddTalkListData(7, 99999007, -1)
+        # upgraded spirit ashes
+        AddTalkListData(8, 99999035, -1)
         # action:99999009:"tools/misc"
-        AddTalkListData(7, 99999009, -1)
+        AddTalkListData(9, 99999009, -1)
         # action:99999006:"consumables"
-        AddTalkListData(8, 99999006, -1)
+        AddTalkListData(10, 99999006, -1)
         # action:99999004:"Ammunition"
-        AddTalkListData(9, 99999004, -1)
+        AddTalkListData(11, 99999004, -1)
         # action:99999008:"materials"
-        AddTalkListData(10, 99999008, -1)
+        AddTalkListData(12, 99999008, -1)
         # action:99999012:"DLC items"
-        AddTalkListData(11, 99999012, -1)
+        AddTalkListData(13, 99999012, -1)
         # action:99999010:"gestures"
-        AddTalkListData(12, 99999010, -1)
+        AddTalkListData(14, 99999010, -1)
         # action:20000009:"Leave"
         AddTalkListData(99, 20000009, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
-        """State 1"""
         if GetTalkListEntryResult() == 1:
-            """State 2"""
             assert t314001110_4()
         elif GetTalkListEntryResult() == 2:
-            """State 3"""
-            assert t314001110_5()
+            assert t314001110_8()
         elif GetTalkListEntryResult() == 3:
-            """State 4"""
-            assert t314001110_6()
+            assert t314001110_5()
         elif GetTalkListEntryResult() == 4:
-            """State 5"""
+            assert t314001110_6()
+        elif GetTalkListEntryResult() == 5:
             OpenRegularShop(9150000, 9150099)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
-        elif GetTalkListEntryResult() == 5:
-            """State 6"""
+        elif GetTalkListEntryResult() == 6:
             OpenRegularShop(9130000, 9130200)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
-        elif GetTalkListEntryResult() == 6:
-            """State 7"""
+        elif GetTalkListEntryResult() == 7:
             OpenRegularShop(9160000, 9160099)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
-        elif GetTalkListEntryResult() == 7:
-            """State 8"""
-            OpenRegularShop(9190000, 9190099)
-            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 8:
-            """State 9"""
-            OpenRegularShop(9170000, 9170199)
+            OpenRegularShop(9260000, 9260099)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 9:
-            """State 10"""
-            OpenRegularShop(9140000, 9140099)
+            OpenRegularShop(9190000, 9190099)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 10:
-            """State 11"""
-            OpenRegularShop(9180100, 9180199)
+            OpenRegularShop(9170000, 9170199)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 11:
-            """State 12"""
-            assert t314001110_7()
+            OpenRegularShop(9140000, 9140099)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 12:
-            """State 13"""
+            OpenRegularShop(9180100, 9180199)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 13:
+            assert t314001110_7()
+        elif GetTalkListEntryResult() == 14:
             assert t314001110_3()
         else:
-            """State 14"""
             return 0
-            
+
+#base weapons
 def t314001110_4():
     while True:
-        """State 0"""
+        c1_110()
         ClearTalkActionState()
         ClearTalkListData()
         # action:99990202:"western swords"
@@ -202,50 +197,98 @@ def t314001110_4():
         AddTalkListData(99, 20000009, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
-        """State 1"""
         if GetTalkListEntryResult() == 1:
-            """State 2"""
             OpenRegularShop(9100000, 9100099)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 2:
-            """State 3"""
             OpenRegularShop(9100100, 9100199)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 3:
-            """State 4"""
             OpenRegularShop(9100200, 9100299)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 4:
-            """State 5"""
             OpenRegularShop(9100300, 9100399)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 5:
-            """State 6"""
             OpenRegularShop(9100400, 9100499)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 6:
-            """State 7"""
             OpenRegularShop(9100500, 9100599)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 7:
-            """State 8"""
             OpenRegularShop(9100600, 9100699)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 8:
-            """State 9"""
             OpenRegularShop(9100700, 9100799)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 9:
-            """State 10"""
             OpenRegularShop(9100800, 9100899)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         else:
-            """State 11"""
+            return 0
+            
+#upgraded weapons
+def t314001110_8():
+    while True:
+        c1_110()
+        ClearTalkActionState()
+        ClearTalkListData()
+        # action:99990202:"western swords"
+        AddTalkListData(1, 99990202, -1)
+        # action:99990201:"eastern swords"
+        AddTalkListData(2, 99990201, -1)
+        # action:99990206:"axes/hammers/flails/colossals"
+        AddTalkListData(3, 99990206, -1)
+        # action:28000015:"spears/halberds/reapers"
+        AddTalkListData(4, 28000015, -1)
+        # action:28000014:"daggers/whips/fists/claws"
+        AddTalkListData(5, 28000014, -1)
+        # action:28000013:"ranged weapons"
+        AddTalkListData(6, 28000013, -1)
+        # action:28000012:"staves/seals"
+        AddTalkListData(7, 28000012, -1)
+        # action:28000011:"shields"
+        AddTalkListData(8, 28000011, -1)
+        # action:28000010:"torches"
+        AddTalkListData(9, 28000010, -1)
+        # action:20000009:"Leave"
+        AddTalkListData(99, 20000009, -1)
+        ShowShopMessage(1)
+        assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        if GetTalkListEntryResult() == 1:
+            OpenRegularShop(9200000, 9200099)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 2:
+            OpenRegularShop(9200100, 9200199)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 3:
+            OpenRegularShop(9200200, 9200299)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 4:
+            OpenRegularShop(9200300, 9200399)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 5:
+            OpenRegularShop(9200400, 9200499)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 6:
+            OpenRegularShop(9200500, 9200599)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 7:
+            OpenRegularShop(9200600, 9200699)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 8:
+            OpenRegularShop(9200700, 9200799)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 9:
+            OpenRegularShop(9200800, 9200899)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        else:
             return 0
 
 def t314001110_5():
     while True:
         """State 0"""
+        c1_110()
         ClearTalkActionState()
         ClearTalkListData()
         # action:28000009:"head armor"
@@ -284,6 +327,7 @@ def t314001110_5():
 def t314001110_6():
     while True:
         """State 0"""
+        c1_110()
         ClearTalkActionState()
         ClearTalkListData()
         # action:26001165:"attack sorceries"
@@ -477,70 +521,69 @@ def t314001110_3():
             
 def t314001110_7():
     while True:
-        """State 0"""
+        c1_110()
         ClearTalkActionState()
         ClearTalkListData()
         # action:99999013:"DLC weapons"
         AddTalkListData(1, 99999013, -1)
+        # upgraded dlc weapons
+        AddTalkListData(2, 99999034, -1)
         # action:99999014:"DLC armor"
-        AddTalkListData(2, 99999014, -1)
+        AddTalkListData(3, 99999014, -1)
         # action:99999015:"DLC spells"
-        AddTalkListData(3, 99999015, -1)
+        AddTalkListData(4, 99999015, -1)
         # action:99999016:"DLC ashes of war"
-        AddTalkListData(4, 99999017, -1)
+        AddTalkListData(5, 99999017, -1)
         # action:99999017:"DLC talismans"
-        AddTalkListData(5, 99999016, -1)
+        AddTalkListData(6, 99999016, -1)
         # action:99999018:"DLC spirit ashes"
-        AddTalkListData(6, 99999018, -1)
+        AddTalkListData(7, 99999018, -1)
+        # dlc upgraded spirit ashes
+        AddTalkListData(8, 99999036, -1)
         # action:99999024:"DLC misc items"
-        AddTalkListData(7, 99999024, -1)
+        AddTalkListData(9, 99999024, -1)
         # action:99999019:"DLC consumables/ammo"
-        AddTalkListData(8, 99999019, -1)
+        AddTalkListData(10, 99999019, -1)
         # action:99999023:"DLC materials"
-        AddTalkListData(9, 99999023, -1)
+        AddTalkListData(11, 99999023, -1)
         # action:20000009:"Leave"
         AddTalkListData(99, 20000009, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
-        """State 1"""
         if GetTalkListEntryResult() == 1:
-            """State 2"""
             OpenRegularShop(8000000, 8000199)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 2:
-            """State 3"""
-            OpenRegularShop(8000200, 8000399)
+            OpenRegularShop(8002000, 8002199)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 3:
-            """State 4"""
-            OpenRegularShop(8000500, 8000599)
+            OpenRegularShop(8000200, 8000399)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 4:
-            """State 5"""
-            OpenRegularShop(8000600, 8000699)
+            OpenRegularShop(8000500, 8000599)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 5:
-            """State 6"""
-            OpenRegularShop(8000400, 8000499)
+            OpenRegularShop(8000600, 8000699)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 6:
-            """State 7"""
-            OpenRegularShop(8000700, 8000799)
+            OpenRegularShop(8000400, 8000499)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 7:
-            """State 8"""
-            OpenRegularShop(8000900, 8000999)
+            OpenRegularShop(8000700, 8000799)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 8:
-            """State 9"""
-            OpenRegularShop(8000800, 8000899)
+            OpenRegularShop(8001700, 8001799)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         elif GetTalkListEntryResult() == 9:
-            """State 10"""
+            OpenRegularShop(8000900, 8000999)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 10:
+            OpenRegularShop(8000800, 8000899)
+            assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        elif GetTalkListEntryResult() == 11:
             OpenRegularShop(8001000, 8001099)
             assert not (CheckSpecificPersonMenuIsOpen(5, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         else:
-            """State 11"""
             return 0
 
 def t314001110_x6():
