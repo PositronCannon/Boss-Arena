@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //infinite hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
     InitializeCommonEvent(0, 90005250, 2050470800, 2050472800, 0, -1);
     InitializeEvent(0, 2050472810, 2050470800, 906251600, 12);
     InitializeEvent(0, 2050472811, 2050480860, 906251601, 12);
@@ -69,12 +67,12 @@ $Event(2050472205, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
             && (InArea(10000, X4_4) || EntityInRadiusOfEntity(10000, X0_4, X12_4, 1)));
     if (EntityInRadiusOfEntity(10000, X0_4, X12_4, 1)
         || InArea(10000, X8_4)
-        || HasDamageType(X0_4, 0, DamageType.Unspecified)
-        || CharacterHasStateInfo(X0_4, 436)
-        || CharacterHasStateInfo(X0_4, 2)
-        || CharacterHasStateInfo(X0_4, 5)
-        || CharacterHasStateInfo(X0_4, 6)
-        || CharacterHasStateInfo(X0_4, 260)) {
+        || (HasDamageType(X0_4, 0, DamageType.Unspecified)
+            || CharacterHasStateInfo(X0_4, 436)
+            || CharacterHasStateInfo(X0_4, 2)
+            || CharacterHasStateInfo(X0_4, 5)
+            || CharacterHasStateInfo(X0_4, 6)
+            || CharacterHasStateInfo(X0_4, 260))) {
         SetSpEffect(X16_4, 20013351);
         ForceAnimationPlayback(X0_4, 3020, false, false, false);
         EndEvent();
@@ -90,7 +88,7 @@ L0:
 
 $Event(2050472400, Restart, function() {
     EndIf(EventFlag(2050470400));
-    WaitFor(EventFlag(2050470800) && EventFlag(2050480800));
+    WaitFor(EventFlag(2050470800) && EventFlag(2050480860));
     SetEventFlagID(2050470400, ON);
 });
 
@@ -191,23 +189,15 @@ L0:
     WaitFor(CharacterHPValue(X8_4) <= 0);
     WaitFixedTimeSeconds(2);
     PlaySE(X8_4, SoundType.SFX, 888880000);
-    WaitFor(CharacterDead(2050470800) && CharacterDead(2050480860));
-    HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.EnemyFelled);
-    WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0)
-L7:
+    WaitFor(CharacterDead(X8_4));
     if (CharacterAIState(2050480860, AIStateType.Combat) && FieldBattleBGMActive(12)) {
         DisplayBossHealthBar(Enabled, 2050480860, 1, 906251601);
     }
-    SetEventFlagID(X0_4, ON);
-    if (X4_4 != 0) {
-        SetEventFlagID(X4_4, ON);
-    }
-    EndIf(!PlayerIsInOwnWorld());
-    EndIf(Signed(X16_4) == 0);
-    EndEvent();
-    WaitFixedTimeSeconds(X20_4);
-    WaitFixedTimeSeconds(X12_4);
+    WaitFor(CharacterDead(2050480860) && CharacterDead(2050470800));
+    HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.EnemyFelled);
+    //roundtable warp
+    WaitFixedTimeSeconds(6);
+    WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(2050472821, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
@@ -228,36 +218,25 @@ L0:
     WaitFor(CharacterHPValue(X8_4) <= 0);
     WaitFixedTimeSeconds(2);
     PlaySE(X8_4, SoundType.SFX, 888880000);
-    WaitFor(CharacterDead(2050470800) && CharacterDead(2050480860));
-    HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.EnemyFelled);
-    WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
-L7:
+    WaitFor(CharacterDead(X8_4));
     if (CharacterAIState(2050470800, AIStateType.Combat) && FieldBattleBGMActive(12)) {
         DisplayBossHealthBar(Enabled, 2050470800, 0, 906251600);
     }
-    SetEventFlagID(X0_4, ON);
-    if (X4_4 != 0) {
-        SetEventFlagID(X4_4, ON);
-    }
-    EndIf(!PlayerIsInOwnWorld());
-    EndIf(Signed(X16_4) == 0);
-
-    EndEvent();
-    WaitFixedTimeSeconds(X20_4);
-    WaitFixedTimeSeconds(X12_4);
+    WaitFor(CharacterDead(2050480860) && CharacterDead(2050470800));
+    HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.EnemyFelled);
+    //roundtable warp
+    WaitFixedTimeSeconds(6);
+    WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(2050470705, Restart, function() {
     WaitFixedTimeFrames(1);
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(2051459752, OFF);
-    EndIf(EventFlag(2050470800));
+    EndIf(EventFlag(2050470400));
     EndIf(!EventFlag(2051459708) && !EventFlag(2051459719) && !EventFlag(2051459720));
     EndIf(EventFlag(25000800));
     SetEventFlagID(2051459752, ON);
-    WaitFor(EventFlag(2050470800) || EventFlag(25000800));
+    WaitFor(EventFlag(2050470400) || EventFlag(25000800));
     SetEventFlagID(2051459752, OFF);
 });
-
-

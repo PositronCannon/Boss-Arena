@@ -313,3 +313,6 @@ L0:
     RequestAssetDestruction(2046461501, 0);
     SetEventFlagID(2046460500, ON);
 });
+
+
+

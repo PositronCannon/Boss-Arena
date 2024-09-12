@@ -364,6 +364,17 @@ L0:
     SetEventFlagID(41022835, OFF);
     SetEventFlagID(41022836, OFF);
     SetEventFlagID(41022837, OFF);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkUpdateAuthority(41020800, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020810, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020811, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020812, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020813, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020814, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020815, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020816, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(41020817, AuthorityLevel.Forced);
+    }
     if (!EventFlag(41020801)) {
         WaitFor(EventFlag(41022805) && InArea(10000, 41022800));
         SetNetworkconnectedEventFlagID(41020801, ON);
@@ -379,14 +390,15 @@ L2:
 
 $Event(41022811, Restart, function() {
     EndIf(EventFlag(41020800));
-    WaitFor(CharacterHasSpEffect(41020800, 20018688));
+    WaitFor(CharacterHasSpEffect(41020800, 20018016));
     SetEventFlagID(41022802, ON);
 });
 
 $Event(41022815, Restart, function() {
     EndIf(EventFlag(41020800));
     WaitFor(
-        (CharacterHasSpEffect(41020800, 20018016)
+        (PlayerIsInOwnWorld()
+            && CharacterHasSpEffect(41020800, 20018016)
             && CharacterDead(41020810)
             && CharacterDead(41020811)
             && CharacterDead(41020812)
@@ -395,7 +407,7 @@ $Event(41022815, Restart, function() {
             && CharacterDead(41020815)
             && CharacterDead(41020816)
             && CharacterDead(41020817))
-            || CharacterHasSpEffect(41020800, 20018653));
+            || (PlayerIsInOwnWorld() && CharacterHasSpEffect(41020800, 20018653)));
     GotoIf(L0, EventFlag(41022820));
     GotoIf(L1, EventFlag(41022821));
     GotoIf(L2, EventFlag(41022822));
@@ -427,6 +439,14 @@ L0:
     InvokeEnemyGenerator(41024815);
     InvokeEnemyGenerator(41024816);
     InvokeEnemyGenerator(41024817);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020811, TargetEntityType.Area, 41022811, -1);
     IssueShortWarpRequest(41020812, TargetEntityType.Area, 41022812, -1);
     IssueShortWarpRequest(41020813, TargetEntityType.Area, 41022813, -1);
@@ -443,7 +463,7 @@ L0:
     ForceAnimationPlayback(41020817, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022810, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 L1:
@@ -469,6 +489,14 @@ L1:
     InvokeEnemyGenerator(41024815);
     InvokeEnemyGenerator(41024816);
     InvokeEnemyGenerator(41024817);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020810, TargetEntityType.Area, 41022810, -1);
     IssueShortWarpRequest(41020812, TargetEntityType.Area, 41022812, -1);
     IssueShortWarpRequest(41020813, TargetEntityType.Area, 41022813, -1);
@@ -485,7 +513,7 @@ L1:
     ForceAnimationPlayback(41020817, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022811, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 L2:
@@ -511,6 +539,14 @@ L2:
     InvokeEnemyGenerator(41024815);
     InvokeEnemyGenerator(41024816);
     InvokeEnemyGenerator(41024817);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020810, TargetEntityType.Area, 41022810, -1);
     IssueShortWarpRequest(41020811, TargetEntityType.Area, 41022811, -1);
     IssueShortWarpRequest(41020813, TargetEntityType.Area, 41022813, -1);
@@ -527,7 +563,7 @@ L2:
     ForceAnimationPlayback(41020817, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022812, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 L3:
@@ -553,6 +589,14 @@ L3:
     InvokeEnemyGenerator(41024815);
     InvokeEnemyGenerator(41024816);
     InvokeEnemyGenerator(41024817);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020810, TargetEntityType.Area, 41022810, -1);
     IssueShortWarpRequest(41020811, TargetEntityType.Area, 41022811, -1);
     IssueShortWarpRequest(41020812, TargetEntityType.Area, 41022812, -1);
@@ -569,7 +613,7 @@ L3:
     ForceAnimationPlayback(41020817, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022813, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 L4:
@@ -595,6 +639,14 @@ L4:
     InvokeEnemyGenerator(41024815);
     InvokeEnemyGenerator(41024816);
     InvokeEnemyGenerator(41024817);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020810, TargetEntityType.Area, 41022810, -1);
     IssueShortWarpRequest(41020811, TargetEntityType.Area, 41022811, -1);
     IssueShortWarpRequest(41020812, TargetEntityType.Area, 41022812, -1);
@@ -611,7 +663,7 @@ L4:
     ForceAnimationPlayback(41020817, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022814, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 L5:
@@ -637,6 +689,14 @@ L5:
     InvokeEnemyGenerator(41024810);
     InvokeEnemyGenerator(41024816);
     InvokeEnemyGenerator(41024817);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020810, TargetEntityType.Area, 41022810, -1);
     IssueShortWarpRequest(41020811, TargetEntityType.Area, 41022811, -1);
     IssueShortWarpRequest(41020812, TargetEntityType.Area, 41022812, -1);
@@ -653,7 +713,7 @@ L5:
     ForceAnimationPlayback(41020817, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022815, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 L6:
@@ -679,6 +739,14 @@ L6:
     InvokeEnemyGenerator(41024815);
     InvokeEnemyGenerator(41024810);
     InvokeEnemyGenerator(41024817);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020810, TargetEntityType.Area, 41022810, -1);
     IssueShortWarpRequest(41020811, TargetEntityType.Area, 41022811, -1);
     IssueShortWarpRequest(41020812, TargetEntityType.Area, 41022812, -1);
@@ -695,7 +763,7 @@ L6:
     ForceAnimationPlayback(41020817, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022816, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 L7:
@@ -721,6 +789,14 @@ L7:
     InvokeEnemyGenerator(41024815);
     InvokeEnemyGenerator(41024816);
     InvokeEnemyGenerator(41024810);
+    SetNetworkUpdateRate(41020810, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020811, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020812, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020813, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020814, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020815, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020816, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(41020817, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(41020810, TargetEntityType.Area, 41022810, -1);
     IssueShortWarpRequest(41020811, TargetEntityType.Area, 41022811, -1);
     IssueShortWarpRequest(41020812, TargetEntityType.Area, 41022812, -1);
@@ -737,7 +813,7 @@ L7:
     ForceAnimationPlayback(41020816, 61020, false, false, false);
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022817, -1);
     ForceAnimationPlayback(41020800, 61020, false, false, false);
-    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeRealFrames(60);
     SetEventFlagID(41022832, OFF);
     RestartEvent();
 });
@@ -945,6 +1021,7 @@ L10:
 
 $Event(41022852, Restart, function() {
     EndIf(EventFlag(41020800));
+    EndIf(!PlayerIsInOwnWorld());
     WaitFor(CharacterHasSpEffect(41020800, 20018654) || CharacterHasSpEffect(41020800, 20018639));
     if (!EventFlag(41022852)) {
         SetEventFlagID(41022852, ON);
@@ -992,14 +1069,14 @@ $Event(41022852, Restart, function() {
         }
     }
     WaitFixedTimeRealFrames(1);
-    SetEventFlagID(41022880, OFF);
-    SetEventFlagID(41022881, OFF);
-    SetEventFlagID(41022882, OFF);
-    SetEventFlagID(41022883, OFF);
-    SetEventFlagID(41022884, OFF);
-    SetEventFlagID(41022885, OFF);
-    SetEventFlagID(41022886, OFF);
-    SetEventFlagID(41022887, OFF);
+    SetNetworkconnectedEventFlagID(41022880, OFF);
+    SetNetworkconnectedEventFlagID(41022881, OFF);
+    SetNetworkconnectedEventFlagID(41022882, OFF);
+    SetNetworkconnectedEventFlagID(41022883, OFF);
+    SetNetworkconnectedEventFlagID(41022884, OFF);
+    SetNetworkconnectedEventFlagID(41022885, OFF);
+    SetNetworkconnectedEventFlagID(41022886, OFF);
+    SetNetworkconnectedEventFlagID(41022887, OFF);
     WaitFixedTimeSeconds(1);
     RestartEvent();
 });
@@ -1043,7 +1120,7 @@ $Event(41022849, Restart, function() {
 
 $Event(41022860, Restart, function(X0_4) {
     EndIf(EventFlag(41020800));
-    WaitFor(CharacterHasSpEffect(X0_4, 20018022));
+    WaitFor(PlayerIsInOwnWorld() && CharacterHasSpEffect(X0_4, 20018022));
     IssueShortWarpRequest(X0_4, TargetEntityType.Area, 41022860, -1);
     DisableCharacter(X0_4);
     DisableCharacterAI(X0_4);
@@ -1053,7 +1130,7 @@ $Event(41022860, Restart, function(X0_4) {
 
 $Event(41022851, Restart, function() {
     EndIf(EventFlag(41020800));
-    WaitFor(CharacterHasSpEffect(41020800, 20018648));
+    WaitFor(PlayerIsInOwnWorld() && CharacterHasSpEffect(41020800, 20018648));
     IssueShortWarpRequest(41020800, TargetEntityType.Area, 41022860, -1);
     WaitFixedTimeRealFrames(10);
     RestartEvent();
@@ -1116,3 +1193,7 @@ $Event(41022871, Restart, function() {
     WaitFixedTimeRealFrames(10);
     RestartEvent();
 });
+
+
+
+

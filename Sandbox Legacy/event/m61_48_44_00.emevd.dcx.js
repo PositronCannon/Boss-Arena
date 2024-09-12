@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //infinite hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
     RegisterBonfire(2048440001, 2048441951, 0, 0, 0, 5);
     InitializeCommonEvent(0, 9005810, 2048440800, 2048440000, 2048440950, 2048441950, 0);
     InitializeCommonEvent(0, 90005300, 2048440392, 2048440392, 40902, 0, 0);
@@ -24,6 +22,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005780, 2048440800, 2048442160, 2048442161, 2048440720, 0, 2048442721, 2048459286, 1, 0);
     InitializeCommonEvent(0, 90005781, 2048440800, 2048442160, 2048442161, 2048440720);
     InitializeCommonEvent(0, 90005784, 2048442160, 2048442805, 2048440720, 2048442800, 2048442805, 0);
+    InitializeCommonEvent(0, 90005783, 2048440800, 2048442160, 2048442161, 2048440720, 2048442721, 2048442420, 1);
     InitializeCommonEvent(0, 90005250, 2048440271, 2048442271, 0, 3008);
     InitializeEvent(0, 2048442200, 2048440200);
     InitializeCommonEvent(0, 90005250, 2048440200, 2048442292, 0, 0);
@@ -74,6 +73,7 @@ $Event(2048442800, Default, function() {
     PlaySE(2048440800, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(2048440800));
     HandleBossDefeatAndDisplayBanner(2048440800, TextBannerType.LegendFelled);
+    //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
@@ -113,11 +113,11 @@ $Event(2048442840, Restart, function() {
 });
 
 $Event(2048442849, Restart, function() {
-    InitializeCommonEvent(0, 9005800, 2048440800, 2048441800, 2048442800, 2048442805, 2048445800, 10000, 0, 2048442800);
-    InitializeCommonEvent(0, 9005801, 2048440800, 2048441800, 2048442800, 2048442805, 2048442806, 10000);
-    InitializeCommonEvent(0, 9005811, 2048440800, 2048441800, 5, 0);
-    InitializeCommonEvent(0, 9005811, 2048440800, 2048441801, 4, 0);
-    InitializeCommonEvent(0, 9005822, 2048440800, 530000, 2048442805, 2048442806, 0, 2048442802, 0, 1);
+    InitializeCommonEvent(0, 9005800, 2048440800, 2048441800, 2048442800, 2048442805, 2048445800, 210001, 0, 0);
+    InitializeCommonEvent(0, 9005801, 2048440800, 2048441800, 2048442800, 2048442805, 2048442806, 210001);
+    InitializeCommonEvent(0, 9005811, 2048440800, 2048441800, 3, 0);
+    InitializeCommonEvent(0, 9005811, 2048440800, 2048441801, 3, 0);
+    InitializeCommonEvent(0, 9005822, 2048440800, 530000, 2048442805, 2048442806, 0, 2048442802, 0, 0);
 });
 
 $Event(2048440715, Restart, function(X0_4, X4_4, X8_4) {
@@ -141,5 +141,6 @@ $Event(2048440716, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(EventFlag(X4_4) || EventFlag(X8_4));
     SetEventFlagID(X0_4, OFF);
 });
+
 
 

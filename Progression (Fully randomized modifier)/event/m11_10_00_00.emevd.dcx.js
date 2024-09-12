@@ -169,27 +169,36 @@ $Event(11105555, Restart, function() {
     EnableCharacter(1042360710);
     SetCharacterTeamType(1042360710, TeamType.FriendlyNPC);
     ForceAnimationPlayback(1042360710, 930003, false, false, false);
+    EnableCharacterInvincibility(1042360710);
+    EnableCharacterImmortality(1042360710);
     SetCharacterTalkRange(14000701, 60);
     EnableCharacter(14000701);
     SetCharacterBackreadState(14000701, false);
     ForceAnimationPlayback(14000701, 930010, false, false, false);
-    EnableCharacter(11100765);
-    SetCharacterBackreadState(11100765, false);
-    ForceAnimationPlayback(11100765, 90100, false, false, false);
+    EnableCharacterInvincibility(14000701);
+    EnableCharacterImmortality(14000701);
     EnableCharacter(11100735);
     SetCharacterBackreadState(11100735, false);
     ForceAnimationPlayback(11100735, 930000, false, false, false);
     EnableCharacter(11100711);
     SetCharacterBackreadState(11100711, false);
-    EnableCharacter(11101721);
+    EnableCharacterInvincibility(11100711);
+    EnableCharacterImmortality(11100711);
+    EnableCharacter(11100721);
+    EnableCharacterInvincibility(11100721);
+    EnableCharacterImmortality(11100721);
     ForceAnimationPlayback(11100711, 90104, false, false, false);
     ForceAnimationPlayback(11100720, 930001, false, false, false);
     SetCharacterBackreadState(11100715, false);
     EnableCharacter(11100715);
     ForceAnimationPlayback(11100715, 930010, false, false, false);
+    EnableCharacterInvincibility(11100715);
+    EnableCharacterImmortality(11100715);
     EnableCharacter(1043310705);
     SetCharacterBackreadState(1043310705, false);
     ForceAnimationPlayback(1043310705, 90100, false, false, false);
+    EnableCharacterInvincibility(1043310705);
+    EnableCharacterImmortality(1043310705);
     RequestAssetRestoration(1043311700);
     EnableAssetInvunerability(1043311700);
     EndEvent();
@@ -259,7 +268,7 @@ $Event(11106667, Restart, function() {
        DisplayBlinkingMessage(30017);
      RestartEvent();
 });
- 
+
 //failsafe rematch unlock if already in ng+
 $Event(11107752, Default, function() {
     if (GameCycle() != 0)
@@ -609,14 +618,10 @@ $Event(11107751, Default, function() {
 
 //all bosses defeated and all items obtained messages
 $Event(11107717, Default, function() {
-    EndIf(EventFlag(1049300042) && EventFlag(1049300043));
-    if (AllBatchEventFlags(1049304400,1049304996) 
-        && AllBatchEventFlags(1049307000,1049307353)
-        && !EventFlag(1049300043)) {
-            DisplayFullScreenMessage(2081019);
-            //set tier item completion flags on
-            BatchSetEventFlags(1049300022,1049300037, ON);
-            SetEventFlagID(1049300043, ON);
+    EndIf(EventFlag(1049300043) && EventFlag(1049300042));
+    if (AllBatchEventFlags(1049300022,1049300037) && !EventFlag(1049300043)) {
+        DisplayFullScreenMessage(2081019);
+        SetEventFlagID(1049300043, ON);
     } if (AllBatchEventFlags(1049300006,1049300021) && !EventFlag(1049300042)) {
         DisplayFullScreenMessage(2081018);
         SetEventFlagID(1049300042, ON);

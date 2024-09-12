@@ -36,6 +36,8 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005301, 21000471, 21000471, 21001993, 0, 2);
     InitializeCommonEvent(0, 90005301, 21000453, 21000453, 21001995, 0, 2);
     InitializeEvent(0, 21002206, 0);
+    InitializeCommonEvent(0, 900005610, 21001590, 100, 800, 0);
+    InitializeCommonEvent(0, 900005610, 21001591, 100, 800, 0);
     InitializeCommonEvent(0, 90005501, 21000510, 21000511, 0, 21001510, 21001511, 21001512, 21000512);
     InitializeCommonEvent(0, 90005501, 21000515, 21000516, 0, 21001515, 21001516, 21001517, 21000517);
     InitializeCommonEvent(0, 90005501, 21000520, 21000521, 0, 21001520, 21001521, 21001522, 21000522);
@@ -54,13 +56,14 @@ $Event(0, Default, function() {
     InitializeEvent(0, 21002580, 0);
     InitializeCommonEvent(0, 90005615, 21002690, 21009230);
     InitializeEvent(0, 21002600, 580120, 21001600, 80120);
-    InitializeCommonEvent(0, 90005780, 21000850, 21002160, 21002161, 21000700, 20, 21002160, 2048459220, 1, 0);
+    InitializeCommonEvent(0, 90005780, 21000850, 21002160, 21002161, 21000700, 20, 21002160, 21002749, 1, 0);
     InitializeCommonEvent(0, 90005781, 21000850, 21002160, 21002161, 21000700);
     InitializeEvent(0, 21002890, 21002160, 21002855, 21000700, 21002850, 21002859, 0);
-    InitializeEvent(0, 21002199, 21000850, 21002160, 21000700, 21002899);
+    InitializeEvent(0, 21002198, 21000850, 21002160, 21000700, 21002899);
     InitializeCommonEvent(0, 90005780, 21000850, 21002164, 21002165, 21000720, 20, 21002164, 2046429373, 1, 0);
     InitializeCommonEvent(0, 90005781, 21000850, 21002164, 21002165, 21000720);
     InitializeEvent(1, 21002890, 21002164, 21002855, 21000720, 21002850, 21002859, 0);
+    InitializeEvent(1, 21002198, 21000850, 21002164, 21000720, 21002899);
     InitializeEvent(0, 21000700, 21000710, 4340, 4341, 4342, 4343, 4345, 4346, 4860, 4358, 21002707, 21002706, 21009211, 90103, 1110704128, 90100, 21009230);
     InitializeCommonEvent(0, 90005750, 21001711, 4350, 106910, 400692, 400692, 21009213, 0);
     InitializeEvent(0, 21000701, 21009208, 21002710, 21002705);
@@ -82,7 +85,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005769, 21000745, 21002732, 21000740, 21002752, 21002739, 7623, 7624);
     InitializeCommonEvent(0, 90005776, 400594, 7624, 105920);
     InitializeEvent(1, 21000735, 21000745, 21000740, 30);
-    InitializeEvent(0, 21000725, 2048459220, 21010800, 21019205, 4898);
+    InitializeEvent(0, 21000725, 4363, 21000850, 21010800, 4898, 21019205, 2048459220, 21002749);
     InitializeCommonEvent(0, 90005706, 21000750, 30010, 0);
 });
 
@@ -96,7 +99,7 @@ L0:
     InitializeCommonEvent(0, 90005221, 21000200, 30003, 20003, 0, 0);
     InitializeCommonEvent(0, 90005211, 21000201, 30001, 20001, 21002201, 1065353216, 1036831949, 1, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 21000202, 30001, 20001, 21002201, 1065353216, 1050253722, 1, 0, 0, 0);
-    InitializeCommonEvent(0, 90005221, 21000203, 30001, 20001, 0, 1);
+    InitializeEvent(0, 21002203, 21000203, 30001, 20001, 0, 1);
     InitializeCommonEvent(0, 90005261, 21000204, 21002204, 1065353216, 0, 0);
     InitializeCommonEvent(0, 90005261, 21000205, 21002205, 1065353216, 0, 0);
     InitializeCommonEvent(0, 90005251, 21000207, 1065353216, 0, 0);
@@ -186,11 +189,69 @@ $Event(21002154, Restart, function() {
     SetBossBGM(943000, BossBGMState.Stop1);
 });
 
-$Event(21002199, Restart, function(X0_4, X4_4, X8_4, X12_4) {
+$Event(21002198, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     EndIf(EventFlag(X0_4));
     WaitFor(EventFlag(X0_4) || (EventFlag(X4_4) && InArea(10000, X12_4)));
     EndIf(EventFlag(X0_4));
     SendNPCSummonHome(X8_4);
+    EndEvent();
+});
+
+$Event(21002203, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
+    EndIf(SpecialStandbyEndedFlag(X0_4));
+    if (X16_4 != 0) {
+        DisableCharacterGravity(X0_4);
+        SetCharacterMaphit(X0_4, false);
+    }
+    ForceAnimationPlayback(X0_4, X4_4, true, false, false);
+    WaitFor(
+        HasDamageType(X0_4, 0, DamageType.Unspecified)
+            || CharacterHasStateInfo(X0_4, 436)
+            || CharacterHasStateInfo(X0_4, 2)
+            || CharacterHasStateInfo(X0_4, 5)
+            || CharacterHasStateInfo(X0_4, 6)
+            || CharacterHasStateInfo(X0_4, 260)
+            || (CharacterHasSpEffect(X0_4, 481)
+                && !CharacterHasSpEffect(X0_4, 90100)
+                && !CharacterHasSpEffect(X0_4, 90110)
+                && !CharacterHasSpEffect(X0_4, 90160))
+            || (CharacterHasSpEffect(X0_4, 482)
+                && !CharacterHasSpEffect(X0_4, 90100)
+                && !CharacterHasSpEffect(X0_4, 90120)
+                && !CharacterHasSpEffect(X0_4, 90160)
+                && !CharacterHasSpEffect(X0_4, 90162))
+            || (CharacterHasSpEffect(X0_4, 483)
+                && !CharacterHasSpEffect(X0_4, 90100)
+                && !CharacterHasSpEffect(X0_4, 90140)
+                && !CharacterHasSpEffect(X0_4, 90160)
+                && !CharacterHasSpEffect(X0_4, 90161))
+            || (CharacterHasSpEffect(X0_4, 484)
+                && !CharacterHasSpEffect(X0_4, 90100)
+                && !CharacterHasSpEffect(X0_4, 90130)
+                && !CharacterHasSpEffect(X0_4, 90161)
+                && !CharacterHasSpEffect(X0_4, 90162))
+            || (CharacterHasSpEffect(X0_4, 487)
+                && !CharacterHasSpEffect(X0_4, 90100)
+                && !CharacterHasSpEffect(X0_4, 90150)
+                && !CharacterHasSpEffect(X0_4, 90160))
+            || (!CharacterHasSpEffect(X0_4, 5080) && ElapsedSeconds(1)));
+    WaitFixedTimeSeconds(0.1);
+    if (!(!CharacterHasSpEffect(X0_4, 5080) && !CharacterHasSpEffect(X0_4, 5450))) {
+        SetNetworkconnectedThisEventSlot(ON);
+        SetSpecialStandbyEndedFlag(X0_4, ON);
+        WaitFixedTimeSeconds(X12_4);
+        if (X16_4 != 0) {
+            EnableCharacterGravity(X0_4);
+            SetCharacterMaphit(X0_4, true);
+        }
+        ForceAnimationPlayback(X0_4, X8_4, true, false, false);
+        EndEvent();
+    }
+L0:
+    if (X16_4 != 0) {
+        EnableCharacterGravity(X0_4);
+        SetCharacterMaphit(X0_4, true);
+    }
     EndEvent();
 });
 
@@ -254,8 +315,11 @@ $Event(21002292, Restart, function(X0_4, X4_4) {
 
 $Event(21002320, Restart, function() {
     if (CharacterDead(21000453) && EventFlag(21002320)) {
-        DisableCharacter(21005320);
-        DisableCharacterCollision(21005320);
+        ForceCharacterDeath(21000315, true);
+        ForceCharacterDeath(21000316, true);
+        ForceCharacterDeath(21000317, true);
+        ForceCharacterDeath(21000318, true);
+        ForceCharacterDeath(21005320, true);
         DisableGenerator(21003320);
         DisableGenerator(21003321);
         DisableGenerator(21003322);
@@ -326,6 +390,16 @@ $Event(21002500, Restart, function() {
     SetCharacterTeamType(21000509, TeamType.Disabled);
     DisableCharacterAI(21000509);
     if (EventFlag(124)) {
+        if (!EventFlag(21000500)) {
+            if (PlayerIsInOwnWorld()) {
+                PlayCutsceneToPlayerAndWarp(21000020, CutscenePlayMode.Skippable, 21002500, 21000000, 10000, 21000000, false);
+            } else {
+                PlayCutsceneToPlayer(21000020, CutscenePlayMode.Skippable, 10000);
+            }
+            WaitFixedTimeRealFrames(1);
+            SetNetworkconnectedEventFlagID(21000500, ON);
+        }
+L1:
         DisableObjAct(21001500, -1);
         ForceAnimationPlayback(21001500, 12, false, false, false);
         DisableAssetInvunerability(21001502);
@@ -360,6 +434,7 @@ L0:
                 PlayCutsceneToPlayer(21000020, CutscenePlayMode.Skippable, 10000);
             }
             WaitFixedTimeRealFrames(1);
+            SetNetworkconnectedEventFlagID(21000500, ON);
             DisableAssetInvunerability(21001502);
             DisableAsset(21006500);
             DisableHit(21007500);
@@ -416,6 +491,11 @@ $Event(21002515, Restart, function(X0_4) {
 
 $Event(21002520, Restart, function() {
     DisableNetworkSync();
+    if (EventFlag(21008540)) {
+        DisableObjAct(21001540, -1);
+        EndEvent();
+    }
+L0:
     if (EventFlag(21000850)) {
         EnableObjAct(21001540, -1);
     } else {
@@ -435,7 +515,9 @@ L0:
 
 $Event(21002580, Restart, function() {
     RegisterLadder(21000580, 21000581, 21001580);
-    RegisterLadder(21000582, 21000583, 21001582);
+    if (!(CeremonyActive(20) || CeremonyActive(30))) {
+        RegisterLadder(21000582, 21000583, 21001582);
+    }
     RegisterLadder(21000584, 21000585, 21001584);
     RegisterLadder(21000586, 21000587, 21001586);
 });
@@ -646,8 +728,8 @@ S2:
         spFlagTimeArea |= EntityInRadiusOfEntity(10000, X12_4, X28_4, 1);
     }
     WaitFor(spFlagTimeArea);
-    GotoIf(L20, sp.Passed);
-    GotoIf(L19, flagTime.Passed);
+    if (!sp.Passed) {
+        if (!flagTime.Passed) {
 L9:
     SetEventFlagID(X4_4, ON);
     if (Signed(X16_4) != 0) {
@@ -698,13 +780,15 @@ L10:
             RestartEvent();
         }
 L18:
-        SetEventFlagID(X4_4, OFF);
-        RestartEvent();
+            SetEventFlagID(X4_4, OFF);
+            RestartEvent();
+        }
     }
 L19:
-    SetEventFlagID(X0_4, OFF);
-    ForceAnimationPlayback(10000, 0, false, false, false);
-    RestartEvent();
+        SetEventFlagID(X0_4, OFF);
+        ForceAnimationPlayback(10000, 0, false, false, false);
+        RestartEvent();
+    }
 L20:
     SetEventFlagID(X0_4, OFF);
     SetEventFlagID(X4_4, OFF);
@@ -864,11 +948,27 @@ $Event(21000714, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     }
 });
 
-$Event(21000725, Restart, function(X0_4, X4_4, X8_4, X12_4) {
+$Event(21000725, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4) {
     EndIf(!PlayerIsInOwnWorld());
-    WaitFor(EventFlag(X4_4) || EventFlag(X8_4) || EventFlag(X12_4));
-    SetEventFlagID(X0_4, OFF);
-    EndEvent();
+    WaitFixedTimeFrames(1);
+    GotoIf(L0, !EventFlag(X24_4));
+    Goto(L1);
+L0:
+    flag = EventFlag(X0_4) || EventFlag(X4_4) || EventFlag(X8_4) || EventFlag(X12_4) || EventFlag(X16_4);
+    WaitFor(flag || EventFlag(X20_4));
+    EndIf(flag.Passed);
+    SetEventFlagID(X24_4, ON);
+    RestartEvent();
+L1:
+    WaitFor(
+        EventFlag(X0_4)
+            || EventFlag(X4_4)
+            || EventFlag(X8_4)
+            || EventFlag(X12_4)
+            || EventFlag(X16_4)
+            || !EventFlag(X24_4));
+    SetEventFlagID(X24_4, OFF);
+    RestartEvent();
 });
 
 $Event(21000735, Restart, function(X0_4, X4_4, X8_4) {
@@ -877,3 +977,7 @@ $Event(21000735, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(CharacterHPValue(X0_4) <= 0 || CharacterDead(X0_4));
     DisableCharacterAI(X4_4);
 });
+
+
+
+

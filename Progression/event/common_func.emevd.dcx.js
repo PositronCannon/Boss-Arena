@@ -1537,7 +1537,6 @@ $Event(90001003, Default, function() {
         AwardItemLot(1049302140);
 });
 
-
 $Event(90005200, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4) {
     EndIf(SpecialStandbyEndedFlag(X0_4));
     if (X20_4 != 0) {
@@ -1717,8 +1716,7 @@ $Event(90005210, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4,
         || CharacterType(10000, TargetType.Alive)
         || CharacterType(10000, TargetType.BluePhantom)
         || CharacterType(10000, TargetType.WhitePhantom);
-    areaChrSp &= InArea(10000, X12_4)
-        && EntityInRadiusOfEntity(10000, X0_4, X16_4, 1)
+    areaChrSp &= (InArea(10000, X12_4) && EntityInRadiusOfEntity(10000, X0_4, X16_4, 1))
         && CharacterBackreadStatus(X0_4)
         && (CharacterHasSpEffect(X0_4, 5080) || CharacterHasSpEffect(X0_4, 5450));
     if (!(X28_4 == 0 && X32_4 == 0 && X36_4 == 0)) {
@@ -2453,6 +2451,7 @@ L0:
     EndEvent();
 });
 
+//used for devonia
 $Event(90005301, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     if (EventFlag(X0_4)) {
         if (SignedAlt(X16_4) != 0) {
@@ -2467,7 +2466,6 @@ $Event(90005301, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
 L0:
     WaitFor(CharacterRatioDead(X4_4));
     WaitFixedTimeSeconds(X12_4);
-    EndEvent();
 });
 
 $Event(90005360, Restart, function(X0_4, X4_4, X8_4) {
@@ -7195,46 +7193,48 @@ S0:
         spFlagTimeArea |= EntityInRadiusOfEntity(10000, X12_4, X28_4, 1);
     }
     WaitFor(spFlagTimeArea);
-    GotoIf(L20, sp.Passed);
-    GotoIf(L19, flagTime.Passed);
+    if (!sp.Passed) {
+        if (!flagTime.Passed) {
 L9:
-    SetEventFlagID(X4_4, ON);
-    if (X8_4 != 0) {
-        SetEventFlagID(X8_4, ON);
-    }
-    if (Signed(X16_4) != 0) {
-        IssueShortWarpRequest(10000, TargetEntityType.Character, X12_4, X16_4);
-    }
-    if (Signed(X40_4) != -1) {
-        RotateCharacter(10000, X12_4, X32_4, false);
-    } else {
-        RotateCharacter(10000, X12_4, X32_4, true);
-    }
-    Goto(L8);
-L8:
-    WaitFixedTimeRealFrames(1);
-    sp2 = !CharacterHasSpEffect(10000, 9900);
-    WaitFor(!EventFlag(X0_4) || sp2);
-    if (!sp2.Passed) {
-        if (Signed(X36_4) != -1) {
-            if (Signed(X40_4) != -1) {
-                sp3 = !CharacterHasSpEffect(10000, 9900);
-                WaitFor(CharacterHasSpEffect(10000, X40_4) || sp3);
-                GotoIf(L20, sp3.Passed);
+            SetEventFlagID(X4_4, ON);
+            if (X8_4 != 0) {
+                SetEventFlagID(X8_4, ON);
             }
+            if (Signed(X16_4) != 0) {
+                IssueShortWarpRequest(10000, TargetEntityType.Character, X12_4, X16_4);
+            }
+            if (Signed(X40_4) != -1) {
+                RotateCharacter(10000, X12_4, X32_4, false);
+            } else {
+                RotateCharacter(10000, X12_4, X32_4, true);
+            }
+            Goto(L8);
+L8:
+            WaitFixedTimeRealFrames(1);
+            sp2 = !CharacterHasSpEffect(10000, 9900);
+            WaitFor(!EventFlag(X0_4) || sp2);
+            if (!sp2.Passed) {
+                if (Signed(X36_4) != -1) {
+                    if (Signed(X40_4) != -1) {
+                        sp3 = !CharacterHasSpEffect(10000, 9900);
+                        WaitFor(CharacterHasSpEffect(10000, X40_4) || sp3);
+                        GotoIf(L20, sp3.Passed);
+                    }
 L10:
-            SetEventFlagID(X4_4, OFF);
-            ForceAnimationPlayback(10000, X36_4, false, true, false);
-            RestartEvent();
-        }
+                    SetEventFlagID(X4_4, OFF);
+                    ForceAnimationPlayback(10000, X36_4, false, true, false);
+                    RestartEvent();
+                }
 L18:
-        SetEventFlagID(X4_4, OFF);
+                SetEventFlagID(X4_4, OFF);
+                RestartEvent();
+            }
+        }
+L19:
+        SetEventFlagID(X0_4, OFF);
+        ForceAnimationPlayback(10000, 0, false, false, false);
         RestartEvent();
     }
-L19:
-    SetEventFlagID(X0_4, OFF);
-    ForceAnimationPlayback(10000, 0, false, false, false);
-    RestartEvent();
 L20:
     SetEventFlagID(X0_4, OFF);
     SetEventFlagID(X4_4, OFF);
@@ -7685,23 +7685,27 @@ $Event(90005756, Restart, function(X0_4, X4_4, X8_4) {
 
 $Event(90005757, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
     WaitFixedTimeRealFrames(1);
-    SetEventFlagID(X16_4, ON);
-    WaitFor(CharacterBackreadStatus(X0_4) && CharacterBackreadStatus(X4_4));
-    WaitFixedTimeRealFrames(1);
     DisableCharacter(X0_4);
     DisableCharacter(X4_4);
     EndIf(!EventFlag(X8_4) || EventFlag(X20_4));
-    if (!EventFlag(X12_4)) {
-        EnableCharacter(X0_4);
-        ForceAnimationPlayback(X0_4, 30007, false, false, false);
-        DisableCharacter(X4_4);
-        EndEvent();
-    }
-    DisableCharacter(X0_4);
+    GotoIf(L1, !EventFlag(X12_4));
+    EndIf(!PlayerIsInOwnWorld());
+    Goto(L2);
+L1:
+    EnableCharacter(X0_4);
+    ForceAnimationPlayback(X0_4, 30007, false, false, false);
+    WaitFor(CharacterBackreadStatus(X0_4));
+    WaitFixedTimeRealFrames(1);
+    EndEvent();
+L2:
     EnableCharacter(X4_4);
     ForceAnimationPlayback(X4_4, 30008, false, false, false);
     SetCharacterTeamType(X4_4, TeamType.Disabled);
     DisableCharacterCollision(X4_4);
+    WaitFor(CharacterBackreadStatus(X4_4));
+    WaitFixedTimeRealFrames(1);
+    EndEvent();
+    SetEventFlagID(X16_4, ON);
 });
 
 $Event(90005758, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
@@ -8604,12 +8608,12 @@ $Event(9005812, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
         flag &= !EventFlag(X0_4);
         WaitFor(
             flag
-                || CharacterType(10000, TargetType.WhitePhantom)
-                || CharacterType(10000, TargetType.BluePhantom)
-                || CharacterType(10000, TargetType.BlackPhantom)
-                || CharacterType(10000, TargetType.Invader)
-                || CharacterType(10000, TargetType.Invader2)
-                || CharacterType(10000, TargetType.Invader3));
+                || (CharacterType(10000, TargetType.WhitePhantom)
+                    || CharacterType(10000, TargetType.BluePhantom))
+                || (CharacterType(10000, TargetType.BlackPhantom)
+                    || CharacterType(10000, TargetType.Invader)
+                    || CharacterType(10000, TargetType.Invader2)
+                    || CharacterType(10000, TargetType.Invader3)));
         EnableAsset(X4_4);
         DeleteAssetfollowingSFX(X4_4, true);
         CreateAssetfollowingSFX(X4_4, 101, X8_4);
@@ -8629,8 +8633,8 @@ $Event(9005812, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     }
 L0:
     WaitFor(
-        HasMultiplayerState(MultiplayerState.Invasion)
-            || HasMultiplayerState(MultiplayerState.InvasionPending)
+        (HasMultiplayerState(MultiplayerState.Invasion)
+            || HasMultiplayerState(MultiplayerState.InvasionPending))
             || EventFlag(9982));
     WaitFor(
         !(HasMultiplayerState(MultiplayerState.Invasion)
@@ -8651,12 +8655,12 @@ $Event(9005813, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
         flag &= !EventFlag(X0_4);
         WaitFor(
             flag
-                || CharacterType(10000, TargetType.WhitePhantom)
-                || CharacterType(10000, TargetType.BluePhantom)
-                || CharacterType(10000, TargetType.BlackPhantom)
-                || CharacterType(10000, TargetType.Invader)
-                || CharacterType(10000, TargetType.Invader2)
-                || CharacterType(10000, TargetType.Invader3));
+                || (CharacterType(10000, TargetType.WhitePhantom)
+                    || CharacterType(10000, TargetType.BluePhantom))
+                || (CharacterType(10000, TargetType.BlackPhantom)
+                    || CharacterType(10000, TargetType.Invader)
+                    || CharacterType(10000, TargetType.Invader2)
+                    || CharacterType(10000, TargetType.Invader3)));
         EnableAsset(X4_4);
         DeleteAssetfollowingSFX(X4_4, true);
         CreateAssetfollowingSFX(X4_4, 101, X8_4);
@@ -9253,10 +9257,10 @@ $Event(91005600, Restart, function(X0_4, X4_4, X8_4) {
     DisableAsset(X4_4);
     DeleteAssetfollowingSFX(X4_4, true);
     WaitFor(
-        HasMultiplayerState(MultiplayerState.Multiplayer)
+        (HasMultiplayerState(MultiplayerState.Multiplayer)
             || HasMultiplayerState(MultiplayerState.MultiplayerPending)
             || HasMultiplayerState(MultiplayerState.Invasion)
-            || HasMultiplayerState(MultiplayerState.InvasionPending)
+            || HasMultiplayerState(MultiplayerState.InvasionPending))
             || EventFlag(9982));
     EnableAsset(X4_4);
     DeleteAssetfollowingSFX(X4_4, true);
@@ -9915,3 +9919,5 @@ L2:
     SendAllPhantomsHomeAndUpdateServerPvpStats(0);
     EndEvent();
 });
+
+

@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    InitializeCommonEvent(0, 90001001, 0);
     InitializeEvent(0, 20010197, 0);
     InitializeEvent(0, 20010199, 0);
     DisableAsset(20011542);
@@ -22,8 +21,6 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005781, 20010800, 20012164, 20012165, 20010710);
     InitializeCommonEvent(0, 90005784, 20012164, 20012805, 20010710, 20012800, 20012809, 0);
     if (!CeremonyActive(20)) {
-        //infinite hp/fp/stam
-        InitializeCommonEvent(0, 90001001, 0);
         InitializeEvent(0, 20012150, 20012149, 20012168, 20012169, 20010730, 20011730, 20012780, 209530, 2080840, 4080843, 20012170, 20012171);
         InitializeEvent(1, 20012150, 20012149, 20012172, 20012173, 20010731, 20011731, 20012781, 209531, 2080850, 4080853, 20012174, 20012175);
         InitializeEvent(2, 20012150, 20012149, 20012176, 20012177, 20010732, 20011732, 20012782, 209532, 2080860, 4080863, 20012178, 20012179);
@@ -44,6 +41,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 20012847, 0);
     InitializeEvent(0, 20012849, 0);
     InitializeEvent(0, 20012820, 0);
+    InitializeEvent(0, 20012821, 0);
     InitializeEvent(0, 20012830, 20010810, 20011580, 20011581);
     InitializeEvent(1, 20012830, 20010811, 20011582, 20011583);
     InitializeEvent(2, 20012830, 20010812, 20011584, 20011585);
@@ -51,8 +49,6 @@ $Event(0, Default, function() {
     InitializeEvent(0, 20012835, 0);
     InitializeEvent(0, 20012145, 7625, 20012140, 20019257, 20012141, 20012142, 2080605, 209055, 20011140, 30010);
     if (CeremonyActive(20)) {
-        //infinite hp/fp/stam
-        InitializeCommonEvent(0, 90001001, 0);
         InitializeEvent(0, 20012146, 7625, 20010725, 5, 20012777);
         InitializeEvent(0, 20012195, 0);
     }
@@ -177,8 +173,8 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005211, 20010302, 30005, 20005, 20012303, 0, 1065353216, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 20010303, 30005, 20005, 20012303, 0, 1056964608, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 20010309, 30002, 20002, 20012308, 0, 0, 0, 0, 0, 0);
-    InitializeCommonEvent(0, 90005221, 20010304, 30003, 20003, 0, 0);
-    InitializeCommonEvent(0, 90005221, 20010305, 30003, 20003, 0, 0);
+    InitializeCommonEvent(0, 90005211, 20010304, 30003, 20003, 20012304, 0, 1056964608, 0, 0, 0, 0);
+    InitializeCommonEvent(0, 90005211, 20010305, 30003, 20003, 20012304, 0, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 20010306, 30002, 20002, 20012306, 1065353216, 1065353216, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 20010307, 30002, 20002, 20012306, 1065353216, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005261, 20010330, 20012330, 0, 1067869798, 3009);
@@ -773,6 +769,13 @@ $Event(20012820, Restart, function() {
     DisableNetworkSync();
     WaitFor(CharacterHasSpEffect(10000, 19680));
     SetEventFlagID(20012820, ON);
+});
+
+$Event(20012821, Restart, function() {
+    WaitFor(PlayerIsInOwnWorld() && CharacterHasSpEffect(10000, 19680));
+    DisableCharacterCollision(20010800);
+    EnableCharacterInvincibility(20010800);
+    EnableCharacterImmortality(20010800);
 });
 
 $Event(20012830, Default, function(X0_4, X4_4, X8_4) {
@@ -2367,3 +2370,6 @@ $Event(20010763, Restart, function(X0_4, X4_4, X8_4) {
     WaitFixedTimeSeconds(20);
     DisableCharacter(X0_4);
 });
+
+
+

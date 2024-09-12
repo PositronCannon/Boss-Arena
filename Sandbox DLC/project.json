@@ -1,0 +1,23 @@
+{
+  "ProjectName": "boss arena dev (dlc)",
+  "GameRoot": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\ELDEN RING\\Game",
+  "GameType": 8,
+  "PinnedParams": [
+    "ShopLineupParam",
+    "SpEffectParam",
+    "EquipParamGoods",
+    "NpcParam",
+    "ClearCountCorrectParam",
+    "GameAreaParam",
+    "ItemLotParam_map",
+    "ItemLotParam_enemy",
+    "EquipMtrlSetParam",
+    "EquipParamWeapon",
+    "EquipParamGem"
+  ],
+  "PinnedRows": {},
+  "PinnedFields": {},
+  "UseLooseParams": false,
+  "PartialParams": false,
+  "LastFmgLanguageUsed": "engus"
+}

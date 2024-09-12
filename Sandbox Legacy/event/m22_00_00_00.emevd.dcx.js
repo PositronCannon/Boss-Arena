@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //infinite hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
     InitializeCommonEvent(0, 9005810, 22000800, 22000000, 22000950, 22001950, 1084227584);
     RegisterBonfire(22000001, 22001951, 0, 0, 0, 5);
     RegisterBonfire(22000002, 22001952, 0, 0, 0, 5);
@@ -19,6 +17,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 22002810, 0);
     InitializeEvent(0, 22002811, 0);
     InitializeEvent(0, 22002815, 0);
+    InitializeEvent(0, 22002830, 22000800, 22001800, 22002800, 22002805, 22002806, 10000);
     InitializeEvent(0, 22002816, 0);
     InitializeEvent(0, 22002820, 0);
     InitializeEvent(0, 22002849, 0);
@@ -287,59 +286,64 @@ $Event(22002471, Restart, function(X0_4) {
         EndEvent();
     }
 L10:
-    if (EventFlag(22009209)) {
-        if (PlayerIsInOwnWorld()) {
-            SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
-        }
-        EnableCharacter(X0_4);
-        SetSpEffect(X0_4, 20004380);
-        DisableCharacterCollision(X0_4);
-        DisableCharacterAI(X0_4);
-        SetCharacterTeamType(X0_4, TeamType.Disabled);
-        EnableCharacterImmortality(X0_4);
-        EnableCharacterFadeOnEnable(X0_4);
-        SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
-        WaitFor(EventFlag(22009209) && EventFlag(22002481) && CharacterBackreadStatus(X0_4));
-        if (EventFlag(22000800)) {
-            DisableCharacter(X0_4);
-            DisableCharacterCollision(X0_4);
-            SetCharacterMaphit(X0_4, false);
-            DisableCharacterGravity(X0_4);
-            DisableCharacterAI(X0_4);
-            EndEvent();
-        }
-        if (PlayerIsInOwnWorld()) {
-            DisplayNetworkMessage(4080100, false);
-        }
-        SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
-        DeleteAssetfollowingSFX(22001480, true);
-        CreateAssetfollowingSFX(22001480, 100, 30320);
-        ClearSpEffect(X0_4, 20004380);
-        SetSpEffect(X0_4, 18677);
-        EnableCharacterInvincibility(X0_4);
-        WaitFixedTimeSeconds(1);
-        ClearSpEffect(X0_4, 18677);
-        ForceAnimationPlayback(X0_4, 63010, false, true, false);
-        EnableCharacter(X0_4);
-        EnableCharacterCollision(X0_4);
-        SetCharacterMaphit(X0_4, true);
-        EnableCharacterGravity(X0_4);
-        DisableCharacterInvincibility(X0_4);
-        EnableCharacterAI(X0_4);
-        RequestCharacterAIReplan(X0_4);
-        ClearCharactersAITarget(X0_4);
-        EnableCharacterHPBarDisplay(X0_4);
-        SetCharacterTeamType(X0_4, TeamType.WhitePhantom);
-        SetCharacterEventTarget(X0_4, 22000800);
-        if (PlayerIsInOwnWorld()) {
-            DisplayNetworkMessage(4080810, false);
-            GotoIf(S0, PlayerIsInOwnWorld());
-        }
-        DisplayNetworkMessage(4080811, false);
+    GotoIf(S0, !PlayerIsInOwnWorld());
+    GotoIf(L20, !EventFlag(22009209));
 S0:
-        DeleteAssetfollowingSFX(22001480, true);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
+    }
+    if (PlayerIsInOwnWorld()) {
+        EnableCharacter(X0_4);
+    } else {
+        DisableCharacter(X0_4);
+    }
+    SetSpEffect(X0_4, 20004380);
+    DisableCharacterCollision(X0_4);
+    DisableCharacterAI(X0_4);
+    SetCharacterTeamType(X0_4, TeamType.Disabled);
+    EnableCharacterImmortality(X0_4);
+    EnableCharacterFadeOnEnable(X0_4);
+    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    WaitFor(EventFlag(22009209) && EventFlag(22002481) && CharacterBackreadStatus(X0_4));
+    if (EventFlag(22000800)) {
+        DisableCharacter(X0_4);
+        DisableCharacterCollision(X0_4);
+        SetCharacterMaphit(X0_4, false);
+        DisableCharacterGravity(X0_4);
+        DisableCharacterAI(X0_4);
         EndEvent();
     }
+    if (PlayerIsInOwnWorld()) {
+        DisplayNetworkMessage(4080100, false);
+    }
+    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    DeleteAssetfollowingSFX(22001480, true);
+    CreateAssetfollowingSFX(22001480, 100, 30320);
+    ClearSpEffect(X0_4, 20004380);
+    SetSpEffect(X0_4, 18677);
+    EnableCharacterInvincibility(X0_4);
+    WaitFixedTimeSeconds(1);
+    ClearSpEffect(X0_4, 18677);
+    ForceAnimationPlayback(X0_4, 63010, false, true, false);
+    EnableCharacter(X0_4);
+    EnableCharacterCollision(X0_4);
+    SetCharacterMaphit(X0_4, true);
+    EnableCharacterGravity(X0_4);
+    DisableCharacterInvincibility(X0_4);
+    EnableCharacterAI(X0_4);
+    RequestCharacterAIReplan(X0_4);
+    ClearCharactersAITarget(X0_4);
+    EnableCharacterHPBarDisplay(X0_4);
+    SetCharacterTeamType(X0_4, TeamType.WhitePhantom);
+    SetCharacterEventTarget(X0_4, 22000800);
+    if (PlayerIsInOwnWorld()) {
+        DisplayNetworkMessage(4080810, false);
+        GotoIf(S1, PlayerIsInOwnWorld());
+    }
+    DisplayNetworkMessage(4080811, false);
+S1:
+    DeleteAssetfollowingSFX(22001480, true);
+    EndEvent();
 L20:
     DisableCharacter(X0_4);
     DisableCharacterCollision(X0_4);
@@ -561,6 +565,9 @@ $Event(22002810, Restart, function() {
         DisableCharacter(22000800);
         DisableCharacterCollision(22000800);
         ForceCharacterDeath(22000800, false);
+        DisableCharacter(22000801);
+        DisableCharacterCollision(22000801);
+        ForceCharacterDeath(22000801, false);
         EndEvent();
     }
 L0:
@@ -635,9 +642,24 @@ $Event(22002820, Default, function() {
     SetSpEffect(22000100, 9532);
 });
 
+$Event(22002830, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
+    DisableNetworkSync();
+    EndIf(EventFlag(X0_4));
+    WaitFor(
+        !EventFlag(X0_4)
+            && EventFlag(X12_4)
+            && CharacterType(10000, TargetType.WhitePhantom)
+            && ActionButtonInArea(X20_4, X4_4));
+    RotateCharacter(10000, X8_4, 60060, true);
+    time = ElapsedSeconds(3);
+    WaitFor(CharacterType(10000, TargetType.WhitePhantom) && (InArea(10000, X8_4) || time));
+    RestartIf(time.Passed);
+    SetEventFlagID(X16_4, ON);
+    RestartEvent();
+});
+
 $Event(22002849, Restart, function() {
     InitializeCommonEvent(0, 9005800, 22000800, 22001800, 22002800, 22002805, 22005800, 10000, 22000801, 22002801);
-    InitializeCommonEvent(0, 9005801, 22000800, 22001800, 22002800, 22002805, 22002806, 10000);
     InitializeCommonEvent(0, 9005811, 22000800, 22001800, 1580, 22000801);
     InitializeCommonEvent(0, 9005811, 22000800, 22001801, 5, 22002801);
     InitializeCommonEvent(0, 9005822, 22000800, 502000, 22002805, 22002806, 22002815, 22002802, 0, 0);
@@ -903,59 +925,61 @@ S2:
         spFlagTimeArea |= EntityInRadiusOfEntity(10000, X12_4, X28_4, 1);
     }
     WaitFor(spFlagTimeArea);
-    GotoIf(L20, sp.Passed);
-    GotoIf(L19, flagTime.Passed);
+    if (!sp.Passed) {
+        if (!flagTime.Passed) {
 L9:
-    SetEventFlagID(X4_4, ON);
-    if (Signed(X16_4) != 0) {
-        RequestCharacterAnimationReset(10000, Disabled);
-        GotoIf(S3, EventFlag(X60_4));
-        RotateCharacter(10000, X12_4, -1, true);
-        RotateCharacter(10000, X12_4, X32_4, false);
-        Goto(S4);
-    }
-S3:
-    Goto(L15);
-S4:
-    SetEventFlagID(X56_4, ON);
-    WaitFixedTimeSeconds(X64_4);
-L15:
-    if (X8_4 != 0) {
-        SetEventFlagID(X8_4, ON);
-    }
-    if (Signed(X16_4) != 0) {
-        IssueShortWarpRequest(10000, TargetEntityType.Character, X12_4, X16_4);
-    }
-    if (Signed(X40_4) != -1) {
-        RotateCharacter(10000, X12_4, X32_4, false);
-    } else {
-        RotateCharacter(10000, X12_4, X32_4, true);
-    }
-    Goto(L8);
-L8:
-    WaitFixedTimeRealFrames(1);
-    sp2 = !CharacterHasSpEffect(10000, 9900);
-    WaitFor(!EventFlag(X0_4) || sp2);
-    if (!sp2.Passed) {
-        if (Signed(X36_4) != -1) {
-            if (Signed(X40_4) != -1) {
-                sp3 = !CharacterHasSpEffect(10000, 9900);
-                WaitFor(CharacterHasSpEffect(10000, X40_4) || sp3);
-                GotoIf(L20, sp3.Passed);
+            SetEventFlagID(X4_4, ON);
+            if (Signed(X16_4) != 0) {
+                RequestCharacterAnimationReset(10000, Disabled);
+                GotoIf(S3, EventFlag(X60_4));
+                RotateCharacter(10000, X12_4, -1, true);
+                RotateCharacter(10000, X12_4, X32_4, false);
+                Goto(S4);
             }
+S3:
+            Goto(L15);
+S4:
+            SetEventFlagID(X56_4, ON);
+            WaitFixedTimeSeconds(X64_4);
+L15:
+            if (X8_4 != 0) {
+                SetEventFlagID(X8_4, ON);
+            }
+            if (Signed(X16_4) != 0) {
+                IssueShortWarpRequest(10000, TargetEntityType.Character, X12_4, X16_4);
+            }
+            if (Signed(X40_4) != -1) {
+                RotateCharacter(10000, X12_4, X32_4, false);
+            } else {
+                RotateCharacter(10000, X12_4, X32_4, true);
+            }
+            Goto(L8);
+L8:
+            WaitFixedTimeRealFrames(1);
+            sp2 = !CharacterHasSpEffect(10000, 9900);
+            WaitFor(!EventFlag(X0_4) || sp2);
+            if (!sp2.Passed) {
+                if (Signed(X36_4) != -1) {
+                    if (Signed(X40_4) != -1) {
+                        sp3 = !CharacterHasSpEffect(10000, 9900);
+                        WaitFor(CharacterHasSpEffect(10000, X40_4) || sp3);
+                        GotoIf(L20, sp3.Passed);
+                    }
 L10:
-            SetEventFlagID(X4_4, OFF);
-            ForceAnimationPlayback(10000, X36_4, false, true, false);
-            RestartEvent();
-        }
+                    SetEventFlagID(X4_4, OFF);
+                    ForceAnimationPlayback(10000, X36_4, false, true, false);
+                    RestartEvent();
+                }
 L18:
-        SetEventFlagID(X4_4, OFF);
+                SetEventFlagID(X4_4, OFF);
+                RestartEvent();
+            }
+        }
+L19:
+        SetEventFlagID(X0_4, OFF);
+        ForceAnimationPlayback(10000, 0, false, false, false);
         RestartEvent();
     }
-L19:
-    SetEventFlagID(X0_4, OFF);
-    ForceAnimationPlayback(10000, 0, false, false, false);
-    RestartEvent();
 L20:
     SetEventFlagID(X0_4, OFF);
     SetEventFlagID(X4_4, OFF);
@@ -1000,3 +1024,6 @@ $Event(22000717, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     SetEventFlagID(X8_4, ON);
     EndEvent();
 });
+
+
+

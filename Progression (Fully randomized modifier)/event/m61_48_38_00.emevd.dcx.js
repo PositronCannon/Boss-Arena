@@ -10,14 +10,15 @@
 $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005301, 2048380800, 2048380800, 2048380020, 1084227584, 0);
     InitializeEvent(0, 2048382806, 0);
-    InitializeEvent(0, 2048382815, 2048380810);
-    InitializeEvent(0, 2048382807, 2048380800, 2048380810);
     InitializeEvent(0, 2048382809, 2048380800, 2048383800, 2048383801, 2048383802, 15300, 15310, 15311, 15312);
     InitializeEvent(0, 2048382801, 2048380800, 2048382810, 15310, 2048380800);
     InitializeEvent(1, 2048382801, 2048380800, 2048382811, 15311, 2048380800);
     InitializeEvent(2, 2048382801, 2048380800, 2048382812, 15312, 2048380800);
     InitializeEvent(0, 2048382800, 2048380800, 2048380800, 15302, 15310, 15311, 15312, 2048382800, 2048382801, 2048382802);
     InitializeEvent(0, 2048382808, 2048380800, 2048380800, 2048385200);
+    InitializeEvent(0, 2048382810, 2048380810);
+    InitializeEvent(1, 2048382810, 2048380811);
+    InitializeEvent(2, 2048382810, 2048380812);
     InitializeEvent(0, 2048382870, 2048380850, 30005, 20005, 2048382850, 2048380870, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005870, 2048380850, 905860601, 22);
     InitializeCommonEvent(0, 90005860, 2048380850, 0, 2048380850, 1, 30840, 0);
@@ -32,6 +33,7 @@ $Event(0, Default, function() {
     InitializeEvent(2, 2048382866, 2048380853, 5034, 2048380850);
     InitializeEvent(7, 2048382866, 2048380858, 5030, 2048380850);
     InitializeEvent(8, 2048382866, 2048380859, 5028, 2048380850);
+    InitializeEvent(0, 2048382351, 2048385860);
     InitializeCommonEvent(0, 90005211, 2048380306, 30016, 20016, 2048382300, 0, 1056964608, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 2048380307, 30016, 20016, 2048382300, 0, 1073741824, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 2048380308, 30016, 20016, 2048382300, 0, 1082130432, 0, 0, 0, 0);
@@ -80,25 +82,9 @@ $Event(2048382801, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     RestartEvent();
 });
 
-$Event(2048382805, Restart, function(X0_4, X4_4, X8_4) {
-    EndIf(EventFlag(X8_4));
-    WaitFor(HPRatio(X0_4) <= 0.2 && CharacterHasSpEffect(X0_4, X4_4));
-    ForceAnimationPlayback(X0_4, 3021, false, true, false);
-});
-
 $Event(2048382806, Restart, function() {
     SetSpEffect(2048380800, 20011750);
     EndEvent();
-});
-
-$Event(2048382807, Restart, function(X0_4, X4_4) {
-    EndIf(EventFlag(2048380800));
-    SetCharacterEventTarget(X0_4, X4_4);
-    SetCharacterEventTarget(X4_4, X0_4);
-    WaitFor(CharacterDead(X4_4));
-    WaitFixedTimeSeconds(5);
-    WaitFor(!CharacterDead(X4_4));
-    RestartEvent();
 });
 
 $Event(2048382808, Restart, function(X0_4, X4_4, X8_4) {
@@ -149,9 +135,27 @@ L0:
     RestartEvent();
 });
 
-$Event(2048382815, Restart, function(X0_4) {
+$Event(2048382810, Restart, function(X0_4) {
     EndIf(EventFlag(2048380800));
-    SetSpEffect(X0_4, 20012650);
+    WaitFor(CharacterHasSpEffect(2048380800, 15300));
+    GotoIf(L0, CharacterHasSpEffect(X0_4, 7860));
+    GotoIf(L1, CharacterHasSpEffect(X0_4, 7861));
+    GotoIf(L2, CharacterHasSpEffect(X0_4, 7862));
+    RestartEvent();
+L0:
+    WaitFixedTimeSeconds(1);
+    SetSpEffect(X0_4, 7860);
+    Goto(L10);
+L1:
+    WaitFixedTimeSeconds(1);
+    SetSpEffect(X0_4, 7861);
+    Goto(L10);
+L2:
+    WaitFixedTimeSeconds(1);
+    SetSpEffect(X0_4, 7862);
+    Goto(L10);
+L10:
+    RestartEvent();
 });
 
 $Event(2048382865, Restart, function() {
@@ -177,10 +181,13 @@ $Event(2048382866, Restart, function(X0_4, X4_4, X8_4) {
 });
 
 $Event(2048382351, Restart, function(X0_4) {
-    WaitFor(EventFlag(2048380850));
-    ForceCharacterDeath(X0_4, false);
-    DisableCharacterCollision(X0_4);
-    DisableCharacter(X0_4);
+    if (EventFlag(2048380850)) {
+        DisableCharacterCollision(X0_4);
+        DisableCharacter(X0_4);
+        EndEvent();
+    }
+L0:
+    EndEvent();
 });
 
 $Event(2048382870, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4, X36_4) {
@@ -275,3 +282,5 @@ $Event(2048382871, Default, function() {
     WaitForEventFlag(ON, TargetEventFlagType.EventFlag, 2048380870);
     SetSpEffect(2048380102, 9532);
 });
+
+

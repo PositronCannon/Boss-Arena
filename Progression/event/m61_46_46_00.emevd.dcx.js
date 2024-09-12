@@ -26,6 +26,10 @@ $Event(0, Default, function() {
     InitializeEvent(7, 2046462820, 2046462857, 2046463807);
     InitializeEvent(8, 2046462820, 2046462858, 2046463808);
     InitializeEvent(9, 2046462820, 2046462859, 2046463809);
+    InitializeEvent(0, 2046462840, 2046460815);
+    InitializeEvent(1, 2046462840, 2046460816);
+    InitializeEvent(2, 2046462840, 2046460817);
+    InitializeEvent(3, 2046462840, 2046460818);
     InitializeCommonEvent(0, 90005301, 2046460290, 2046460290, 2046460000, 1077936128, 0);
     InitializeCommonEvent(0, 90005557, 2046461680);
     InitializeCommonEvent(0, 90005557, 2046461681);
@@ -114,10 +118,10 @@ L0:
             || CharacterHasSpEffect(2046460800, 20011212)
             || CharacterHasSpEffect(2046460800, 20011215)
             || CharacterHasSpEffect(2046460800, 20011218))
-            && (CharacterType(10000, TargetType.Alive)
+            && ((CharacterType(10000, TargetType.Alive)
                 || CharacterType(10000, TargetType.BluePhantom)
                 || CharacterType(10000, TargetType.WhitePhantom))
-            && InArea(10000, 2046462800));
+                && InArea(10000, 2046462800)));
     ClearSpEffect(10000, 20004220);
     ClearSpEffect(10000, 20004221);
     ClearSpEffect(10000, 20004222);
@@ -289,12 +293,20 @@ $Event(2046462830, Restart, function() {
     SetEventFlagID(2046462830, OFF);
     WaitFor(
         CharacterHasSpEffect(2046460800, 20011217)
-            && ((CharacterType(10000, TargetType.BlackPhantom) && CharacterHasSpEffect(10000, 3710))
+            && (((CharacterType(10000, TargetType.BlackPhantom) && CharacterHasSpEffect(10000, 3710))
                 || CharacterType(10000, TargetType.Alive)
                 || CharacterType(10000, TargetType.BluePhantom)
                 || CharacterType(10000, TargetType.WhitePhantom))
-            && InArea(10000, 2046462890));
+                && InArea(10000, 2046462890)));
     SetEventFlagID(2046462830, ON);
+    WaitFixedTimeSeconds(3);
+    RestartEvent();
+});
+
+$Event(2046462840, Restart, function(X0_4) {
+    EndIf(EventFlag(2046460800));
+    WaitFor(CharacterBackreadStatus(X0_4) && EventFlag(2046462830));
+    EnableCharacterGravity(X0_4);
     WaitFixedTimeSeconds(3);
     RestartEvent();
 });
@@ -313,3 +325,7 @@ L0:
     RequestAssetDestruction(2046461501, 0);
     SetEventFlagID(2046460500, ON);
 });
+
+
+
+

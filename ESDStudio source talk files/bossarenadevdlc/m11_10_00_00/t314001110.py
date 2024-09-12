@@ -98,6 +98,8 @@ def t314001110_x3():
         c1_110()
         ClearTalkActionState()
         ClearTalkListData()
+        # action:99999012:"DLC items"
+        AddTalkListData(13, 99999012, -1)
         # action:99999000:"weapons"
         AddTalkListData(1, 99999000, -1)
         #upgraded weapons
@@ -122,8 +124,6 @@ def t314001110_x3():
         AddTalkListData(11, 99999004, -1)
         # action:99999008:"materials"
         AddTalkListData(12, 99999008, -1)
-        # action:99999012:"DLC items"
-        AddTalkListData(13, 99999012, -1)
         # action:99999010:"gestures"
         AddTalkListData(14, 99999010, -1)
         # action:20000009:"Leave"

@@ -310,10 +310,10 @@ $Event(10010001, Default, function() {
     AwardItemLot(2048370040);
     AwardItemLot(2048450500);
     AwardItemLot(2052410600);
-    //rando only - give tailoring tools and golden tailoring tools
-    AwardItemLot(1049304292);
-    AwardItemLot(1049304875);
-    //rando only - enable purifying crystal tear in shop
+    //give igon's finger (rando only)
+    AwardItemLot(1049306580);
+    SetEventFlagID(1049309301, ON);
+    //enable purifying crystal tear in shop (rando only)
     SetEventFlagID(1049304332, ON);
     //set all item award and acquisition flags off
     BatchSetEventFlags(1049304400, 1049304999, OFF);
@@ -322,15 +322,6 @@ $Event(10010001, Default, function() {
     BatchSetEventFlags(1049309000, 1049309499, OFF);
     //set all tier unlock flags off
     BatchSetEventFlags(1049304315,1049304330, OFF);
-    //rando only - enable empty award flags
-    SetEventFlagID(1049304438, ON); //tailoring tools
-    SetEventFlagID(1049304480, ON);
-    SetEventFlagID(1049304485, ON);
-    SetEventFlagID(1049304661, ON); //golden tailoring tools
-    SetEventFlagID(1049304768, ON);
-    SetEventFlagID(1049304790, ON);
-    SetEventFlagID(1049304804, ON);
-    SetEventFlagID(1049304805, ON);
     //set startup script flag on
     SetEventFlagID(1049300000, ON);
     //warp to roundtable

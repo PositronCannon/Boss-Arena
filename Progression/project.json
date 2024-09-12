@@ -1,0 +1,22 @@
+{
+  "ProjectName": "boss arena dev (progression)",
+  "GameRoot": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\ELDEN RING\\Game",
+  "GameType": 8,
+  "PinnedParams": [
+    "ShopLineupParam",
+    "NpcParam",
+    "ItemLotParam_map",
+    "EquipParamWeapon",
+    "EquipParamProtector",
+    "EquipParamGem",
+    "EquipParamGoods",
+    "EquipParamAccessory",
+    "CharaInitParam",
+    "SpEffectParam"
+  ],
+  "PinnedRows": {},
+  "PinnedFields": {},
+  "UseLooseParams": false,
+  "PartialParams": false,
+  "LastFmgLanguageUsed": "engus"
+}

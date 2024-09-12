@@ -388,7 +388,7 @@ L2:
 
 $Event(41022811, Restart, function() {
     EndIf(EventFlag(41020800));
-    WaitFor(CharacterHasSpEffect(41020800, 20018688));
+    WaitFor(CharacterHasSpEffect(41020800, 20018016));
     SetEventFlagID(41022802, ON);
 });
 
@@ -1191,3 +1191,6 @@ $Event(41022871, Restart, function() {
     WaitFixedTimeRealFrames(10);
     RestartEvent();
 });
+
+
+

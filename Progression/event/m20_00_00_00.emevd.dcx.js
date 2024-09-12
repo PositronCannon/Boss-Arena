@@ -35,6 +35,7 @@ $Event(0, Default, function() {
     InitializeEvent(10, 20002831, 20011231, 501010);
     InitializeEvent(11, 20002831, 20011232, 501011);
     InitializeEvent(12, 20002831, 20011233, 501012);
+    InitializeCommonEvent(0, 900005610, 20001590, 100, 800, 0);
     InitializeCommonEvent(0, 90005501, 20000510, 20000511, 0, 20001510, 20001511, 20001512, 20000512);
     InitializeCommonEvent(0, 90005501, 20000515, 20000516, 0, 20001515, 20001516, 20001517, 20000517);
     InitializeCommonEvent(0, 90005501, 20000520, 20000521, 0, 20001520, 20001521, 20001522, 20000522);
@@ -130,7 +131,7 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005211, 20000239, 30002, 20002, 20002236, 1065353216, 1056964608, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005261, 20000240, 20002240, 1073741824, 0, 3000);
     InitializeCommonEvent(0, 90005201, 20000241, 30001, 20001, 1065353216, 0, 0, 0, 0, 0);
-    InitializeCommonEvent(0, 90005261, 20000242, 20002301, 1065353216, 0, 3002);
+    InitializeCommonEvent(0, 90005261, 20000242, 20002242, 1065353216, 1065353216, 3002);
     InitializeCommonEvent(0, 90005261, 20000244, 20002244, 1065353216, 0, 0);
     InitializeCommonEvent(0, 90005261, 20000245, 20002245, 1065353216, 0, 3000);
     InitializeCommonEvent(0, 90005261, 20000243, 20002243, 1073741824, 0, 3000);
@@ -410,9 +411,15 @@ L0:
             || CharacterType(10000, TargetType.Invader3)
             || CharacterType(10000, TargetType.BluePhantom));
     if (!EventFlag(20000801)) {
+        WaitFixedTimeFrames(1);
         DisableCharacter(20000800);
         DisableCharacterFadeOnEnable(20000800);
-        WaitFor(EventFlag(20002805) || InArea(10000, 20002801));
+        if (EventFlag(20000544)) {
+            WaitFixedTimeFrames(1);
+        } else {
+            WaitFor(EventFlag(20002805) || InArea(10000, 20002801));
+        }
+L3:
         if (PlayerIsInOwnWorld()) {
             SendInvadingPhantomsHome(0);
         }
@@ -1043,3 +1050,7 @@ L0:
     DeleteAssetfollowingSFX(X0_4, true);
     RestartEvent();
 });
+
+
+
+

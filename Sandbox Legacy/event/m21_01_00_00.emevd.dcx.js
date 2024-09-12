@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //infinite hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
     InitializeCommonEvent(0, 9005810, 21010800, 21010000, 21010950, 21011950, 0);
     InitializeCommonEvent(0, 90005102, 76945, 72110, 21011980, 77900, 0, 78900, 78901, 78902, 78903, 78904, 78905, 78906, 78907, 78908, 78909, 9146);
     RegisterBonfire(21010001, 21011951, 0, 0, 0, 0);
@@ -223,7 +221,6 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005702, 21010720, 4423, 4420, 4424);
     InitializeCommonEvent(0, 90005744, 21010720, 21019370, 21019370, 90200);
     InitializeCommonEvent(0, 90005744, 21010720, 21012781, 4897, 90307);
-    InitializeCommonEvent(0, 90005750, 21011720, 4350, 106010, 400602, 400602, 21019373, 6102);
     InitializeEvent(0, 21010726, 7621, 4403, 4400, 4404, 21019328, 21019314, 4893);
     InitializeEvent(0, 21010727, 21010735, 21012764, 7621);
     InitializeEvent(0, 21010729, 21012748, 21010730, 21012746, 7621);
@@ -1266,6 +1263,7 @@ $Event(21012811, Restart, function() {
     EnableCharacterAI(21010800);
     EnableCharacterCollision(21010800);
     EnableCharacterGravity(21010800);
+    SetNetworkUpdateRate(21010800, true, CharacterUpdateFrequency.AlwaysUpdate);
     IssueShortWarpRequest(21010800, TargetEntityType.Area, 21012815, -1);
     DisplayBossHealthBar(Enabled, 21010800, 0, 905130001);
     ChangeCharacterDispmask(21010800, 10, OFF);
@@ -1305,6 +1303,7 @@ $Event(21012820, Restart, function(X0_4, X4_4, X8_4) {
     EnableCharacter(21010810);
     EnableCharacterCollision(21010810);
     EnableCharacterAI(21010810);
+    SetNetworkUpdateRate(21010810, true, CharacterUpdateFrequency.AlwaysUpdate);
     WarpCharacterAndCopyFloor(21010810, TargetEntityType.Character, 21010800, X4_4, 21010800);
     if (!CharacterHasSpEffect(21010800, 20010652)) {
         ForceAnimationPlayback(21010800, 30010, true, false, false);
@@ -1354,6 +1353,12 @@ $Event(21012830, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     EnableCharacter(X12_4);
     EnableCharacterCollision(X12_4);
     EnableCharacterAI(X12_4);
+    SetNetworkUpdateRate(21010822, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    SetNetworkUpdateRate(21010823, true, CharacterUpdateFrequency.AtLeastEvery5Frames);
+    SetNetworkUpdateRate(21010824, true, CharacterUpdateFrequency.AtLeastEvery5Frames);
+    SetNetworkUpdateRate(21010825, true, CharacterUpdateFrequency.AtLeastEvery5Frames);
+    SetNetworkUpdateRate(21010826, true, CharacterUpdateFrequency.AtLeastEvery5Frames);
+    SetNetworkUpdateRate(21010827, true, CharacterUpdateFrequency.AtLeastEvery5Frames);
     WarpCharacterAndCopyFloor(X12_4, TargetEntityType.Character, 21010800, X4_4, 21010800);
     ForceAnimationPlayback(X12_4, X8_4, false, false, false);
     RestartEvent();
@@ -1732,13 +1737,12 @@ L1:
         SetCharacterTeamType(X0_4, TeamType.FriendlyNPC);
         SetCharacterTalkRange(X0_4, X32_4);
     }
-    if (EventFlag(X28_4) && !EventFlag(X36_4)) {
-        BatchSetNetworkconnectedEventFlags(X16_4, X40_4, OFF);
-        SetNetworkconnectedEventFlagID(X24_4, ON);
-        DisableCharacter(X0_4);
-        SetCharacterBackreadState(X0_4, true);
-        SetEventFlagID(X48_4, ON);
-    }
+    GotoIf(S0, !(EventFlag(X28_4) && !EventFlag(X36_4)));
+    BatchSetNetworkconnectedEventFlags(X16_4, X40_4, OFF);
+    SetNetworkconnectedEventFlagID(X24_4, ON);
+    SetEventFlagID(X48_4, ON);
+    Goto(L4);
+S0:
     Goto(L20);
 L2:
     if (!EventFlag(X28_4)) {
@@ -1913,3 +1917,6 @@ $Event(21010740, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(CharacterHPValue(X0_4) <= 0 || CharacterDead(X0_4));
     DisableCharacterAI(X4_4);
 });
+
+
+

@@ -2270,9 +2270,9 @@ $Event(1420, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(60863));
     if (!EventFlag(20010198)) {
-        onlineFlagChr = PlayerIsInOwnWorld() && EventFlag(20012820) && CharacterDead(10000);
+        cond = PlayerIsInOwnWorld() && EventFlag(20012820) && CharacterDead(10000);
         onlineFlag = PlayerIsInOwnWorld() && EventFlag(20010800);
-        WaitFor(onlineFlagChr || onlineFlag);
+        WaitFor(cond || onlineFlag);
         if (!onlineFlag.Passed) {
             SetEventFlagID(20010198, ON);
             EndEvent();
@@ -2406,15 +2406,23 @@ $Event(1600, Default, function(X0_4, X4_4, X8_4, X12_4) {
     DisableNetworkSync();
     if (!PlayerIsInOwnWorld()) {
         EndIf(0 == X8_4);
+        WaitFor(AssetBackread(X12_4, Equal, 1));
         DisableAsset(X12_4);
-        EndEvent();
+        WaitFixedTimeSeconds(1);
+        WaitFor(!AssetBackread(X12_4, Equal, 1));
+        WaitFixedTimeSeconds(1);
+        RestartEvent();
     }
 L0:
-    if (EventFlag(X0_4)) {
-        EndIf(0 == X8_4);
-        DisableAsset(X12_4);
-        EndEvent();
-    }
+    GotoIf(L1, !EventFlag(X0_4));
+    EndIf(0 == X8_4);
+    WaitFor(AssetBackread(X12_4, Equal, 1));
+    DisableAsset(X12_4);
+    WaitFixedTimeSeconds(1);
+    WaitFor(!AssetBackread(X12_4, Equal, 1));
+    WaitFixedTimeSeconds(1);
+    RestartEvent();
+L0:
 L1:
     if (0 != X8_4) {
         CreateAssetfollowingSFX(X8_4, 200, 803220);
@@ -2430,7 +2438,8 @@ L1:
     if (0 != X8_4) {
         DeleteAssetfollowingSFX(X8_4, true);
     }
-    EndEvent();
+    WaitFixedTimeSeconds(5);
+    RestartEvent();
 });
 
 $Event(1630, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4) {
@@ -8253,10 +8262,11 @@ L1:
                 BatchSetEventFlags(X32_4, X40_4, OFF);
                 WaitFixedTimeSeconds(2);
                 WaitFor(AnyBatchEventFlags(X32_4, X40_4) || TimeOfDayInRange(20, 0, 0, 5, 59, 59));
-                GotoIf(L2, EventFlag(X40_4));
-                GotoIf(L19, EventFlag(X36_4));
-                if (!EventFlag(X32_4)) {
-                    GotoIf(L2, time5);
+                if (!EventFlag(X40_4)) {
+                    GotoIf(L19, EventFlag(X36_4));
+                    if (!EventFlag(X32_4)) {
+                        GotoIf(L2, time5);
+                    }
                 }
             }
         }
@@ -8287,10 +8297,11 @@ L5:
                 WaitFixedTimeSeconds(2);
                 time7 = TimeOfDayInRange(6, 0, 0, 11, 59, 59);
                 WaitFor(AnyBatchEventFlags(X32_4, X40_4) || time7);
-                GotoIf(L6, EventFlag(X36_4));
-                GotoIf(L19, EventFlag(X40_4));
-                if (!time7) {
-                    GotoIf(L6, EventFlag(X32_4));
+                if (!EventFlag(X36_4)) {
+                    GotoIf(L19, EventFlag(X40_4));
+                    if (!time7) {
+                        GotoIf(L6, EventFlag(X32_4));
+                    }
                 }
             }
         }
@@ -8321,10 +8332,11 @@ L9:
                 WaitFixedTimeSeconds(2);
                 time9 = TimeOfDayInRange(12, 0, 0, 19, 59, 59);
                 WaitFor(AnyBatchEventFlags(X32_4, X40_4) || time9);
-                GotoIf(L10, EventFlag(X40_4));
-                GotoIf(L19, EventFlag(X36_4));
-                if (!EventFlag(X32_4)) {
-                    GotoIf(L10, time9);
+                if (!EventFlag(X40_4)) {
+                    GotoIf(L19, EventFlag(X36_4));
+                    if (!EventFlag(X32_4)) {
+                        GotoIf(L10, time9);
+                    }
                 }
             }
         }
@@ -8452,6 +8464,9 @@ L10:
     }
     if (!EventFlag(4900)) {
         SetEventFlagID(4900, ON);
+    }
+    if (EventFlag(22009209)) {
+        SetEventFlagID(22009209, OFF);
     }
     if (EventFlag(4895) && !EventFlag(4901)) {
         SetEventFlagID(4901, ON);
@@ -8739,6 +8754,18 @@ L19:
 L20:
     EndEvent();
 });
+
+//$Event(4852, Restart, function() {
+//    EndIf(!PlayerIsInOwnWorld());
+//    EndIf(EventFlag(4927) && EventFlag(4903));
+//    WaitFor(EventFlag(4927));
+//    WaitFixedTimeSeconds(6);
+//    DisplayGenericDialogAndSetEventFlags(1030040, PromptType.OKCANCEL, NumberofOptions.OneButton, 0, 100, 2048452713, 2048452712, 2048452712);
+//    WaitFor(EventFlag(2048452713) || EventFlag(2048452712));
+//    WaitFixedTimeSeconds(0.5);
+//    SetNetworkconnectedEventFlagID(4903, ON);
+//    DisplayGenericDialog(1030041, PromptType.OKCANCEL, NumberofOptions.OneButton, 0, 100);
+//});
 
 $Event(4853, Restart, function(X0_4, X4_4) {
     EndIf(!PlayerIsInOwnWorld());

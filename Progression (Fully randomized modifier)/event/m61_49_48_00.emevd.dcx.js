@@ -14,6 +14,8 @@ $Event(0, Default, function() {
     InitializeEvent(0, 2049482810, 0);
     InitializeEvent(0, 2049482811, 0);
     InitializeEvent(0, 2049482849, 0);
+    InitializeCommonEvent(0, 900005610, 2049481590, 100, 800, 0);
+    InitializeCommonEvent(0, 900005610, 2049481591, 100, 800, 0);
 });
 
 $Event(2049482800, Restart, function() {
@@ -25,6 +27,7 @@ $Event(2049482800, Restart, function() {
     HandleBossDefeatAndDisplayBanner(2049480800, TextBannerType.LegendFelled);
     //boss rewards (6 bonus items, DLC version)
     InitializeCommonEvent(0,90001046,1049304294,1049304154,1049304158,1049307264,1049307265,1049307266,1049307267,1049307268,1049307269,1049307270,1049306489,1049306492,1049306494,1049306496,1049306501,1049306503,1049306505,1049300294);
+    //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
@@ -88,3 +91,7 @@ $Event(2049482849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2049480800, 2049481801, 4, 0);
     InitializeCommonEvent(0, 9005822, 2049480800, 950000, 2049482805, 2049482806, 0, 2049482802, 0, 0);
 });
+
+
+
+
