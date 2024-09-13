@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //infinite hp/fp/stamina
-    InitializeCommonEvent(0, 90001001, 0);
     RegisterBonfire(40000000, 40001950, 0, 0, 0, 5);
     InitializeEvent(0, 40002800, 0);
     InitializeEvent(0, 40002810, 0);
@@ -900,5 +898,3 @@ $Event(40002849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 40000800, 40001800, 3, 0);
     InitializeCommonEvent(0, 9005822, 40000800, 940000, 40002805, 40002806, 0, 40002802, 0, 0);
 });
-
-

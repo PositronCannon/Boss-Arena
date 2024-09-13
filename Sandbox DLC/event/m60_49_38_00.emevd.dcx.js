@@ -8,7 +8,7 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    InitializeCommonEvent(0, 90001001, 0);
+    
     RegisterLadder(49381500, 49381501, 1049381500);
     RegisterLadder(49381502, 49381503, 1049381502);
     RegisterLadder(49381504, 49381505, 1049381504);

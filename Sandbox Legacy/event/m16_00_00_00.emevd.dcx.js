@@ -8,7 +8,7 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    InitializeCommonEvent(0, 90001001, 0);
+    
     RegisterBonfire(16000002, 16001952, 0, 0, 0, 5);
     RegisterBonfire(16000003, 16001953, 0, 0, 0, 5);
     RegisterBonfire(16000004, 16001954, 0, 0, 0, 5);

@@ -8,7 +8,7 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    InitializeCommonEvent(0, 90001001, 0);
+    
     InitializeCommonEvent(0, 90005620, 1038520570, 1038521570, 1038521571, 0, 1038522570, 1038522571, 1038522572);
     InitializeCommonEvent(0, 90005621, 1038520570, 1038521573);
     InitializeCommonEvent(0, 90005261, 1038520340, 1038522300, 1106247680, 0, -1);

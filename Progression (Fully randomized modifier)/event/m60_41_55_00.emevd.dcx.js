@@ -8,8 +8,8 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     ConnectCharacterToCaravan(1041550400, 1041552000);
     ConnectCharacterToCaravan(1041550401, 1041552000);
     ConnectCharacterToCaravan(1041550402, 1041552000);

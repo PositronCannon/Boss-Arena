@@ -8,8 +8,8 @@
 // ==/EMEVD==
 
 $Event(1040372200, Restart, function(X0_4, X4_4, X8_4) {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     DisableCharacter(X0_4);
     WaitFor(
         InArea(10000, X4_4)

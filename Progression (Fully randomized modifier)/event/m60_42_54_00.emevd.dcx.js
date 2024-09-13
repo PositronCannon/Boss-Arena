@@ -8,8 +8,8 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     RegisterLadder(1042540580, 1042540581, 1042541580);
     RegisterLadder(1042540582, 1042540583, 1042541582);
     RegisterLadder(1042540584, 1042540585, 1042541584);

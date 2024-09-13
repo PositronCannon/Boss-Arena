@@ -478,6 +478,8 @@ $Event(2051452800, Restart, function(X0_4) {
 L10:
     WaitFixedTimeSeconds(8);
     HandleBossDefeatAndDisplayBanner(X0_4, TextBannerType.EnemyFelled);
+    //turn off metyr flag
+    SetEventFlagID(25000800, OFF);
     //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);

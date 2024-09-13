@@ -8,8 +8,8 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     InitializeEvent(0, 1035522200, 1035520200);
     InitializeEvent(1, 1035522200, 1035520201);
     InitializeEvent(2, 1035522200, 1035520202);

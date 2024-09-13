@@ -2219,7 +2219,7 @@ def t324001110_14():
             AddTalkListData(16, 99993129, -1)
             # action:99993125:"Black Knight Garrew"
             AddTalkListData(13, 99993125, -1)
-            # action:99993121:"Blackgaol Knight"
+            # action:99993121:"Knight of the Solitary Gaol"
             AddTalkListData(21, 99993121, -1)
             # action:99993124:"Red Bear"
             AddTalkListData(7, 99993124, -1)
@@ -2323,7 +2323,7 @@ def t324001110_14():
             #ancient dragon-man
             elif GetTalkListEntryResult() == 20:
                 SetEventFlag(1049302200, 1)
-            #blackgaol knight
+            #knight of the solitary gaol
             elif GetTalkListEntryResult() == 21:
                 SetEventFlag(1049302198, 1)
             #crucible knight devonia
@@ -2368,8 +2368,6 @@ def t324001110_14():
             AddTalkListData(3, 99993126, -1)
             # action:99993125:"Black Knight Garrew"
             AddTalkListData(4, 99993125, -1)
-            # action:99993121:"Blackgaol Knight"
-            AddTalkListData(5, 99993121, -1)
             # action:99993120:"Chief Bloodfiend"
             AddTalkListData(6, 99993120, -1)
             #count ymir
@@ -2408,6 +2406,8 @@ def t324001110_14():
             AddTalkListData(23, 99993137, -1)
             # action:99993115:"Jori, Elder Inquisitor"
             AddTalkListData(24, 99993115, -1)
+            # action:99993121:"Knight of the Solitary Gaol"
+            AddTalkListData(5, 99993121, -1)
             # action:99993117:"Lamenter"
             AddTalkListData(25, 99993117, -1)
             # action:99993123:"Rakshasa"
@@ -2436,7 +2436,7 @@ def t324001110_14():
             #black knight garrew
             elif GetTalkListEntryResult() == 4:
                 SetEventFlag(1049302191, 1)
-            #blackgaol knight
+            #knight of the solitary gaol
             elif GetTalkListEntryResult() == 5:
                 SetEventFlag(1049302198, 1)
             #chief bloodfiend

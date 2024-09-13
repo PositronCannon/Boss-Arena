@@ -8,8 +8,8 @@
 // ==/EMEVD==
 
 $Event(1045352200, Restart, function() {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     EndIf(ThisEventSlot());
     chrSp = (CharacterType(10000, TargetType.BlackPhantom) && CharacterHasSpEffect(10000, 3710))
         || CharacterType(10000, TargetType.Alive)

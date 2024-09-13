@@ -8,7 +8,7 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    InitializeCommonEvent(0, 90001001, 0);
+    
     if (PlayerIsInOwnWorld()) {
         InitializeEvent(0, 18000020, 0);
         InitializeEvent(0, 18000021, 0);

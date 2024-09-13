@@ -8,7 +8,7 @@
 // ==/EMEVD==
 
 $Event(50, Default, function() {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     SetCharacterBackreadState(1053440700, true);
 });

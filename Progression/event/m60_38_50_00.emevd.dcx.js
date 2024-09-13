@@ -8,8 +8,8 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     RegisterBonfire(1038500000, 1038501950, 0, 0, 0, 5);
     InitializeCommonEvent(0, 90005100, 76209, 76209, 1038501980, 77210, 2, 78210, 78211, 78212, 78213, 78214, 78215, 78216, 78217, 78218, 78219);
     RegisterBonfire(1038500001, 1038501951, 0, 0, 0, 5);

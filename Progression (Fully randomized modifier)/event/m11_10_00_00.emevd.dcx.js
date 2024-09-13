@@ -8,7 +8,30 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    InitializeEvent(0, 11103333, 0);
+    //enable unused item award flags (patch)
+    SetEventFlagID(1049304438, ON);
+    SetEventFlagID(1049304480, ON);
+    SetEventFlagID(1049304485, ON);
+    SetEventFlagID(1049304661, ON);
+    SetEventFlagID(1049304768, ON);
+    SetEventFlagID(1049304790, ON);
+    SetEventFlagID(1049304804, ON);
+    SetEventFlagID(1049304805, ON);
+    SetEventFlagID(1049307301, ON);
+    //enable armor alteration if not already enabled (patch)
+    if (EventFlag(1049300000) && (!EventFlag(60140) || !EventFlag(60150))) {
+        DirectlyGivePlayerItem(ItemType.Goods, 8163, 951, 1);
+        DirectlyGivePlayerItem(ItemType.Goods, 8188, 951, 1);
+        DirectlyGivePlayerItem(ItemType.Goods, 8161, 951, 1);
+        DirectlyGivePlayerItem(ItemType.Goods, 8162, 951, 1);
+        SetEventFlagID(60140, ON);
+        SetEventFlagID(60150, ON);
+    }
+    //enable shop visibility flags if not already (patch)
+    if (EventFlag(1049300000) && (!EventFlag(1049304332)))
+        SetEventFlagID(1049304332, ON); //purifying crystal tear
+    if (EventFlag(1049300000) && (!EventFlag(1049309301)))
+        SetEventFlagID(1049309301, ON); //igon's finger
     BonfirelikeRecovery();
     RegisterBonfire(11100000, 11101950, 0, 0, 0, 1);
     InitializeCommonEvent(0, 90005790, 0, 11100180, 11102180, 11102181, 11100785, 23, 11102385, 11102386, 0, 0, 0, 0);
@@ -126,6 +149,13 @@ $Event(50, Default, function() {
     BatchSetEventFlags(1049302000,1049302215, OFF);
     //set rematch trigger off
     SetEventFlagID(1049302260, OFF);
+    //run character startup script if it has not already
+    if (!EventFlag(1049300000)) 
+        InitializeCommonEvent(0, 10010001, 0);
+    else
+        //run one-time item check
+        if (!EventFlag(1049300051))
+            InitializeEvent(0, 11109999, 0);
     SetCharacterBackreadState(11100711, true);
     SetCharacterBackreadState(11100715, true);
     SetCharacterBackreadState(11100735, true);
@@ -133,6 +163,49 @@ $Event(50, Default, function() {
     SetCharacterBackreadState(14000700, true);
     EnableAssetInvunerability(11101715);
     EnableAssetInvunerability(11101730);
+});
+
+$Event(11109999, Default, function() {
+    //check if any main boss flags have been tripped
+    if (EventFlag(19000800)
+        || EventFlag(10000800)
+        || EventFlag(1052380800)
+        || EventFlag(11000800)
+        || EventFlag(16000800)
+        || EventFlag(12050800)
+        || EventFlag(15000800)
+        || EventFlag(14000800)
+        || EventFlag(12030850)
+        || EventFlag(13000800)
+        || EventFlag(12040800)
+        || EventFlag(12090800)
+        || EventFlag(11050800)
+        || EventFlag(1052520800)
+        || EventFlag(13000830)
+        || EventFlag(20000800)
+        || EventFlag(2048440800)
+        || EventFlag(22000800)
+        || EventFlag(21000850)
+        || EventFlag(21010800)
+        || EventFlag(2049480800)
+        || EventFlag(2050480800)
+        || EventFlag(25000800)
+        || EventFlag(28000800)
+        || EventFlag(2044450800)
+        || EventFlag(2054390800)
+        || EventFlag(20010800)) {
+            DisplayFullScreenMessage(2081020);
+            SetEventFlagID(1049300051, ON); //commented = warning will appear every time map loads
+    //check if whetblades are missing
+    } if (!PlayerHasItemIncludingBBox(3, 8970)
+        || !PlayerHasItemIncludingBBox(3, 8971)
+        || !PlayerHasItemIncludingBBox(3, 8972)
+        || !PlayerHasItemIncludingBBox(3, 8973)
+        || !PlayerHasItemIncludingBBox(3, 8974)) {
+            DisplayFullScreenMessage(2081021);
+            SetEventFlagID(1049300051, ON); //commented = warning will appear every time map loads
+    } else 
+            SetEventFlagID(1049300051, ON); //commented = checks will run every time map loads
 });
 
 $Event(11104445, Restart, function() {
@@ -202,22 +275,6 @@ $Event(11105555, Restart, function() {
     RequestAssetRestoration(1043311700);
     EnableAssetInvunerability(1043311700);
     EndEvent();
-});
-
-//check if fresh character, if not show warning and set initialization flag on
-$Event(11107753, Default, function() {
-    EndIf(EventFlag(1049300051));
-    if (EventFlag(1049300000) && EventFlag(65720)) {
-        SetEventFlagID(1049300000, ON);
-        SetEventFlagID(1049300051, ON);
-    } else if (EventFlag(10010001) && EventFlag(65720)) {
-        SetEventFlagID(1049300000, ON);
-        SetEventFlagID(1049300051, ON);
-    } else {
-        DisplayFullScreenMessage(2081020);
-        SetEventFlagID(1049300000, ON);
-        SetEventFlagID(1049300051, ON);
-    }
 });
 
 //morgott's ng+ options

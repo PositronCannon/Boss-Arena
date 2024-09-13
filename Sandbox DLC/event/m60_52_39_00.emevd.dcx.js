@@ -8,8 +8,8 @@
 // ==/EMEVD==
 
 $Event(1052392699, Restart, function(X0_4) {
-    //inf hp/fp/stam
-    InitializeCommonEvent(0, 90001001, 0);
+    
+    
     GotoIf(L0, EventFlag(9411));
     GotoIf(L1, EventFlag(1052380800));
     DisableAsset(X0_4);

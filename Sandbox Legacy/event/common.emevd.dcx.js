@@ -8,8 +8,13 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    //inf hp/fp/stamina
-    InitializeCommonEvent(0, 90001001, 0);
+    //infinite hp/fp/stamina
+    if (EventFlag(1049300001))
+        SetSpEffect(10000, 10493010);
+    if (EventFlag(1049300002)) 
+        SetSpEffect(10000, 10493020);
+    if (EventFlag(1049300003)) 
+        SetSpEffect(10000, 10493030);
     //set all boss selection flags off
     BatchSetEventFlags(1049302000,1049302215, OFF);
     //set rematch trigger off
