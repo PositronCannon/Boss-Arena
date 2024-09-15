@@ -58,7 +58,7 @@ $Event(0, Default, function() {
 //night's cavalry
 $Event(1043372690, Default, function() {
     WaitFor(CharacterDead(1043370340));
-    //boss reward (3 bonus items)
+    //boss rewards (3 bonus items)
     InitializeCommonEvent(0,90001023,1049304119,1049304032,1049304034,-1,1049304397,1049304482,1049304483,1049304484,1049304399,1049304401,1049304404,1049300119);
 });
 

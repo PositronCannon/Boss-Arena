@@ -109,6 +109,10 @@ def t324001110_x3():
         AddTalkListDataIf(GetEventFlag(1049304329) == 1 and GetEventFlag(1049300037) == 1,18, 99998485, -1)
         #tier dlc 5 (defeated)
         AddTalkListDataIf(GetEventFlag(1049304329) == 1 and GetEventFlag(1049300021) == 1,18, 99998465, -1)
+        # respawn location options
+        AddTalkListData(19, 99998417, -1)
+        # reset first encounter flags
+        AddTalkListData(20, 99999037, -1)
         # action:20000009:"Leave"
         AddTalkListData(99, 20000009, -1)
         ShowShopMessage(1)
@@ -149,9 +153,47 @@ def t324001110_x3():
             assert t324001110_16()
         elif GetTalkListEntryResult() == 18:
             assert t324001110_17()
+        #respawn location options
+        elif GetTalkListEntryResult() == 19:
+            assert t324001110_19()
+        # reset first encounter flags
+        elif GetTalkListEntryResult() == 20:
+            SetEventFlag(1049302243, 1)
+            return 0
         else:
             return 0    
             
+def t324001110_19():
+    while True:
+        c1_110()
+        ClearTalkListData()
+        # respawn before boss
+        AddTalkListDataIf (GetEventFlag(1049300052) == 0,1, 99998418, -1)
+        # respawn before boss (currently active)
+        AddTalkListDataIf (GetEventFlag(1049300052) == 1,1, 99998420, -1)
+        # respawn at roundtable
+        AddTalkListDataIf (GetEventFlag(1049300053) == 0,2, 99998419, -1)
+        # respawn at roundtable (currently active)
+        AddTalkListDataIf (GetEventFlag(1049300053) == 1,2, 99998421, -1)
+        # note
+        AddTalkListData(3, 99998422, -1)
+        # action:20000009:"Leave"
+        AddTalkListData(99, 26000004, -1)
+        ShowShopMessage(1)
+        assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        if GetTalkListEntryResult() == 1:
+            SetEventFlag(1049300052, 1)
+            SetEventFlag(1049300053, 0)
+            pass
+        elif GetTalkListEntryResult() == 2:
+            SetEventFlag(1049300053, 1)
+            SetEventFlag(1049300052, 0)
+            pass
+        elif GetTalkListEntryResult() == 3:
+            pass
+        else:
+            return 0
+
 def t324001110_18():
     while True: 
         c1_110()
@@ -170,7 +212,7 @@ def t324001110_18():
         #random dlc minor
         AddTalkListData(6, 99998412, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         if GetTalkListEntryResult() == 1:
@@ -291,7 +333,7 @@ def t324001110_2():
         #leonine (defeated)
         AddTalkListDataIf(GetEventFlag(1049304115) == 1,16, 16000030, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #soldier of godrick
@@ -455,7 +497,7 @@ def t324001110_3():
         #godrick (defeated)
         AddTalkListDataIf(GetEventFlag(1049304127) == 1,12, 16000054, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #bloodhound knight darriwil
@@ -629,7 +671,7 @@ def t324001110_4():
         #royal knight loretta (defeated)
         AddTalkListDataIf(GetEventFlag(1049304143) == 1,17, 16000086, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #crucible knight gaol
@@ -805,7 +847,7 @@ def t324001110_5():
         #rennala (defeated)
         AddTalkListDataIf(GetEventFlag(1049304155) == 1,12, 16000108, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #adan
@@ -996,7 +1038,7 @@ def t324001110_6():
         #elemer (defeated)
         AddTalkListDataIf(GetEventFlag(1049304187) == 1,24, 16000174, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #abductor virgins
@@ -1193,7 +1235,7 @@ def t324001110_7():
         #regal ancestor (defeated)
         AddTalkListDataIf(GetEventFlag(1049304188) == 1,15, 16000176, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #battlemage hugues
@@ -1347,7 +1389,7 @@ def t324001110_8():
         #starscourge radahn (defeated)
         AddTalkListDataIf(GetEventFlag(1049304201) == 1,13, 16000202, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #black knife assassin (altus)
@@ -1505,7 +1547,7 @@ def t324001110_9():
         #morgott (defeated)
         AddTalkListDataIf(GetEventFlag(1049304218) == 1,17, 16000236, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #bell bearing outskirts
@@ -1677,7 +1719,7 @@ def t324001110_10():
         #commander niall (defeated)
         AddTalkListDataIf(GetEventFlag(1049304232) == 1,14, 16000264, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #ancient dragon lansseax
@@ -1886,7 +1928,7 @@ def t324001110_11():
         #godfrey/hoarah (defeated)
         AddTalkListDataIf(GetEventFlag(1049304249) == 1,17, 16000298, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #deathrite mountaintops
@@ -2076,7 +2118,7 @@ def t324001110_12():
         #mohg lord of blood (defeated)
         AddTalkListDataIf(GetEventFlag(1049304264) == 1,15, 16000328, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #astel snowfield
@@ -2191,7 +2233,7 @@ def t324001110_13():
         #divine beast dancing lion (defeated)
         AddTalkListDataIf(GetEventFlag(1049304271) == 1,7, 16000344, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #curseblade labirith
@@ -2303,7 +2345,7 @@ def t324001110_14():
         #gold hippo (defeated)
         AddTalkListDataIf(GetEventFlag(1049304284) == 1,13, 16000362, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #ancient dragon-man
@@ -2415,7 +2457,7 @@ def t324001110_15():
         #scadutree (defeated)
         AddTalkListDataIf(GetEventFlag(1049304294) == 1,10, 16000380, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #jagged drake
@@ -2512,7 +2554,7 @@ def t324001110_16():
         #metyr (defeated)
         AddTalkListDataIf(GetEventFlag(1049304303) == 1,9, 16000402, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #fallingstar hinter
@@ -2570,7 +2612,7 @@ def t324001110_17():
         #bayle (defeated)
         AddTalkListDataIf(GetEventFlag(1049304306) == 1,3, 16000412, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         #ancient dragon senessax

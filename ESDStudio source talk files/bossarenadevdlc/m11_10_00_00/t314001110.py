@@ -194,7 +194,7 @@ def t314001110_4():
         # action:28000010:"torches"
         AddTalkListData(9, 28000010, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         if GetTalkListEntryResult() == 1:
@@ -252,7 +252,7 @@ def t314001110_8():
         # action:28000010:"torches"
         AddTalkListData(9, 28000010, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         if GetTalkListEntryResult() == 1:
@@ -300,7 +300,7 @@ def t314001110_5():
         # action:28000006:"leg"
         AddTalkListData(4, 28000006, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         """State 1"""
@@ -339,7 +339,7 @@ def t314001110_6():
         # action:26001162:"support incantations"
         AddTalkListData(4, 26001162, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         """State 1"""
@@ -547,7 +547,7 @@ def t314001110_7():
         # action:99999023:"DLC materials"
         AddTalkListData(11, 99999023, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         if GetTalkListEntryResult() == 1:

@@ -7,6 +7,7 @@
 // @version    3.4.2
 // ==/EMEVD==
 
+//character initalization script (progression random)
 $Event(10010001, Default, function() {
     SetEventFlagID(100, ON);
     SetEventFlagID(9021, ON);
@@ -82,14 +83,6 @@ $Event(10010001, Default, function() {
     SetEventFlagID(65680, ON);
     DirectlyGivePlayerItem(ItemType.Goods, 8974, 951, 1);
     SetEventFlagID(65640, ON);
-    //sewing items
-    DirectlyGivePlayerItem(ItemType.Goods, 8163, 951, 1);
-    DirectlyGivePlayerItem(ItemType.Goods, 8188, 951, 1);
-    DirectlyGivePlayerItem(ItemType.Goods, 8161, 951, 1);
-    DirectlyGivePlayerItem(ItemType.Goods, 8162, 951, 1);
-    //enable armor alteration
-    SetEventFlagID(60140, ON);
-    SetEventFlagID(60150, ON);
     //maps
     AwardItemLot(1042370200);
     AwardItemLot(1044320000);
@@ -292,6 +285,14 @@ $Event(10010001, Default, function() {
     BatchSetEventFlags(1049308400, 1049308999, OFF);
     BatchSetEventFlags(1049307000, 1049307499, OFF);
     BatchSetEventFlags(1049309000, 1049309499, OFF);
+    //give sewing items (rando only)
+    DirectlyGivePlayerItem(ItemType.Goods, 8163, 951, 1);
+    DirectlyGivePlayerItem(ItemType.Goods, 8188, 951, 1);
+    DirectlyGivePlayerItem(ItemType.Goods, 8161, 951, 1);
+    DirectlyGivePlayerItem(ItemType.Goods, 8162, 951, 1);
+    //enable armor alteration (rando only)
+    SetEventFlagID(60140, ON);
+    SetEventFlagID(60150, ON);
     //enable purifying crystal tear in shop (rando only)
     SetEventFlagID(1049304332, ON);
     //enable igon's finger in shop (rando only)

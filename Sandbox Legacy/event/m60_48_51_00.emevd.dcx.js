@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    if (EventFlag(1049308089))
-        SetCurrentTime(0, 0, 0, false, false, false, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 1048510202, 30001, 20001, 0, 0, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005476, 1048510800, 1048510810);
     InitializeEvent(0, 1048512820, 1048510800, 1048510810);

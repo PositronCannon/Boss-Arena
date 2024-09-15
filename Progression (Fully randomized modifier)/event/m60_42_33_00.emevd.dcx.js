@@ -40,7 +40,7 @@ $Event(0, Default, function() {
 //ancient hero of zamor
 $Event(1042332990, Default, function() {
     WaitFor(CharacterDead(1042330800));
-    //boss reward (4 bonus items)
+    //boss rewards (4 bonus items)
     InitializeCommonEvent(0,90001024,1049304122,1049304026,1049304091,-1,1049304427,1049304495,1049304496,1049304497,1049304498,1049304429,1049304432,1049304437,1049304439,1049300122);
 });
 

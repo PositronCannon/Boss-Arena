@@ -12,8 +12,6 @@ $Event(0, Default, function() {
 });
 
 $Event(200, Default, function() {
-    if (EventFlag(1049308095))
-        SetCurrentTime(0, 0, 0, false, false, false, 0, 0, 0);
     InitializeCommonEvent(0, 90005421, 1248550300, 1248551301, 1248558301);
     InitializeCommonEvent(0, 90005422, 1248558301, 1248551300, 1248553301);
     InitializeCommonEvent(0, 90005424, 1248551300, 1248550302, 1248550303, 1248550300, 1248551301);

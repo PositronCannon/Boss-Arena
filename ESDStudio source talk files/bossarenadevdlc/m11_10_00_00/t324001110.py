@@ -24,6 +24,10 @@ def t324001110_x3():
         AddTalkListData(7, 99998406, -1)
         # action:99998403:"sorting options"
         AddTalkListData(8, 99998403, -1)
+        # respawn location options
+        AddTalkListData(9, 99998417, -1)
+        # reset first encounter flags
+        AddTalkListData(10, 99999037, -1)
         # action:20000009:"Leave"
         AddTalkListData(99, 20000009, -1)
         ShowShopMessage(1)
@@ -52,6 +56,13 @@ def t324001110_x3():
         #sorting options
         elif GetTalkListEntryResult() == 8:
             assert t324001110_15()
+        #respawn location options
+        elif GetTalkListEntryResult() == 9:
+            assert t324001110_17()
+        # reset first encounter flags
+        elif GetTalkListEntryResult() == 10:
+            SetEventFlag(1049302243, 1)
+            return 0
         else:
             return 0    
 
@@ -68,17 +79,48 @@ def t324001110_15():
         # sort by name (currently active)
         AddTalkListDataIf (GetEventFlag(1049300005) == 1,2, 99998414, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         if GetTalkListEntryResult() == 1:
             SetEventFlag(1049300004, 1)
             SetEventFlag(1049300005, 0)
-            return 0
+            pass
         elif GetTalkListEntryResult() == 2:
             SetEventFlag(1049300005, 1)
             SetEventFlag(1049300004, 0)
+            pass
+        else:
             return 0
+            
+def t324001110_17():
+    while True:
+        c1_110()
+        ClearTalkListData()
+        # respawn before boss
+        AddTalkListDataIf (GetEventFlag(1049300052) == 0,1, 99998418, -1)
+        # respawn before boss (currently active)
+        AddTalkListDataIf (GetEventFlag(1049300052) == 1,1, 99998420, -1)
+        # respawn at roundtable
+        AddTalkListDataIf (GetEventFlag(1049300053) == 0,2, 99998419, -1)
+        # respawn at roundtable (currently active)
+        AddTalkListDataIf (GetEventFlag(1049300053) == 1,2, 99998421, -1)
+        # note
+        AddTalkListData(3, 99998422, -1)
+        # action:20000009:"Leave"
+        AddTalkListData(99, 26000004, -1)
+        ShowShopMessage(1)
+        assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        if GetTalkListEntryResult() == 1:
+            SetEventFlag(1049300052, 1)
+            SetEventFlag(1049300053, 0)
+            pass
+        elif GetTalkListEntryResult() == 2:
+            SetEventFlag(1049300053, 1)
+            SetEventFlag(1049300052, 0)
+            pass
+        elif GetTalkListEntryResult() == 3:
+            pass
         else:
             return 0
             
@@ -99,7 +141,7 @@ def t324001110_16():
         #random dlc minor
         AddTalkListData(6, 99998412, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         if GetTalkListEntryResult() == 1:
@@ -160,7 +202,7 @@ def t324001110_2():
             # action:13040106:"malenia"
             AddTalkListData(17, 13040106, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #godrick
@@ -256,7 +298,7 @@ def t324001110_2():
             # action:13040102:"radahn"
             AddTalkListData(17, 13040102, -1)            
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #astel
@@ -387,7 +429,7 @@ def t324001110_5():
             # action:13040139:"great wyrm theodorix"
             AddTalkListData(32, 13040139, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #leonine
@@ -563,7 +605,7 @@ def t324001110_5():
             # action:13040121:"valiant gargoyles"
             AddTalkListData(33, 13040121, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #ancestor spirit
@@ -684,7 +726,7 @@ def t324001110_6():
         # action:99993015:"tunnels/ruins"
         AddTalkListData(5, 99993015, -1)
         # action:20000009:"Leave"
-        AddTalkListData(99, 20000009, -1)
+        AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
         if GetTalkListEntryResult() == 1:
@@ -802,7 +844,7 @@ def t324001110_7():
             # action:15000535:"death rite bird (snowfield)"
             AddTalkListData(45, 15000535, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #deathbird limgrave
@@ -1045,7 +1087,7 @@ def t324001110_7():
             # action:15000536:"ulcerated tree spirit (gelmir)"
             AddTalkListData(47, 15000536, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #bell bearing limgrave
@@ -1220,7 +1262,7 @@ def t324001110_8():
             # action:15000393:"alecto"
             AddTalkListData(10, 15000393, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #bloodhound knight darriwil
@@ -1281,7 +1323,7 @@ def t324001110_8():
             # action:15000391:"vyke"
             AddTalkListData(10, 15000391, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #adan
@@ -1373,7 +1415,7 @@ def t324001110_9():
             # action:99992000:"stray mimic tear"
             AddTalkListData(23, 99992000, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #black knife assassin deathtouched
@@ -1504,7 +1546,7 @@ def t324001110_9():
             # action:15000425:"ulcerated tree spirit (giants' mountaintops)"
             AddTalkListData(24, 15000425, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #ancient hero of zamor sainted hero
@@ -1634,7 +1676,7 @@ def t324001110_10():
             # action:15000455:"crusader"
             AddTalkListData(22, 15000455, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #soldier of godrick
@@ -1755,7 +1797,7 @@ def t324001110_10():
             # action:99993011:"spiritcaller snail (spiriticaller cave)"
             AddTalkListData(22, 99993011, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #abductor virgins
@@ -1863,7 +1905,7 @@ def t324001110_11():
             # action:15000513:"astel stars of darkness"
             AddTalkListData(14, 15000513, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #mad pumpkin
@@ -1944,7 +1986,7 @@ def t324001110_11():
             # action:99992010:"stonedigger troll (altus)"
             AddTalkListData(14, 99992010, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #astel snowfield
@@ -2079,7 +2121,7 @@ def t324001110_13():
             # action:99993110:"Bayle the Dread"
             AddTalkListData(12, 99993110, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #divine beast dancing lion
@@ -2150,7 +2192,7 @@ def t324001110_13():
             # action:99993106:"Scadutree Avatar"
             AddTalkListData(12, 99993106, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #bayle
@@ -2260,7 +2302,7 @@ def t324001110_14():
             # action:99993138:"Ancient Dragon Senessax"
             AddTalkListData(30, 99993138, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #demi-human swordmaster onze
@@ -2421,7 +2463,7 @@ def t324001110_14():
             # action:99993135:"Tree Sentinel x2 (Hinterland)"
             AddTalkListData(30, 99993135, -1)
             # action:20000009:"Leave"
-            AddTalkListData(99, 20000009, -1)
+            AddTalkListData(99, 26000004, -1)
             ShowShopMessage(1)
             assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
             #ancient dragon-man

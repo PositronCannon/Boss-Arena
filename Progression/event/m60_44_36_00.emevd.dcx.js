@@ -303,7 +303,7 @@ $Event(1044362800, Restart, function() {
     PlaySE(1044360800, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(1044360800));
     HandleBossDefeatAndDisplayBanner(1044360800, TextBannerType.EnemyFelled);
-    //boss reward (4 bonus items)
+    //boss rewards (4 bonus items)
     InitializeCommonEvent(0,90001024,1049304106,1049304010,1049304006,-1,1049304260,1049304426,1049304427,1049304428,1049304429,1049304262,1049304265,1049304267,1049304269,1049300106);
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);

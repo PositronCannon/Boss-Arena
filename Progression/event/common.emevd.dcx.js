@@ -451,6 +451,28 @@ $Event(0, Default, function() {
 });
 
 $Event(50, Default, function() {
+    //switch to night for night bosses
+    if (EventFlag(1049308050)
+        || EventFlag(1049308051)
+        || EventFlag(1049308052)
+        || EventFlag(1049308055)
+        || EventFlag(1049308057)
+        || EventFlag(1049308060)
+        || EventFlag(1049308061)
+        || EventFlag(1049308062)
+        || EventFlag(1049308065)
+        || EventFlag(1049308068)
+        || EventFlag(1049308069)
+        || EventFlag(1049308070)
+        || EventFlag(1049308076)
+        || EventFlag(1049308078)
+        || EventFlag(1049308079)
+        || EventFlag(1049308089)
+        || EventFlag(1049308090)
+        || EventFlag(1049308092)
+        || EventFlag(1049308094)
+        || EventFlag(1049308095))
+        SetCurrentTime(0, 0, 0, false, false, false, 0, 0, 0);
     InitializeEvent(0, 700, 0);
     InitializeEvent(0, 707, 0);
     InitializeEvent(0, 710, 0);
@@ -8930,6 +8952,3 @@ $Event(9950, Default, function(X0_4, X4_4) {
     WaitFor(EventFlag(X0_4));
     SetEventFlagID(X4_4, ON);
 });
-
-
-
