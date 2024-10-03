@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
-    
     RegisterBonfire(2050480000, 2050481950, 0, 0, 0, 5);
     InitializeCommonEvent(0, 9005810, 2050480800, 2050480001, 2050480951, 2050481951, 1084227584);
     InitializeEvent(0, 2050480800, 0);
@@ -30,6 +28,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 2050482500, 2050486500);
     InitializeEvent(0, 2050482501, 0);
     InitializeEvent(0, 2050482505, 0);
+    InitializeEvent(0, 2050482506, 0);
 });
 
 $Event(2050482500, Restart, function(X0_4) {
@@ -66,6 +65,11 @@ $Event(2050482505, Default, function() {
     SetSpEffect(2050480104, 9532);
 });
 
+$Event(2050482506, Default, function() {
+    EndIf(EventFlag(2050480800));
+    SetCharacterTalkRange(2050480104, 210);
+});
+
 $Event(2050480800, Default, function() {
     if (EventFlag(2050480800)) {
         EndIf(!PlayerIsInOwnWorld());
@@ -85,13 +89,9 @@ L0:
         (PlayerIsInOwnWorld() && CharacterDead(2050480800) && !CharacterHasSpEffect(10000, 9646))
             || EventFlag(2050480800));
     HandleBossDefeatAndDisplayBanner(2050480800, TextBannerType.LegendFelled);
+    //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
-    //SetNetworkconnectedEventFlagID(2050480800, ON);
-    //SetEventFlagID(9162, ON);
-    //if (PlayerIsInOwnWorld()) {
-        //SetEventFlagID(61162, ON);
-    //}
 });
 
 $Event(2050482810, Restart, function() {
@@ -119,6 +119,7 @@ L0:
                 || HasDamageType(2050482800, 10000, DamageType.Unspecified));
         SetNetworkconnectedEventFlagID(2050480801, ON);
         ForceAnimationPlayback(2050480802, 20010, false, false, false);
+        WaitFixedTimeSeconds(4);
     } else {
 L1:
         WaitFor(EventFlag(2050482805) && InArea(10000, 2050482800));
@@ -225,5 +226,6 @@ $Event(2050482849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2050480800, 2050481800, 5, 2050480801);
     InitializeCommonEvent(0, 9005824, 2050480800, 523000, 2050482805, 2050482806, 0, 2050482802, 2050482803, 0, 0);
 });
+
 
 

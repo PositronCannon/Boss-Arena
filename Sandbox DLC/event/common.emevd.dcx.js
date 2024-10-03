@@ -15,10 +15,6 @@ $Event(0, Default, function() {
         SetSpEffect(10000, 10493020);
     if (EventFlag(1049300003)) 
         SetSpEffect(10000, 10493030);
-    //set all boss selection flags off
-    BatchSetEventFlags(1049302000,1049302215, OFF);
-    //set rematch trigger off
-    SetEventFlagID(1049302260, OFF);
     InitializeEvent(0, 701, 0);
     InitializeEvent(0, 707, 0);
     InitializeEvent(0, 705, 0);
@@ -456,6 +452,10 @@ $Event(0, Default, function() {
 });
 
 $Event(50, Default, function() {
+    //set all boss selection flags off
+    BatchSetEventFlags(1049302000,1049302215, OFF);
+    //set rematch trigger off
+    SetEventFlagID(1049302260, OFF);
     //switch to night for night bosses
     if (EventFlag(1049308050)
         || EventFlag(1049308051)
@@ -730,6 +730,7 @@ L0:
     InitializeEvent(0, 6907, 0);
     InitializeEvent(0, 6908, 0);
     InitializeEvent(0, 6909, 0);
+    InitializeEvent(0, 6910, 0);
     EndEvent();
 });
 
@@ -3682,6 +3683,21 @@ $Event(6909, Restart, function() {
         }
         if (EventFlag(1049570840)) {
             SetEventFlagID(670507, ON);
+        }
+        SetThisEventSlot(ON);
+        EndEvent();
+    }
+L15:
+    WaitFor(PlayerIsInOwnWorld());
+    WaitFixedTimeSeconds(1);
+    RequestCharacterAIReplan(0);
+});
+
+$Event(6910, Restart, function() {
+    EndIf(ThisEventSlot());
+    if (PlayerIsInOwnWorld()) {
+        if (EventFlag(124)) {
+            SetEventFlagID(21000500, ON);
         }
         SetThisEventSlot(ON);
         EndEvent();
@@ -8782,6 +8798,7 @@ L20:
     EndEvent();
 });
 
+//miquella charm break event
 //$Event(4852, Restart, function() {
 //    EndIf(!PlayerIsInOwnWorld());
 //    EndIf(EventFlag(4927) && EventFlag(4903));
@@ -8956,3 +8973,6 @@ $Event(9950, Default, function(X0_4, X4_4) {
     WaitFor(EventFlag(X0_4));
     SetEventFlagID(X4_4, ON);
 });
+
+
+

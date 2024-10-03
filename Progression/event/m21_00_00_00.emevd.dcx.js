@@ -99,7 +99,7 @@ L0:
     InitializeCommonEvent(0, 90005221, 21000200, 30003, 20003, 0, 0);
     InitializeCommonEvent(0, 90005211, 21000201, 30001, 20001, 21002201, 1065353216, 1036831949, 1, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 21000202, 30001, 20001, 21002201, 1065353216, 1050253722, 1, 0, 0, 0);
-    InitializeEvent(0, 21002203, 21000203, 30001, 20001, 0, 1);
+    InitializeEvent(0, 21002203, 21000203, 30001, 20001, 21002203, 0, 1);
     InitializeCommonEvent(0, 90005261, 21000204, 21002204, 1065353216, 0, 0);
     InitializeCommonEvent(0, 90005261, 21000205, 21002205, 1065353216, 0, 0);
     InitializeCommonEvent(0, 90005251, 21000207, 1065353216, 0, 0);
@@ -197,15 +197,16 @@ $Event(21002198, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     EndEvent();
 });
 
-$Event(21002203, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
+$Event(21002203, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
     EndIf(SpecialStandbyEndedFlag(X0_4));
-    if (X16_4 != 0) {
+    if (X20_4 != 0) {
         DisableCharacterGravity(X0_4);
         SetCharacterMaphit(X0_4, false);
     }
     ForceAnimationPlayback(X0_4, X4_4, true, false, false);
     WaitFor(
-        HasDamageType(X0_4, 0, DamageType.Unspecified)
+        !InArea(X0_4, X12_4)
+            || HasDamageType(X0_4, 0, DamageType.Unspecified)
             || CharacterHasStateInfo(X0_4, 436)
             || CharacterHasStateInfo(X0_4, 2)
             || CharacterHasStateInfo(X0_4, 5)
@@ -233,14 +234,13 @@ $Event(21002203, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
             || (CharacterHasSpEffect(X0_4, 487)
                 && !CharacterHasSpEffect(X0_4, 90100)
                 && !CharacterHasSpEffect(X0_4, 90150)
-                && !CharacterHasSpEffect(X0_4, 90160))
-            || (!CharacterHasSpEffect(X0_4, 5080) && ElapsedSeconds(1)));
+                && !CharacterHasSpEffect(X0_4, 90160)));
     WaitFixedTimeSeconds(0.1);
     if (!(!CharacterHasSpEffect(X0_4, 5080) && !CharacterHasSpEffect(X0_4, 5450))) {
         SetNetworkconnectedThisEventSlot(ON);
         SetSpecialStandbyEndedFlag(X0_4, ON);
-        WaitFixedTimeSeconds(X12_4);
-        if (X16_4 != 0) {
+        WaitFixedTimeSeconds(X16_4);
+        if (X20_4 != 0) {
             EnableCharacterGravity(X0_4);
             SetCharacterMaphit(X0_4, true);
         }
@@ -248,7 +248,7 @@ $Event(21002203, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
         EndEvent();
     }
 L0:
-    if (X16_4 != 0) {
+    if (X20_4 != 0) {
         EnableCharacterGravity(X0_4);
         SetCharacterMaphit(X0_4, true);
     }
@@ -384,22 +384,25 @@ L0:
 });
 
 $Event(21002500, Restart, function() {
+    if (PlayerIsInOwnWorld()) {
+        WaitFor(EventFlag(6910));
+    }
     DisableCharacterCollision(21000509);
     DisableCharacterGravity(21000509);
     DisableLockOnPoint(21000509, 220);
     SetCharacterTeamType(21000509, TeamType.Disabled);
     DisableCharacterAI(21000509);
     if (EventFlag(124)) {
-        if (!EventFlag(21000500)) {
+        if (!EventFlag(21000500) && InArea(10000, 21002501)) {
             if (PlayerIsInOwnWorld()) {
                 PlayCutsceneToPlayerAndWarp(21000020, CutscenePlayMode.Skippable, 21002500, 21000000, 10000, 21000000, false);
             } else {
                 PlayCutsceneToPlayer(21000020, CutscenePlayMode.Skippable, 10000);
             }
             WaitFixedTimeRealFrames(1);
-            SetNetworkconnectedEventFlagID(21000500, ON);
         }
 L1:
+        SetNetworkconnectedEventFlagID(21000500, ON);
         DisableObjAct(21001500, -1);
         ForceAnimationPlayback(21001500, 12, false, false, false);
         DisableAssetInvunerability(21001502);
@@ -977,6 +980,7 @@ $Event(21000735, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(CharacterHPValue(X0_4) <= 0 || CharacterDead(X0_4));
     DisableCharacterAI(X4_4);
 });
+
 
 
 

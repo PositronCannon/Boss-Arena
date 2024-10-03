@@ -13,7 +13,8 @@ $Event(0, Default, function() {
     RegisterBonfire(2049430002, 2049431952, 0, 0, 0, 5);
     InitializeCommonEvent(0, 90005860, 2049430800, 0, 2049430800, 1, 30945, 0);
     InitializeEvent(0, 2049432314, 0);
-    InitializeEvent(0, 2049430830, 2049430800, 905860603, 920300, 1114636288, 1121058816, 2049432822, 2049435100);
+    InitializeEvent(0, 2049430830, 2049430800, 905860603, 920300, 1098907648, 1121058816);
+    InitializeEvent(0, 2049430831, 2049430800, 1114636288, 1121058816);
     InitializeEvent(0, 2049432300, 2049430810, 2049432300);
     InitializeEvent(1, 2049432300, 2049430811, 2049432300);
     InitializeEvent(2, 2049432300, 2049430812, 2049432300);
@@ -67,7 +68,6 @@ $Event(2049469991, Default, function() {
 InitializeCommonEvent(0,90001042,1049304298,1049304152,1049304158,1049307280,1049307281,1049307282,1049306525,1049306527,1049306530,1049300298);
 });
 
-
 $Event(2049432690, Restart, function() {
     EndIf(EventFlag(4925));
     EndIf(!PlayerIsInOwnWorld());
@@ -115,10 +115,9 @@ $Event(2049432314, Restart, function() {
     SetSpEffect(2049430800, 20011655);
 });
 
-$Event(2049430830, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4) {
+$Event(2049430830, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     DisableNetworkSync();
-    SetSpEffect(X0_4, 4800);
-    SetSpEffect(X0_4, 5662);
+    EndIf(EventFlag(2049430800));
     EndIf(
         (CharacterType(10000, TargetType.BlackPhantom) && !CharacterHasSpEffect(10000, 3710))
             || CharacterType(10000, TargetType.Invader)
@@ -127,72 +126,32 @@ $Event(2049430830, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_
     WaitFor(
         (CharacterAIState(X0_4, AIStateType.Combat)
             && !EventFlag(9000)
-            && (HasDamageType(X0_4, 10000, DamageType.Unspecified)
-                || HasDamageType(X0_4, 35000, DamageType.Unspecified)
-                || HasDamageType(35000, X0_4, DamageType.Unspecified)
-                || EntityInRadiusOfEntity(10000, X0_4, X12_4, 1)
-                || EntityInRadiusOfEntity(35000, X0_4, X12_4, 1)))
-            || EventFlag(X20_4));
-    ClearSpEffect(X24_4, 4800);
-    ClearSpEffect(X24_4, 5662);
+            && EntityInRadiusOfEntity(10000, X0_4, X12_4, 1))
+            || (HasDamageType(X0_4, 10000, DamageType.Unspecified)
+                || HasDamageType(X0_4, 35000, DamageType.Unspecified)));
     GotoIf(L0, !EventFlag(9290));
     GotoIf(L1, !EventFlag(9291));
     WaitFixedTimeSeconds(5);
     RestartEvent();
 L0:
-    SetBossBGM(X8_4, BossBGMState.Start);
     SetEventFlagID(9290, ON);
-    SetNetworkconnectedEventFlagID(X20_4, ON);
+    SetBossBGM(X8_4, BossBGMState.Start);
     WaitFixedTimeSeconds(1);
     DisplayBossHealthBar(Enabled, X0_4, 0, X4_4);
     if (PlayerIsInOwnWorld()) {
         SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
         SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
     }
-    cond |= !CharacterAIState(X0_4, AIStateType.Combat);
     WaitFor(
-        CharacterDead(X0_4)
+        !CharacterAIState(X0_4, AIStateType.Combat)
+            || CharacterDead(X0_4)
             || EventFlag(9000)
-            //fix for OR condition groups limit
-            
-            //|| !(EntityInRadiusOfEntity(10000, X0_4, X16_4, 1)
-            //    || (!(CharacterType(10001, TargetType.BlackPhantom)
-            //        || CharacterType(10001, TargetType.Invader)
-            //        || CharacterType(10001, TargetType.Invader3)
-            //        || CharacterType(10001, TargetType.Invader2))
-            //        && EntityInRadiusOfEntity(10001, X0_4, X16_4, 1))
-            //    || (!(CharacterType(10002, TargetType.BlackPhantom)
-            //        || CharacterType(10002, TargetType.Invader)
-            //        || CharacterType(10002, TargetType.Invader3)
-            //        || CharacterType(10002, TargetType.Invader2))
-            //        && EntityInRadiusOfEntity(10002, X0_4, X16_4, 1))
-            //    || (!(CharacterType(10003, TargetType.BlackPhantom)
-            //        || CharacterType(10003, TargetType.Invader)
-            //        || CharacterType(10003, TargetType.Invader3)
-            //        || CharacterType(10003, TargetType.Invader2))
-            //        && EntityInRadiusOfEntity(10003, X0_4, X16_4, 1))
-            //    || (!(CharacterType(10004, TargetType.BlackPhantom)
-            //        || CharacterType(10004, TargetType.Invader)
-            //        || CharacterType(10004, TargetType.Invader3)
-            //        || CharacterType(10004, TargetType.Invader2))
-            //        && EntityInRadiusOfEntity(10004, X0_4, X16_4, 1))
-            //    || (!(CharacterType(10004, TargetType.BlackPhantom)
-            //        || CharacterType(10004, TargetType.Invader)
-            //        || CharacterType(10004, TargetType.Invader3)
-            //        || CharacterType(10004, TargetType.Invader2))
-            //        && EntityInRadiusOfEntity(10004, X0_4, X16_4, 1))
-            //    || EntityInRadiusOfEntity(35000, X0_4, X16_4, 1))
-            || !EventFlag(X20_4));
-    SetSpEffect(X24_4, 4800);
-    SetSpEffect(X24_4, 5662);
+            || !EntityInRadiusOfEntity(10000, X0_4, X16_4, 1)
+            || !InArea(10000, 2049432305));
     SetBossBGM(X8_4, BossBGMState.Stop2);
-    SetNetworkconnectedEventFlagID(X20_4, OFF);
     if (CharacterDead(X0_4)) {
-        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);
-        SetNetworkUpdateRate(X0_4, false, CharacterUpdateFrequency.AtLeastEvery2Frames);
-        EndEvent();
-    }
-    if (!EventFlag(9000)) {
+        WaitFixedTimeSeconds(3);
+    } else if (!EventFlag(9000)) {
         WaitFixedTimeSeconds(1);
     }
     DisplayBossHealthBar(Disabled, X0_4, 0, X4_4);
@@ -205,63 +164,90 @@ L0:
 L1:
     SetBossBGM(X8_4, BossBGMState.Start);
     SetEventFlagID(9291, ON);
-    SetNetworkconnectedEventFlagID(X20_4, ON);
     WaitFixedTimeSeconds(1);
-    DisplayBossHealthBar(Enabled, X0_4, 0, X4_4);
+    DisplayBossHealthBar(Enabled, X0_4, 1, X4_4);
     if (PlayerIsInOwnWorld()) {
         SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
         SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
     }
-    cond |= !CharacterAIState(X0_4, AIStateType.Combat);
     WaitFor(
-        CharacterDead(X0_4)
+        !CharacterAIState(X0_4, AIStateType.Combat)
+            || CharacterDead(X0_4)
             || EventFlag(9000)
-            || !(EntityInRadiusOfEntity(10000, X0_4, X16_4, 1)
-                || (!(CharacterType(10001, TargetType.BlackPhantom)
-                    || CharacterType(10001, TargetType.Invader)
-                    || CharacterType(10001, TargetType.Invader3)
-                    || CharacterType(10001, TargetType.Invader2))
-                    && EntityInRadiusOfEntity(10001, X0_4, X16_4, 1))
-                || (!(CharacterType(10002, TargetType.BlackPhantom)
-                    || CharacterType(10002, TargetType.Invader)
-                    || CharacterType(10002, TargetType.Invader3)
-                    || CharacterType(10002, TargetType.Invader2))
-                    && EntityInRadiusOfEntity(10002, X0_4, X16_4, 1))
-                || (!(CharacterType(10003, TargetType.BlackPhantom)
-                    || CharacterType(10003, TargetType.Invader)
-                    || CharacterType(10003, TargetType.Invader3)
-                    || CharacterType(10003, TargetType.Invader2))
-                    && EntityInRadiusOfEntity(10003, X0_4, X16_4, 1))
-                || (!(CharacterType(10004, TargetType.BlackPhantom)
-                    || CharacterType(10004, TargetType.Invader)
-                    || CharacterType(10004, TargetType.Invader3)
-                    || CharacterType(10004, TargetType.Invader2))
-                    && EntityInRadiusOfEntity(10004, X0_4, X16_4, 1))
-                || (!(CharacterType(10004, TargetType.BlackPhantom)
-                    || CharacterType(10004, TargetType.Invader)
-                    || CharacterType(10004, TargetType.Invader3)
-                    || CharacterType(10004, TargetType.Invader2))
-                    && EntityInRadiusOfEntity(10004, X0_4, X16_4, 1))
-                || EntityInRadiusOfEntity(35000, X0_4, X16_4, 1))
-            || !EventFlag(X20_4));
-    SetSpEffect(X24_4, 4800);
-    SetSpEffect(X24_4, 5662);
+            || !EntityInRadiusOfEntity(10000, X0_4, X16_4, 1)
+            || !InArea(10000, 2049432305));
     SetBossBGM(X8_4, BossBGMState.Stop2);
-    SetNetworkconnectedEventFlagID(X20_4, OFF);
     if (CharacterDead(X0_4)) {
-        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);
-        SetNetworkUpdateRate(X0_4, false, CharacterUpdateFrequency.AtLeastEvery2Frames);
-        EndEvent();
-    }
-    if (!EventFlag(9000)) {
+        WaitFixedTimeSeconds(3);
+    } else if (!EventFlag(9000)) {
         WaitFixedTimeSeconds(1);
     }
-    DisplayBossHealthBar(Disabled, X0_4, 0, X4_4);
+    DisplayBossHealthBar(Disabled, X0_4, 1, X4_4);
     if (PlayerIsInOwnWorld()) {
         SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);
         SetNetworkUpdateRate(X0_4, false, CharacterUpdateFrequency.AtLeastEvery2Frames);
     }
     SetEventFlagID(9291, OFF);
+    RestartEvent();
+});
+
+$Event(2049430831, Restart, function(X0_4, X4_4, X8_4) {
+    EndIf(EventFlag(2049430800));
+    if (!EventFlag(2049432831)) {
+        SetSpEffect(X0_4, 4800);
+        SetSpEffect(X0_4, 5662);
+        chrSp = (CharacterType(10000, TargetType.BlackPhantom) && CharacterHasSpEffect(10000, 3710))
+            || CharacterType(10000, TargetType.Alive)
+            || CharacterType(10000, TargetType.GrayPhantom)
+            || CharacterType(10000, TargetType.WhitePhantom);
+        dmgAreaChr |= HasDamageType(X0_4, 10000, DamageType.Unspecified)
+            || HasDamageType(X0_4, 35000, DamageType.Unspecified)
+            || HasDamageType(35000, X0_4, DamageType.Unspecified)
+            || EntityInRadiusOfEntity(10000, X0_4, X4_4, 1)
+            || EntityInRadiusOfEntity(35000, X0_4, X4_4, 1);
+        WaitFor(chrSp && dmgAreaChr);
+        SetNetworkconnectedEventFlagID(2049432831, ON);
+        ClearSpEffect(X0_4, 4800);
+        ClearSpEffect(X0_4, 5662);
+    } else {
+L0:
+        dmgAreaChr |= !CharacterAIState(X0_4, AIStateType.Combat);
+        WaitFor(
+            CharacterDead(X0_4)
+                || EventFlag(9000)
+                || !(EntityInRadiusOfEntity(10000, X0_4, X8_4, 1)
+                    || (!(CharacterType(10001, TargetType.BlackPhantom)
+                        || CharacterType(10001, TargetType.Invader)
+                        || CharacterType(10001, TargetType.Invader3)
+                        || CharacterType(10001, TargetType.Invader2))
+                        && EntityInRadiusOfEntity(10001, X0_4, X8_4, 1))
+                    || (!(CharacterType(10002, TargetType.BlackPhantom)
+                        || CharacterType(10002, TargetType.Invader)
+                        || CharacterType(10002, TargetType.Invader3)
+                        || CharacterType(10002, TargetType.Invader2))
+                        && EntityInRadiusOfEntity(10002, X0_4, X8_4, 1))
+                    || (!(CharacterType(10003, TargetType.BlackPhantom)
+                        || CharacterType(10003, TargetType.Invader)
+                        || CharacterType(10003, TargetType.Invader3)
+                        || CharacterType(10003, TargetType.Invader2))
+                        && EntityInRadiusOfEntity(10003, X0_4, X8_4, 1))
+                    || (!(CharacterType(10004, TargetType.BlackPhantom)
+                        || CharacterType(10004, TargetType.Invader)
+                        || CharacterType(10004, TargetType.Invader3)
+                        || CharacterType(10004, TargetType.Invader2))
+                        && EntityInRadiusOfEntity(10004, X0_4, X8_4, 1))
+                    || (!(CharacterType(10004, TargetType.BlackPhantom)
+                        || CharacterType(10004, TargetType.Invader)
+                        || CharacterType(10004, TargetType.Invader3)
+                        || CharacterType(10004, TargetType.Invader2))
+                        && EntityInRadiusOfEntity(10004, X0_4, X8_4, 1))
+                    || EntityInRadiusOfEntity(35000, X0_4, X8_4, 1)));
+        SetNetworkconnectedEventFlagID(2049432831, OFF);
+        SetSpEffect(X0_4, 4800);
+        SetSpEffect(X0_4, 5662);
+        Goto(L10);
+    }
+L10:
     RestartEvent();
 });
 
@@ -405,3 +391,6 @@ $Event(2049462580, Default, function() {
     RegisterLadder(2049430586, 2049430587, 2049431586);
     RegisterLadder(2049430588, 2049430589, 2049431588);
 });
+
+
+

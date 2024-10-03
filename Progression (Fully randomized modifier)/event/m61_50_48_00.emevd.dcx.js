@@ -28,6 +28,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 2050482500, 2050486500);
     InitializeEvent(0, 2050482501, 0);
     InitializeEvent(0, 2050482505, 0);
+    InitializeEvent(0, 2050482506, 0);
 });
 
 $Event(2050482500, Restart, function(X0_4) {
@@ -62,6 +63,11 @@ $Event(2050482505, Default, function() {
     SetSpEffect(2050480104, 9531);
     WaitForEventFlag(ON, TargetEventFlagType.EventFlag, 2050480801);
     SetSpEffect(2050480104, 9532);
+});
+
+$Event(2050482506, Default, function() {
+    EndIf(EventFlag(2050480800));
+    SetCharacterTalkRange(2050480104, 210);
 });
 
 $Event(2050480800, Default, function() {
@@ -114,6 +120,7 @@ L0:
                 || HasDamageType(2050482800, 10000, DamageType.Unspecified));
         SetNetworkconnectedEventFlagID(2050480801, ON);
         ForceAnimationPlayback(2050480802, 20010, false, false, false);
+        WaitFixedTimeSeconds(4);
     } else {
 L1:
         WaitFor(EventFlag(2050482805) && InArea(10000, 2050482800));
@@ -220,3 +227,6 @@ $Event(2050482849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2050480800, 2050481800, 5, 2050480801);
     InitializeCommonEvent(0, 9005824, 2050480800, 523000, 2050482805, 2050482806, 0, 2050482802, 2050482803, 0, 0);
 });
+
+
+
