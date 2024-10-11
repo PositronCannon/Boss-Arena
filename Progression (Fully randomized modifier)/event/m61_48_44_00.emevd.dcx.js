@@ -66,6 +66,7 @@ $Event(2048442200, Restart, function(X0_4) {
     }
 });
 
+//rellana
 $Event(2048442800, Default, function() {
     EndIf(EventFlag(2048440800));
     WaitFor(CharacterHPValue(2048440800) <= 0);
@@ -74,7 +75,7 @@ $Event(2048442800, Default, function() {
     WaitFor(CharacterDead(2048440800));
     HandleBossDefeatAndDisplayBanner(2048440800, TextBannerType.LegendFelled);
     //boss rewards (6 bonus items, DLC version)
-InitializeCommonEvent(0,90001046,1049304283,1049304152,1049304158,1049307209,1049307210,1049307211,1049307212,1049307213,1049307214,1049307215,1049306335,1049306338,1049306340,1049306343,1049306348,1049306350,1049306352,1049300283);
+    InitializeCommonEvent(0,90001046,1049304283,1049304152,1049304158,1049307209,1049307210,1049307211,1049307212,1049307213,1049307214,1049307215,1049306335,1049306338,1049306340,1049306343,1049306348,1049306350,1049306352,1049300283);
     //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
@@ -143,7 +144,3 @@ $Event(2048440716, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(EventFlag(X4_4) || EventFlag(X8_4));
     SetEventFlagID(X0_4, OFF);
 });
-
-
-
-

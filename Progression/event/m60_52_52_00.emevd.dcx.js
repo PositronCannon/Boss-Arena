@@ -18,6 +18,7 @@ $Event(200, Default, function() {
     InitializeEvent(0, 1052522849, 0);
 });
 
+//fire giant
 $Event(1052520800, Restart, function() {
     EndIf(EventFlag(1252520800));
     WaitFor(CharacterHPValue(1052520800) <= 0);

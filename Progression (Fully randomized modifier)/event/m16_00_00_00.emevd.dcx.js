@@ -539,6 +539,7 @@ $Event(16002849, Restart, function() {
     InitializeCommonEvent(0, 9005822, 16000800, 471000, 16002805, 16002806, 16002803, 16002802, 0, 0);
 });
 
+//godskin noble
 $Event(16002850, Restart, function() {
     EndIf(EventFlag(16000850));
     WaitFor(CharacterHPValue(16000850) <= 0);

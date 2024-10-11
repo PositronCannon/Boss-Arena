@@ -214,35 +214,21 @@ $Event(19002682, Restart, function() {
     MoveBloodstainAndDroppedItems(19002682, 19002683);
 });
 
+//radagon+elden beast
 $Event(19002800, Restart, function() {
-    if (!(PlayerIsInOwnWorld() && InArea(10000, 19002815) && EventFlag(19000804))) {
-        EndIf(EventFlag(19000804));
-        if (!EventFlag(19000800)) {
-            WaitFor(CharacterHPValue(19000800) <= 0);
-            WaitFixedTimeSeconds(4);
-            PlaySE(19008000, SoundType.SFX, 888880000);
-            ChangeCamera(-1, -1);
-            WaitFor(CharacterDead(19000800));
-            WaitFixedTimeSeconds(4.5);
-            HandleBossDefeatAndDisplayBanner(19000800, TextBannerType.GodSlain);
-            //boss rewards (4 bonus items + guaranteed flag)
-            InitializeCommonEvent(0,90001034,1049304263,-1,-1,1049304060,1049307126,1049307127,1049307128,1049307129,1049307130,1049306111,1049306114,1049306116,1049306118,1049306120,1049300263);
-            WaitFixedTimeSeconds(6);
-            WarpPlayer(11, 10, 0, 0, 11102021, 0);
-        }
+    if (!EventFlag(19000800)) {
+        WaitFor(CharacterHPValue(19000800) <= 0);
+        WaitFixedTimeSeconds(4);
+        PlaySE(19008000, SoundType.SFX, 888880000);
+        ChangeCamera(-1, -1);
+        WaitFor(CharacterDead(19000800));
+        WaitFixedTimeSeconds(4.5);
+        HandleBossDefeatAndDisplayBanner(19000800, TextBannerType.GodSlain);
+        //boss rewards (4 bonus items + guaranteed flag)
+        InitializeCommonEvent(0,90001034,1049304263,-1,-1,1049304060,1049307126,1049307127,1049307128,1049307129,1049307130,1049306111,1049306114,1049306116,1049306118,1049306120,1049300263);
+        WaitFixedTimeSeconds(6);
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
     }
-L0:
-    SetEventFlagID(9021, ON);
-    PlayCutsceneToPlayerAndWarp(19000050, CutscenePlayMode.Skippable, 19002814, 19000000, 10000, 19000, false);
-    WaitFixedTimeRealFrames(1);
-    SetCameraAngle(20.9, -51.56);
-    SetPlayerPositionDisplay(Enabled, true, 19, 0, 0, 0, 181.1, 102.35, -607.06);
-    SetPlayerRespawnPoint(19002814);
-    SaveRequest();
-    MoveBloodstainAndDroppedItems(19002680, 19002681);
-    SetEventFlagID(19000804, ON);
-    DisableCharacterDefaultBackread(35000);
-    SetNetworkUpdateRate(35000, true, CharacterUpdateFrequency.AtLeastEvery5Frames);
 });
 
 $Event(19002810, Restart, function() {

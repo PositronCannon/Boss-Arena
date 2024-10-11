@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     RegisterBonfire(16000002, 16001952, 0, 0, 0, 5);
     RegisterBonfire(16000003, 16001953, 0, 0, 0, 5);
     RegisterBonfire(16000004, 16001954, 0, 0, 0, 5);
@@ -185,6 +184,7 @@ $Event(16002695, Restart, function() {
     }
 });
 
+//rykard
 $Event(16002800, Restart, function() {
     EndIf(EventFlag(16000800));
     WaitFor(CharacterHPValue(16000800) <= 0);
@@ -193,7 +193,14 @@ $Event(16002800, Restart, function() {
     WaitFor(CharacterDead(16000800));
     HandleBossDefeatAndDisplayBanner(16000800, TextBannerType.DemigodFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302507, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);  
 });
 
 $Event(16002810, Restart, function() {
@@ -900,5 +907,3 @@ L1:
     SetEventFlagID(X4_4, OFF);
     EndEvent();
 });
-
-

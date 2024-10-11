@@ -18,6 +18,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 900005610, 2049481591, 100, 800, 0);
 });
 
+//gaius
 $Event(2049482800, Restart, function() {
     EndIf(EventFlag(2049480800));
     WaitFor(CharacterHPValue(2049480800) <= 0);
@@ -91,7 +92,3 @@ $Event(2049482849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2049480800, 2049481801, 4, 0);
     InitializeCommonEvent(0, 9005822, 2049480800, 950000, 2049482805, 2049482806, 0, 2049482802, 0, 0);
 });
-
-
-
-

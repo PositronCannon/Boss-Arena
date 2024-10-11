@@ -343,9 +343,7 @@ $Event(15002800, Restart, function() {
     WaitFor(CharacterHPValue(15000800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(15008000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(15000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(15000800));
+    WaitFor(CharacterDead(15000800));
     HandleBossDefeatAndDisplayBanner(15000800, TextBannerType.DemigodFelled);
     //boss rewards (5 bonus items + guaranteed flag)
     InitializeCommonEvent(0,90001035,1049304261,1049304144,1049304142,1049304004,1049307114,1049307115,1049307116,1049307117,1049307118,1049307119,1049306078,1049306082,1049306084,1049306086,1049306091,1049306093,1049300261);

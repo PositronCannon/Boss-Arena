@@ -1268,6 +1268,8 @@ $Event(11107778, Restart, function() {
         SetEventFlagID(1049308005, ON);
         SetEventFlagID(12030800, ON);
         SetEventFlagID(12030850, OFF);
+        if (EventFlag(1049300052))
+            SetPlayerRespawnPoint(12030099);
         WarpPlayer(12, 3, 0, 0, 12030099, 0);
         //maliketh
     } else if (EventFlag(1049302009) && (!EventFlag(1049304248) || EventFlag(1049304330))) {
@@ -1560,7 +1562,7 @@ $Event(11107780, Restart, function() {
         //deathbird (weeping)
         if (EventFlag(1049302055) && (!EventFlag(1049304123) || EventFlag(1049304330))) {
         SetEventFlagID(1049308055, ON);
-        SetEventFlagID(1044320340, OFF);
+        SetEventFlagID(1044320800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1044322099);
         WarpPlayer(60, 44, 32, 0, 1044322099, 0);
@@ -1621,12 +1623,12 @@ $Event(11107780, Restart, function() {
         //night's cavalry (limgrave)
     } else if (EventFlag(1049302052) && (!EventFlag(1049304119) || EventFlag(1049304330))) {
         SetEventFlagID(1049308052, ON);
-        SetEventFlagID(1043370340, OFF);
+        SetEventFlagID(1043370800, OFF);
         WarpPlayer(60, 43, 37, 0, 1043370971, 0);
         //night's cavalry (weeping)
     } else if (EventFlag(1049302057) && (!EventFlag(1049304125) || EventFlag(1049304330))) {
         SetEventFlagID(1049308057, ON);
-        SetEventFlagID(1044320342, OFF);
+        SetEventFlagID(1044320850, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1044332001);
         WarpPlayer(60, 44, 33, 0, 1044332001, 0);
@@ -1652,7 +1654,7 @@ $Event(11107731, Restart, function() {
         //death rite (liurnia)
     } else if (EventFlag(1049302062) && (!EventFlag(1049304161) || EventFlag(1049304330))) {
         SetEventFlagID(1049308062, ON);
-        SetEventFlagID(1036450340, OFF);
+        SetEventFlagID(1036450800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1036452001);
         WarpPlayer(60, 36, 45, 0, 1036452001, 0);
@@ -1666,7 +1668,7 @@ $Event(11107731, Restart, function() {
         //deathbird (liurnia)
     } else if (EventFlag(1049302061) && (!EventFlag(1049304160) || EventFlag(1049304330))) {
         SetEventFlagID(1049308061, ON);
-        SetEventFlagID(1037420340, OFF);
+        SetEventFlagID(1037420800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1037422001);
         WarpPlayer(60, 37, 42, 0, 1037422001, 0);
@@ -1683,14 +1685,14 @@ $Event(11107731, Restart, function() {
         //night's cavalry (liurnia north)
     } else if (EventFlag(1049302065) && (!EventFlag(1049304166) || EventFlag(1049304330))) {
         SetEventFlagID(1049308065, ON);
-        SetEventFlagID(1036480340, OFF);
+        SetEventFlagID(1036480800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1036482001);
         WarpPlayer(60, 36, 48, 0, 1036482001, 0);
         //night's cavalry (liurnia east)
     } else if (EventFlag(1049302070) && (!EventFlag(1049304165) || EventFlag(1049304330))) {
         SetEventFlagID(1049308070, ON);
-        SetEventFlagID(1039430340, OFF);
+        SetEventFlagID(1039430800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1039432099);
         WarpPlayer(60, 39, 43, 0, 1039432099, 0);
@@ -1772,7 +1774,6 @@ $Event(11107795, Restart, function() {
     } else if (EventFlag(1049302076) && (!EventFlag(1049304198) || EventFlag(1049304330))) {
         SetEventFlagID(1049308076, ON);
         SetEventFlagID(1039510800, OFF);
-        SetEventFlagID(1039510801, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1039512001);
         WarpPlayer(60, 39, 51, 0, 1039512001, 0);
@@ -1802,7 +1803,6 @@ $Event(11107732, Restart, function() {
     if (EventFlag(1049302089) && (!EventFlag(1049304236) || EventFlag(1049304330))) {
         SetEventFlagID(1049308089, ON);
         SetEventFlagID(1048510800, OFF);
-        SetEventFlagID(1048510810, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1048512099);
         WarpPlayer(60, 48, 51, 0, 1048512099, 0);
@@ -1822,7 +1822,6 @@ $Event(11107732, Restart, function() {
     } else if (EventFlag(1049302092) && (!EventFlag(1049304254) || EventFlag(1049304330))) {
         SetEventFlagID(1049308092, ON);
         SetEventFlagID(1052410850, OFF);
-        SetEventFlagID(1052410851, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1052412098);
         WarpPlayer(60, 52, 41, 0, 1052412098, 0);

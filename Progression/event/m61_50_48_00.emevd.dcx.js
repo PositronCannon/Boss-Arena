@@ -70,6 +70,7 @@ $Event(2050482506, Default, function() {
     SetCharacterTalkRange(2050480104, 210);
 });
 
+//scadutree avatar
 $Event(2050480800, Default, function() {
     if (EventFlag(2050480800)) {
         EndIf(!PlayerIsInOwnWorld());
@@ -85,9 +86,7 @@ L0:
     }
     WaitFixedTimeSeconds(1);
     PlaySE(2050480800, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(2050480800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(2050480800));
+    WaitFor(CharacterDead(2050480800));
     HandleBossDefeatAndDisplayBanner(2050480800, TextBannerType.LegendFelled);
     //boss rewards (5 bonus items, DLC version)
     InitializeCommonEvent(0,90001045,1049304293,1049304154,1049304158,1049307258,1049307259,1049307260,1049307261,1049307262,1049307263,1049306472,1049306476,1049306478,1049306480,1049306485,1049306487,1049300293);
@@ -227,6 +226,3 @@ $Event(2050482849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2050480800, 2050481800, 5, 2050480801);
     InitializeCommonEvent(0, 9005824, 2050480800, 523000, 2050482805, 2050482806, 0, 2050482802, 2050482803, 0, 0);
 });
-
-
-

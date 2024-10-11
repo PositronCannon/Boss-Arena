@@ -15,6 +15,8 @@ $Event(0, Default, function() {
         SetSpEffect(10000, 10493020);
     if (EventFlag(1049300003)) 
         SetSpEffect(10000, 10493030);
+    //recovery in every map
+    BonfirelikeRecovery();
     InitializeEvent(0, 701, 0);
     InitializeEvent(0, 707, 0);
     InitializeEvent(0, 705, 0);
@@ -8973,6 +8975,3 @@ $Event(9950, Default, function(X0_4, X4_4) {
     WaitFor(EventFlag(X0_4));
     SetEventFlagID(X4_4, ON);
 });
-
-
-

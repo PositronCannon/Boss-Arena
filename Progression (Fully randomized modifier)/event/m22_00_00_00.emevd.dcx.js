@@ -545,6 +545,7 @@ $Event(22002300, Restart, function(X0_4, X4_4) {
     RestartEvent();
 });
 
+//putrescent
 $Event(22000800, Restart, function() {
     EndIf(EventFlag(22000800));
     WaitFor(CharacterHPValue(22000800) <= 0);
@@ -556,7 +557,7 @@ $Event(22000800, Restart, function() {
     DisableCharacterCollision(22000801);
     HandleBossDefeatAndDisplayBanner(22000800, TextBannerType.LegendFelled);
     //boss rewards (6 bonus items, DLC version)
-InitializeCommonEvent(0,90001046,1049304292,1049304154,1049304158,1049307251,1049307252,1049307253,1049307254,1049307255,1049307256,1049307257,1049306453,1049306456,1049306458,1049306460,1049306466,1049306468,1049306470,1049300292);
+    InitializeCommonEvent(0,90001046,1049304292,1049304154,1049304158,1049307251,1049307252,1049307253,1049307254,1049307255,1049307256,1049307257,1049306453,1049306456,1049306458,1049306460,1049306466,1049306468,1049306470,1049300292);
     //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
@@ -1026,7 +1027,3 @@ $Event(22000717, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     SetEventFlagID(X8_4, ON);
     EndEvent();
 });
-
-
-
-

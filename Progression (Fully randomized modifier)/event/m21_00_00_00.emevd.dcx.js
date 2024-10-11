@@ -537,6 +537,7 @@ $Event(21002600, Restart, function(X0_4, X4_4, X8_4) {
     AwardItemsIncludingClients(X8_4);
 });
 
+//golden hippo
 $Event(21002850, Restart, function() {
     EndIf(EventFlag(21000850));
     WaitFor(CharacterHPValue(21000850) <= 0);
@@ -545,7 +546,7 @@ $Event(21002850, Restart, function() {
     WaitFor(CharacterDead(21000850));
     HandleBossDefeatAndDisplayBanner(21000850, TextBannerType.GreatEnemyFelled);
     //boss rewards (6 bonus items, DLC version)
-InitializeCommonEvent(0,90001046,1049304284,1049304152,1049304158,1049307216,1049307217,1049307218,1049307219,1049307220,1049307221,1049307222,1049306354,1049306356,1049306358,1049306362,1049306367,1049306369,1049306371,1049300284);
+    InitializeCommonEvent(0,90001046,1049304284,1049304152,1049304158,1049307216,1049307217,1049307218,1049307219,1049307220,1049307221,1049307222,1049306354,1049306356,1049306358,1049306362,1049306367,1049306369,1049306371,1049300284);
     //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
@@ -980,8 +981,3 @@ $Event(21000735, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(CharacterHPValue(X0_4) <= 0 || CharacterDead(X0_4));
     DisableCharacterAI(X4_4);
 });
-
-
-
-
-

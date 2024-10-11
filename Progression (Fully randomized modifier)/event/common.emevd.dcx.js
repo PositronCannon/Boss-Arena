@@ -8,6 +8,8 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
+    //no rune loss
+    SetSpEffect(10000, 4290);
     InitializeEvent(0, 701, 0);
     InitializeEvent(0, 707, 0);
     InitializeEvent(0, 705, 0);
@@ -449,8 +451,6 @@ $Event(50, Default, function() {
     BatchSetEventFlags(1049302000,1049302215, OFF);
     //set rematch trigger off
     SetEventFlagID(1049302260, OFF);
-    //no rune loss
-    SetSpEffect(10000, 4290);
     //switch to night for night bosses
     if (EventFlag(1049308050)
         || EventFlag(1049308051)
@@ -8968,6 +8968,3 @@ $Event(9950, Default, function(X0_4, X4_4) {
     WaitFor(EventFlag(X0_4));
     SetEventFlagID(X4_4, ON);
 });
-
-
-

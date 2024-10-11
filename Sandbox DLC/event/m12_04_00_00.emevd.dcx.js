@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     InitializeCommonEvent(0, 9005810, 12040800, 71240, 12040950, 12041950, 1084227584);
     InitializeEvent(0, 12042680, 0);
     InitializeEvent(0, 12042400, 0);
@@ -69,6 +68,7 @@ $Event(12042680, Restart, function() {
     RestartEvent();
 });
 
+//astel
 $Event(12042800, Default, function() {
     EndIf(EventFlag(12040800));
     WaitFor(HPRatio(12040800) <= 0);
@@ -77,7 +77,14 @@ $Event(12042800, Default, function() {
     WaitFor(CharacterDead(12040800));
     HandleBossDefeatAndDisplayBanner(12040800, TextBannerType.LegendFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302504, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);  
 });
 
 $Event(12042810, Restart, function() {
@@ -106,5 +113,3 @@ $Event(12042849, Default, function() {
     InitializeCommonEvent(0, 9005811, 12040800, 12041800, 8, 0);
     InitializeCommonEvent(0, 9005822, 12040800, 920700, 12042805, 12042806, 0, 12042802, 0, 0);
 });
-
-

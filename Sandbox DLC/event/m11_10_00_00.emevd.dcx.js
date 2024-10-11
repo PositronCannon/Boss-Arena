@@ -77,11 +77,13 @@ $Event(0, Default, function() {
     InitializeEvent(0, 11107728, 0);
     InitializeEvent(0, 11107800, 0);
     InitializeEvent(0, 11107801, 0);
+    InitializeEvent(0, 11107802, 0);
 });
 
 $Event(50, Default, function() {
     BatchSetEventFlags(1049302000,1049302215, OFF); //set all boss selection flags off
     SetEventFlagID(1049302260, OFF); //set rematch trigger off
+    BatchSetEventFlags(1049302265, 1049302267, OFF); //set boss rush triggers off
     //run character startup script if it has not already
     if (!EventFlag(1049300000)) 
         InitializeCommonEvent(0, 10010001, 0);
@@ -839,44 +841,72 @@ $Event(11107728, Restart, function() {
 
 //Random boss selection
 $Event(11107798, Restart, function() {
-    WaitFor(
-        //all bosses
-        EventFlag(1049302245)
-            //remembrance
-            || EventFlag(1049302246)
-            //great enemies
-            || EventFlag(1049302247)
-            //minor bosses
-            || EventFlag(1049302248)
-            //dlc main
-            || EventFlag(1049302249)
-            //dlc minor
-            || EventFlag(1049302250));
-        //all bosses
-        if (EventFlag(1049302245)) {
-            SetEventFlagID(1049302245, OFF);
-            RandomlySetEventFlagInRange(1049302000,1049302208, ON);
-        //remembrance
-        } else if (EventFlag(1049302246)) {
-            SetEventFlagID(1049302246, OFF);
-            RandomlySetEventFlagInRange(1049302000,1049302016, ON);
-        //great enemies
-        } else if (EventFlag(1049302247)) {
-            SetEventFlagID(1049302247, OFF); 
-            RandomlySetEventFlagInRange(1049302017,1049302049, ON);
-        //minor bosses
-        } else if (EventFlag(1049302248)) {
-            SetEventFlagID(1049302248, OFF);
-            RandomlySetEventFlagInRange(1049302050,1049302166, ON);
-        //dlc main
-        } else if (EventFlag(1049302249)) {
-            SetEventFlagID(1049302249, OFF);
-            RandomlySetEventFlagInRange(1049302167,1049302178, ON);
-        //dlc minor
-        } else if (EventFlag(1049302250)) {
-            SetEventFlagID(1049302250, OFF);
-            RandomlySetEventFlagInRange(1049302179,1049302208, ON);
-        }
+    WaitFor(AnyBatchEventFlags(1049302245,1049302250));
+    //all bosses
+    if (EventFlag(1049302245)) {
+        SetEventFlagID(1049302245, OFF);
+        RandomlySetEventFlagInRange(1049302000,1049302208, ON);
+    //remembrance
+    } else if (EventFlag(1049302246)) {
+        SetEventFlagID(1049302246, OFF);
+        RandomlySetEventFlagInRange(1049302000,1049302016, ON);
+    //great enemies
+    } else if (EventFlag(1049302247)) {
+        SetEventFlagID(1049302247, OFF); 
+        RandomlySetEventFlagInRange(1049302017,1049302049, ON);
+    //minor bosses
+    } else if (EventFlag(1049302248)) {
+        SetEventFlagID(1049302248, OFF);
+        RandomlySetEventFlagInRange(1049302050,1049302166, ON);
+    //dlc main
+    } else if (EventFlag(1049302249)) {
+        SetEventFlagID(1049302249, OFF);
+        RandomlySetEventFlagInRange(1049302167,1049302178, ON);
+    //dlc minor
+    } else if (EventFlag(1049302250)) {
+        SetEventFlagID(1049302250, OFF);
+        RandomlySetEventFlagInRange(1049302179,1049302208, ON);
+    }
+});
+    
+//boss rush
+$Event(11107802, Restart, function() {
+    WaitFor(AnyBatchEventFlags(1049302270, 1049302290));
+    BatchSetEventFlags(1049308250, 1049308275, OFF);
+    BatchSetEventFlags(1049302500, 1049302750, OFF);
+    SetEventFlagID(1049302750, ON); //temp
+    //remembrance+dlc main
+    if (EventFlag(1049302270)) {
+        SetEventFlagID(1049302270, OFF);
+        SetEventFlagID(1049308250, ON);
+        InitializeCommonEvent(0, 90009900, 0);
+    //remembrance (base game)
+    } else if (EventFlag(1049302271)) {
+        SetEventFlagID(1049302271, OFF);
+        SetEventFlagID(1049308251, ON);
+        InitializeCommonEvent(0, 90009901, 0);
+    //dlc main
+    } else if (EventFlag(1049302272)) {
+        SetEventFlagID(1049302272, OFF);
+        SetEventFlagID(1049308252, ON);
+        InitializeCommonEvent(0, 90009902, 0);
+    //custom 1
+    } else if (EventFlag(1049302280)) {
+        SetEventFlagID(1049302280, OFF);
+        SetEventFlagID(1049308260, ON);
+        InitializeCommonEvent(0, 90009910, 0);
+    //custom 2
+    } else if (EventFlag(1049302281)) {
+        SetEventFlagID(1049302281, OFF);
+        SetEventFlagID(1049308261, ON);
+        InitializeCommonEvent(0, 90009911, 0);
+    //custom 3
+    } else if (EventFlag(1049302282)) {
+        SetEventFlagID(1049302282, OFF);
+        SetEventFlagID(1049308262, ON);
+        InitializeCommonEvent(0, 90009912, 0);
+    }
+    RestartEvent();
 });
 
 //remembrance bosses
@@ -884,6 +914,7 @@ $Event(11107778, Restart, function() {
     WaitFor(AnyBatchEventFlags(1049302000,1049302016));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
     //radagon+elden beast
     if (EventFlag(1049302012)) {
         SetEventFlagID(1049308012, ON);
@@ -961,6 +992,8 @@ $Event(11107778, Restart, function() {
         SetEventFlagID(1049308005, ON);
         SetEventFlagID(12030800, ON);
         SetEventFlagID(12030850, OFF);
+        if (EventFlag(1049300052))
+            SetPlayerRespawnPoint(12030099);
         WarpPlayer(12, 3, 0, 0, 12030099, 0);
         //maliketh
     } else if (EventFlag(1049302009)) {
@@ -1009,6 +1042,7 @@ $Event(11107792, Restart, function() {
     WaitFor(AnyBatchEventFlags(1049302017,1049302049));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
         //goldfrey
     if (EventFlag(1049302033)) {
         SetEventFlagID(1049308033, ON);
@@ -1231,10 +1265,11 @@ $Event(11107780, Restart, function() {
     WaitFor(AnyBatchEventFlags(1049302050,1049302075));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
         //deathbird (weeping)
     if (EventFlag(1049302055)) {
         SetEventFlagID(1049308055, ON);
-        SetEventFlagID(1044320340, OFF);
+        SetEventFlagID(1044320800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1044322099);
         WarpPlayer(60, 44, 32, 0, 1044322099, 0);
@@ -1321,7 +1356,7 @@ $Event(11107780, Restart, function() {
         //deathbird (liurnia)
     } else if (EventFlag(1049302061)) {
         SetEventFlagID(1049308061, ON);
-        SetEventFlagID(1037420340, OFF);
+        SetEventFlagID(1037420800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1037422001);
         WarpPlayer(60, 37, 42, 0, 1037422001, 0);
@@ -1351,7 +1386,7 @@ $Event(11107780, Restart, function() {
         //death rite (liurnia)
     } else if (EventFlag(1049302062)) {
         SetEventFlagID(1049308062, ON);
-        SetEventFlagID(1036450340, OFF);
+        SetEventFlagID(1036450800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1036452001);
         WarpPlayer(60, 36, 45, 0, 1036452001, 0);
@@ -1365,26 +1400,26 @@ $Event(11107780, Restart, function() {
         //night's cavalry (limgrave)
     } else if (EventFlag(1049302052)) {
         SetEventFlagID(1049308052, ON);
-        SetEventFlagID(1043370340, OFF);
+        SetEventFlagID(1043370800, OFF);
         WarpPlayer(60, 43, 37, 0, 1043370971, 0);
         //night's cavalry (weeping)
     } else if (EventFlag(1049302057)) {
         SetEventFlagID(1049308057, ON);
-        SetEventFlagID(1044320342, OFF);
+        SetEventFlagID(1044320850, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1044332001);
         WarpPlayer(60, 44, 33, 0, 1044332001, 0);
         //night's cavalry (liurnia north)
     } else if (EventFlag(1049302065)) {
         SetEventFlagID(1049308065, ON);
-        SetEventFlagID(1036480340, OFF);
+        SetEventFlagID(1036480800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1036482001);
         WarpPlayer(60, 36, 48, 0, 1036482001, 0);
         //night's cavalry (liurnia east)
     } else if (EventFlag(1049302070)) {
         SetEventFlagID(1049308070, ON);
-        SetEventFlagID(1039430340, OFF);
+        SetEventFlagID(1039430800, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1039432099);
         WarpPlayer(60, 39, 43, 0, 1039432099, 0);
@@ -1404,6 +1439,7 @@ $Event(11107795, Restart, function() {
     WaitFor(AnyBatchEventFlags(1049302076,1049302096));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
         //black blade kindred (dragonbarrow)
     if (EventFlag(1049302091)) {
         SetEventFlagID(1049308091, ON);
@@ -1474,7 +1510,6 @@ $Event(11107795, Restart, function() {
     } else if (EventFlag(1049302092)) {
         SetEventFlagID(1049308092, ON);
         SetEventFlagID(1052410850, OFF);
-        SetEventFlagID(1052410851, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1052412098);
         WarpPlayer(60, 52, 41, 0, 1052412098, 0);
@@ -1522,7 +1557,6 @@ $Event(11107795, Restart, function() {
     } else if (EventFlag(1049302076)) {
         SetEventFlagID(1049308076, ON);
         SetEventFlagID(1039510800, OFF);
-        SetEventFlagID(1039510801, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1039512001);
         WarpPlayer(60, 39, 51, 0, 1039512001, 0);
@@ -1530,7 +1564,6 @@ $Event(11107795, Restart, function() {
     } else if (EventFlag(1049302089)) {
         SetEventFlagID(1049308089, ON);
         SetEventFlagID(1048510800, OFF);
-        SetEventFlagID(1048510810, OFF);
         if (EventFlag(1049300052))
             SetPlayerRespawnPoint(1048512099);
         WarpPlayer(60, 48, 51, 0, 1048512099, 0);
@@ -1558,6 +1591,7 @@ $Event(11107793, Restart, function() {
     WaitFor(AnyBatchEventFlags(1049302097,1049302106));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
         //darriwil
         if (EventFlag(1049302097)) {
         SetEventFlagID(1049308097, ON);
@@ -1621,6 +1655,7 @@ $Event(11107794, Restart, function() {
     WaitFor(AnyBatchEventFlags(1049302107,1049302130));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
         //duelist (murkwater)
         if (EventFlag(1049302109)) {
         SetEventFlagID(1049308109, ON);
@@ -1778,6 +1813,7 @@ $Event(11107782, Default, function() {
     WaitFor(AnyBatchEventFlags(1049302131,1049302152));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
     //soldier of godrick
     if (EventFlag(1049302131)) {
         SetEventFlagID(1049308131, ON);
@@ -1929,6 +1965,7 @@ $Event(11107796, Default, function() {
     WaitFor(AnyBatchEventFlags(1049302153,1049302166));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
     //stonedigger troll (limgrave)
     if (EventFlag(1049302154)) {
         SetEventFlagID(1049308154, ON);
@@ -2027,6 +2064,7 @@ $Event(11107788, Default, function() {
     WaitFor(AnyBatchEventFlags(1049302167,1049302178));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
     //divine beast
     if (EventFlag(1049302167)) {
         SetEventFlagID(1049308167, ON);
@@ -2121,6 +2159,7 @@ $Event(11107789, Default, function() {
     WaitFor(AnyBatchEventFlags(1049302179,1049302208));
     SetPlayerRespawnPoint(11102021);
     BatchSetEventFlags(1049308000,1049308215, OFF);
+    BatchSetEventFlags(1049308250,1049308275, OFF);
     //death knight fog rift
     if (EventFlag(1049302180)) {
         SetEventFlagID(1049308180, ON);

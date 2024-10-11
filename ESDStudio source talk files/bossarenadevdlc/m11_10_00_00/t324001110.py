@@ -4,24 +4,74 @@ def t324001110_1():
     t324001110_x0()
     Quit()
     
+def t324001110_x0():
+    """State 0"""
+    if not IsClientPlayer():
+        """State 1"""
+        Label('L0')
+        call = t324001110_x1()
+        if IsClientPlayer() == 1:
+            """State 2"""
+            Label('L1')
+            call = t324001110_x2()
+            if not IsClientPlayer():
+                Goto('L0')
+            elif IsPlayerDead() == 1:
+                pass
+        elif IsPlayerDead() == 1:
+            pass
+    else:
+        Goto('L1')
+    """State 3"""
+    call = t324001110_x4()
+    assert not IsPlayerDead()
+    Goto('L0')
+    """Unused"""
+    """State 4"""
+    return 0
+
+def t324001110_x1():
+    """State 0"""
+    while True:
+        """State 1"""
+        # actionbutton:6000:"Talk"
+        call = t324001110_x5(actionbutton1=6000, flag1=6001, flag2=6000, flag3=6000, flag4=6000, flag5=6000,
+                             flag6=6000)
+        if call.Done():
+            """State 2"""
+            call = t324001110_x3()
+            if call.Done():
+                pass
+            elif GetDistanceToPlayer() > 3 or IsMultiplayerInProgress() == 1:
+                pass
+        elif IsMultiplayerInProgress() == 1:
+            pass
+        """State 3"""
+        assert t324001110_x6() and not IsMultiplayerInProgress()
+    """Unused"""
+    """State 4"""
+    return 0
+
+def t324001110_x2():
+    """State 0"""
+    Quit()
+    """Unused"""
+    """State 1"""
+    return 0
+
+#main menu
 def t324001110_x3():
     while True:
         c1_110()
         ClearTalkListData()
+        #boss lists
+        AddTalkListData(1, 99998424, -1)
         #last boss selected
-        AddTalkListData(1, 99998416, -1)
-        # action:99996000:"remembrance bosses"
-        AddTalkListData(2, 99996000, -1)
-        # action:99993021:"great enemies"
-        AddTalkListData(3, 99993021, -1)
-        # action:99993020:"minor bosses"
-        AddTalkListData(4, 99993020, -1)
-        # action:99993023:"dlc main bosses"
-        AddTalkListData(5, 99993023, -1)
-        # action:99993024:"dlc minor bosses"
-        AddTalkListData(6, 99993024, -1)
+        AddTalkListData(2, 99998416, -1)
         #random menu
         AddTalkListData(7, 99998406, -1)
+        #boss rush menu
+        AddTalkListData(11, 99998486, -1)
         # action:99998403:"sorting options"
         AddTalkListData(8, 99998403, -1)
         # respawn location options
@@ -32,24 +82,12 @@ def t324001110_x3():
         AddTalkListData(99, 20000009, -1)
         ShowShopMessage(1)
         assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
-        #last boss selected
+        #boss lists
         if GetTalkListEntryResult() == 1:
-            SetEventFlag(1049302260, 1)
-        #remembrance bosses
+            assert t324001110_19()
+        #last boss selected
         elif GetTalkListEntryResult() == 2:
-            assert t324001110_2()
-        #great enemies
-        elif GetTalkListEntryResult() == 3:
-            assert t324001110_5()
-        #minor bosses
-        elif GetTalkListEntryResult() == 4:
-            assert t324001110_6()
-        #dlc main
-        elif GetTalkListEntryResult() == 5:
-            assert t324001110_13()
-        #dlc minor
-        elif GetTalkListEntryResult() == 6:
-            assert t324001110_14()
+            SetEventFlag(1049302260, 1)
         #random
         elif GetTalkListEntryResult() == 7:
             assert t324001110_16()
@@ -63,9 +101,50 @@ def t324001110_x3():
         elif GetTalkListEntryResult() == 10:
             SetEventFlag(1049302243, 1)
             return 0
+        #boss rush
+        elif GetTalkListEntryResult() == 11:
+            assert t324001110_18()
         else:
             return 0    
 
+#boss lists
+def t324001110_19():
+    while True:
+        c1_110()
+        ClearTalkListData()
+        # action:99996000:"remembrance bosses"
+        AddTalkListData(1, 99996000, -1)
+        # action:99993021:"great enemies"
+        AddTalkListData(2, 99993021, -1)
+        # action:99993020:"minor bosses"
+        AddTalkListData(3, 99993020, -1)
+        # action:99993023:"dlc main bosses"
+        AddTalkListData(4, 99993023, -1)
+        # action:99993024:"dlc minor bosses"
+        AddTalkListData(5, 99993024, -1)
+        # action:20000009:"Leave"
+        AddTalkListData(99, 26000004, -1)
+        ShowShopMessage(1)
+        assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        #remembrance bosses
+        if GetTalkListEntryResult() == 1:
+            assert t324001110_2()
+        #great enemies
+        elif GetTalkListEntryResult() == 2:
+            assert t324001110_5()
+        #minor bosses
+        elif GetTalkListEntryResult() == 3:
+            assert t324001110_6()
+        #dlc main
+        elif GetTalkListEntryResult() == 4:
+            assert t324001110_13()
+        #dlc minor
+        elif GetTalkListEntryResult() == 5:
+            assert t324001110_14()
+        else:
+            return 0    
+
+#sorting options
 def t324001110_15():
     while True:
         c1_110()
@@ -92,7 +171,8 @@ def t324001110_15():
             pass
         else:
             return 0
-            
+
+# respawn options
 def t324001110_17():
     while True:
         c1_110()
@@ -105,8 +185,10 @@ def t324001110_17():
         AddTalkListDataIf (GetEventFlag(1049300053) == 0,2, 99998419, -1)
         # respawn at roundtable (currently active)
         AddTalkListDataIf (GetEventFlag(1049300053) == 1,2, 99998421, -1)
-        # note
+        # note about grace
         AddTalkListData(3, 99998422, -1)
+        # note about boss rush
+        AddTalkListData(4, 99998423, -1)
         # action:20000009:"Leave"
         AddTalkListData(99, 26000004, -1)
         ShowShopMessage(1)
@@ -121,9 +203,11 @@ def t324001110_17():
             pass
         elif GetTalkListEntryResult() == 3:
             pass
+        elif GetTalkListEntryResult() == 4:
+            pass
         else:
             return 0
-            
+# random    
 def t324001110_16():
     while True: 
         c1_110()
@@ -156,6 +240,42 @@ def t324001110_16():
             SetEventFlag(1049302249, 1)
         elif GetTalkListEntryResult() == 6:
             SetEventFlag(1049302250, 1)
+        else:
+            return 0
+
+# boss rush
+def t324001110_18():
+    while True:
+        c1_110()
+        ClearTalkListData()
+        # remembrance + dlc main
+        AddTalkListData(1, 99998487, -1)
+        # remembrance (base game)
+        AddTalkListData(2, 99998488, -1)
+        # dlc main
+        AddTalkListData(3, 99998489, -1)
+        # custom 1
+        AddTalkListData(10, 99998490, -1)
+        # custom 2
+        AddTalkListData(11, 99998491, -1)
+        # custom 3
+        AddTalkListData(12, 99998492, -1)
+        # action:20000009:"Leave"
+        AddTalkListData(99, 26000004, -1)
+        ShowShopMessage(1)
+        assert not (CheckSpecificPersonMenuIsOpen(1, 0) == 1 and not CheckSpecificPersonGenericDialogIsOpen(0))
+        if GetTalkListEntryResult() == 1:
+            SetEventFlag(1049302270, 1)
+        elif GetTalkListEntryResult() == 2:
+            SetEventFlag(1049302271, 1)
+        elif GetTalkListEntryResult() == 3:
+            SetEventFlag(1049302272, 1)
+        elif GetTalkListEntryResult() == 10:
+            SetEventFlag(1049302280, 1)
+        elif GetTalkListEntryResult() == 11:
+            SetEventFlag(1049302281, 1)
+        elif GetTalkListEntryResult() == 12:
+            SetEventFlag(1049302282, 1)
         else:
             return 0
 
@@ -354,7 +474,8 @@ def t324001110_2():
                 SetEventFlag(1049302003, 1)
             else:
                 return 0
-            
+    
+#great enemies
 def t324001110_5():
     while True:
         #ordered by level
@@ -710,6 +831,7 @@ def t324001110_5():
             else:
                 return 0
 
+#minor bosses
 def t324001110_6():
     while True:
         c1_110()
@@ -742,6 +864,7 @@ def t324001110_6():
         else:
             return 0
 
+#overworld bosses
 def t324001110_7():
     while True:
         c1_110()
@@ -1234,6 +1357,7 @@ def t324001110_7():
             else:
                 return 0
 
+#evergaols
 def t324001110_8():
     while True:
         #ordered by level
@@ -1359,6 +1483,7 @@ def t324001110_8():
             else:
                 return 0
 
+#catacombs
 def t324001110_9():
     while True:
         #ordered by level
@@ -1623,7 +1748,7 @@ def t324001110_9():
                 SetEventFlag(1049302126, 1)
             else:
                 return 0
-
+#cave bosses
 def t324001110_10():
     while True:
         #ordered by level
@@ -1869,6 +1994,7 @@ def t324001110_10():
             else:
                 return 0
 
+#ruins
 def t324001110_11():
     while True:
         #ordered by level
@@ -2033,61 +2159,6 @@ def t324001110_11():
                 SetEventFlag(1049302163, 1)
             else:
                 return 0
-
-def t324001110_x0():
-    """State 0"""
-    if not IsClientPlayer():
-        """State 1"""
-        Label('L0')
-        call = t324001110_x1()
-        if IsClientPlayer() == 1:
-            """State 2"""
-            Label('L1')
-            call = t324001110_x2()
-            if not IsClientPlayer():
-                Goto('L0')
-            elif IsPlayerDead() == 1:
-                pass
-        elif IsPlayerDead() == 1:
-            pass
-    else:
-        Goto('L1')
-    """State 3"""
-    call = t324001110_x4()
-    assert not IsPlayerDead()
-    Goto('L0')
-    """Unused"""
-    """State 4"""
-    return 0
-
-def t324001110_x1():
-    """State 0"""
-    while True:
-        """State 1"""
-        # actionbutton:6000:"Talk"
-        call = t324001110_x5(actionbutton1=6000, flag1=6001, flag2=6000, flag3=6000, flag4=6000, flag5=6000,
-                             flag6=6000)
-        if call.Done():
-            """State 2"""
-            call = t324001110_x3()
-            if call.Done():
-                pass
-            elif GetDistanceToPlayer() > 3 or IsMultiplayerInProgress() == 1:
-                pass
-        elif IsMultiplayerInProgress() == 1:
-            pass
-        """State 3"""
-        assert t324001110_x6() and not IsMultiplayerInProgress()
-    """Unused"""
-    """State 4"""
-    return 0
-
-def t324001110_x2():
-    """State 0"""
-    Quit()
-    """Unused"""
-    """State 1"""
-    return 0
             
 def t324001110_13():
     while True:

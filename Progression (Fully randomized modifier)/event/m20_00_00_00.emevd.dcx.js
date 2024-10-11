@@ -371,21 +371,20 @@ L0:
     ForceAnimationPlayback(X4_4, X20_4, false, false, false);
 });
 
+//divine beast
 $Event(20002800, Restart, function() {
     EndIf(EventFlag(20000800));
     WaitFor(CharacterHPValue(20000800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(20008000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(20000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(20000800));
+    WaitFor(CharacterDead(20000800));
     HandleBossDefeatAndDisplayBanner(20000800, TextBannerType.LegendFelled);
     ChangeWeather(Weather.Default, 1, false);
     ClearSpEffect(10000, 20004220);
     ClearSpEffect(10000, 20004221);
     ClearSpEffect(10000, 20004222);
     //boss rewards (5 bonus items, DLC version)
-InitializeCommonEvent(0,90001045,1049304271,1049304154,1049304158,1049307169,1049307170,1049307171,1049307172,1049307173,1049307174,1049306228,1049306232,1049306235,1049306237,1049306240,1049306242,1049300271);
+    InitializeCommonEvent(0,90001045,1049304271,1049304154,1049304158,1049307169,1049307170,1049307171,1049307172,1049307173,1049307174,1049306228,1049306232,1049306235,1049306237,1049306240,1049306242,1049300271);
     //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
@@ -1050,7 +1049,3 @@ L0:
     DeleteAssetfollowingSFX(X0_4, true);
     RestartEvent();
 });
-
-
-
-

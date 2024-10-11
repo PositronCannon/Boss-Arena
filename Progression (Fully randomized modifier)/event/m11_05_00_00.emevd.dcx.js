@@ -71,9 +71,7 @@ $Event(11052800, Default, function() {
     WaitFor(CharacterHPValue(11050800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(11058000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(11050800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(11050800));
+    WaitFor(CharacterDead(11050800));
     HandleBossDefeatAndDisplayBanner(11050800, TextBannerType.LegendFelled);
     //boss rewards (4 bonus items + guaranteed flag)
     InitializeCommonEvent(0,90001034,1049304249,1049304148,-1,1049304150,1049307066,1049307067,1049307068,1049307069,1049307070,1049305945,1049305948,1049305950,1049305957,1049305959,1049300249);
@@ -220,9 +218,7 @@ $Event(11052850, Restart, function() {
     WaitFixedTimeSeconds(4);
     PlaySE(11058050, SoundType.SFX, 888880000);
     SetSpEffect(20000, 1899);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(11050850) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(11050850));
+    WaitFor(CharacterDead(11050850));
     HandleBossDefeatAndDisplayBanner(11050850, TextBannerType.GreatEnemyFelled);
     //boss rewards (3 bonus items + guaranteed flag)
     InitializeCommonEvent(0,90001033,1049304240,1049304136,-1,-1,1049307028,1049307029,1049307030,1049307031,1049305839,1049305844,1049305846,1049305848,1049300240);

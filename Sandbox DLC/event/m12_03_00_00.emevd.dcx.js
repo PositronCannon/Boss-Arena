@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     RegisterBonfire(71231, 12031951, 0, 0, 0, 5);
     RegisterBonfire(71232, 12031952, 0, 0, 0, 5);
     RegisterBonfire(71233, 12031953, 0, 0, 0, 5);
@@ -268,6 +267,7 @@ $Event(12032241, Restart, function(X0_4, X4_4) {
     EndEvent();
 });
 
+//fia's champions
 $Event(12032800, Restart, function() {
     EndIf(EventFlag(12030800));
     WaitFor(
@@ -330,6 +330,9 @@ L0:
     DisableCharacter(12030814);
     DisableAssetTreasure(12031490);
     DisableAsset(12031810);
+    //move forward to begin battle
+    if (EventFlag(1049308032))
+        DisplayBlinkingMessage(2081023);
     WaitFor(PlayerIsInOwnWorld() && InArea(10000, 12032801));
     SetEventFlagID(12030801, ON);
     SetEventFlagID(12032803, ON);
@@ -613,8 +616,11 @@ $Event(12032849, Restart, function() {
 $Event(12032859, Restart, function() {
     DisableCharacter(12030850);
     EndIf(EventFlag(12030850));
+    //move forward to begin battle
+    if (EventFlag(1049308005))
+        DisplayBlinkingMessage(2081023);
+    WaitFor(PlayerIsInOwnWorld() && InArea(10000, 12032801));
     SetEventFlagID(9021, ON);
-    WaitFixedTimeSeconds(2);
     FadeToBlack(1, 1, true, 1);
     WaitFixedTimeSeconds(1);
     ChangeWeather(Weather.PuffyClouds, -1, true);
@@ -628,6 +634,7 @@ $Event(12032859, Restart, function() {
     SetEventFlagID(12032858, ON);
 });
 
+//fortissax
 $Event(12032850, Restart, function() {
     if (EventFlag(12030850)) {
         EnableCharacter(12030950);
@@ -645,7 +652,14 @@ L10:
     WaitFor(CharacterDead(12030850));
     HandleBossDefeatAndDisplayBanner(12030850, TextBannerType.LegendFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302505, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);  
 });
 
 $Event(12032860, Restart, function() {

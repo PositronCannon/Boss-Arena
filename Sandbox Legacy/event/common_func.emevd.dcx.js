@@ -7,6 +7,154 @@
 // @version    3.4.2
 // ==/EMEVD==
 
+//boss rush scripts
+
+//custom boss rush slot 1
+$Event(90009910, Default, function() {
+    DisplayBlinkingMessage(2081024); //remove this line if you use this slot
+});
+
+//custom boss rush slot 2
+$Event(90009911, Default, function() {
+    DisplayBlinkingMessage(2081024); //remove this line if you use this slot
+});
+
+//custom boss rush slot 3
+$Event(90009912, Default, function() {
+    DisplayBlinkingMessage(2081024); //remove this line if you use this slot
+});
+
+//boss rush: remembrance (base game only)
+$Event(90009901, Default, function() {
+        //Godrick the Grafted
+    if (EventFlag(1049302750)) {
+        SetEventFlagID(1049302750, OFF);
+        SetEventFlagID(10000800, OFF);
+        SetPlayerRespawnPoint(10002899);
+        WarpPlayer(10, 0, 0, 0, 10002899, 0);
+    }
+    //Rennala, Queen of the Full Moon
+    else if (EventFlag(1049302500)) {
+        SetEventFlagID(1049302500, OFF);
+        SetEventFlagID(14000800, OFF);
+        SetPlayerRespawnPoint(14000099);
+        WarpPlayer(14, 0, 0, 0, 14000099, 0);
+    }
+    //Regal Ancestor Spirit
+    else if (EventFlag(1049302501)) {
+        SetEventFlagID(1049302501, OFF);
+        SetEventFlagID(12090800, OFF);
+        SetPlayerRespawnPoint(12090099);
+        WarpPlayer(12, 9, 0, 0, 12090099, 0);
+    }
+    //Starscourge Radahn
+    else if (EventFlag(1049302502)) {
+        SetEventFlagID(1049302502, OFF);
+        SetEventFlagID(1052380800, OFF);
+        SetPlayerRespawnPoint(60513799);
+        WarpPlayer(60, 51, 37, 0, 60513799, 0);
+    }
+    //Astel, Naturalborn of the Void
+    else if (EventFlag(1049302503)) {
+        SetEventFlagID(1049302503, OFF);
+        SetEventFlagID(12040800, OFF);
+        SetPlayerRespawnPoint(12040099);
+        WarpPlayer(12, 4, 0, 0, 12040099, 0);
+    }
+    //Lichdragon Fortissax
+    else if (EventFlag(1049302504)) {
+        SetEventFlagID(1049302504, OFF);
+        SetEventFlagID(12030800, ON);
+        SetEventFlagID(12030850, OFF);
+        SetPlayerRespawnPoint(12030099);
+        WarpPlayer(12, 3, 0, 0, 12030099, 0);
+    }
+    //Morgott, the Omen King
+    else if (EventFlag(1049302505)) {
+        SetEventFlagID(1049302505, OFF);
+        SetEventFlagID(11000800, OFF);
+        SetPlayerRespawnPoint(11000099);
+        WarpPlayer(11, 0, 0, 0, 11000099, 0);
+    }
+    //Rykard, Lord of Blasphemy
+    else if (EventFlag(1049302506)) {
+        SetEventFlagID(1049302506, OFF);
+        SetEventFlagID(16000800, OFF);
+        SetPlayerRespawnPoint(16000099);
+        WarpPlayer(16, 0, 0, 0, 16000099, 0);
+    }
+    //Fire Giant
+    else if (EventFlag(1049302507)) {
+        SetEventFlagID(1049302507, OFF);
+        SetEventFlagID(1052520800, OFF);
+        SetPlayerRespawnPoint(1052530099);
+        WarpPlayer(60, 52, 53, 0, 1052530099, 0);
+    }
+    //Beast Clergyman / Maliketh
+    else if (EventFlag(1049302508)) {
+        SetEventFlagID(1049302508, OFF);
+        SetEventFlagID(13000800, OFF);
+        SetPlayerRespawnPoint(13000099);
+        WarpPlayer(13, 0, 0, 0, 13000099, 0);
+    }
+    //Godfrey / Hoarah Loux
+    else if (EventFlag(1049302509)) {
+        SetEventFlagID(1049302509, OFF);
+        SetEventFlagID(11050800, OFF);
+        SetPlayerRespawnPoint(11050099);
+        WarpPlayer(11, 5, 0, 0, 11050099, 0);
+    }
+    //Dragonlord Placidusax
+    else if (EventFlag(1049302510)) {
+        SetEventFlagID(1049302510, OFF);
+        SetEventFlagID(13000830, OFF);
+        SetPlayerRespawnPoint(13000098);
+        WarpPlayer(13, 0, 0, 0, 13000098, 0);
+    }
+    //Radagon / Elden Beast
+    else if (EventFlag(1049302511)) {
+        SetEventFlagID(1049302511, OFF);
+        SetEventFlagID(19000800, OFF);
+        SetEventFlagID(1049300040, OFF);
+        SetEventFlagID(1049300041, ON);
+        SetPlayerRespawnPoint(19000098);
+        WarpPlayer(19, 0, 0, 0, 19000098, 0);
+    }
+    //Mohg, Lord of Blood
+    else if (EventFlag(1049302512)) {
+        SetEventFlagID(1049302512, OFF);
+        SetEventFlagID(12050800, OFF);
+        SetPlayerRespawnPoint(12050099);
+        WarpPlayer(12, 5, 0, 0, 12050099, 0);
+    }
+    //Malenia, Blade of Miquella
+    else if (EventFlag(1049302515)) {
+        SetEventFlagID(1049302515, OFF);
+        SetEventFlagID(15000800, OFF);
+        SetPlayerRespawnPoint(15000099);
+        WarpPlayer(15, 0, 0, 0, 15000099, 0);
+    }
+    //Roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11100000, 0);
+});
+
+//boss rush initialization (sandbox legacy)
+$Event(90009920, Default, function() {
+    //remembrance (base game)
+    if (EventFlag(1049308251))
+        InitializeCommonEvent(0, 90009901, 0);
+    //custom 1
+    else if (EventFlag(1049308260))
+        InitializeCommonEvent(0, 90009910, 0);
+    //custom 2
+    else if (EventFlag(1049308261))
+        InitializeCommonEvent(0, 90009911, 0);
+    //custom 3
+    else if (EventFlag(1049308262))
+        InitializeCommonEvent(0, 90009912, 0);
+});
+
 //character initialization (sandbox legacy)
 $Event(10010001, Default, function() {
     SetEventFlagID(100, ON);

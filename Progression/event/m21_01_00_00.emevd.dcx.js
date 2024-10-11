@@ -447,6 +447,7 @@ $Event(21012580, Restart, function() {
     RegisterLadder(21010588, 21010589, 21011588);
 });
 
+//messmer
 $Event(21012800, Restart, function() {
     EndIf(EventFlag(21010800));
     WaitFor(CharacterHPValue(21010800) <= 0);
@@ -457,7 +458,7 @@ $Event(21012800, Restart, function() {
     DisableHit(21013891);
     ChangeCamera(-1, -1);
     //boss rewards (6 bonus items, DLC version)
-InitializeCommonEvent(0,90001046,1049304300,1049304154,1049304158,1049307309,1049307310,1049307311,1049307312,1049307313,1049307314,1049307315,1049306601,1049306604,1049306606,1049306608,1049306613,1049306615,1049306617,1049300300);
+    InitializeCommonEvent(0,90001046,1049304300,1049304154,1049304158,1049307309,1049307310,1049307311,1049307312,1049307313,1049307314,1049307315,1049306601,1049306604,1049306606,1049306608,1049306613,1049306615,1049306617,1049300300);
     //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
@@ -1919,7 +1920,3 @@ $Event(21010740, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(CharacterHPValue(X0_4) <= 0 || CharacterDead(X0_4));
     DisableCharacterAI(X4_4);
 });
-
-
-
-

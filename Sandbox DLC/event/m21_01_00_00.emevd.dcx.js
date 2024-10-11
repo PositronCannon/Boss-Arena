@@ -447,6 +447,7 @@ $Event(21012580, Restart, function() {
     RegisterLadder(21010588, 21010589, 21011588);
 });
 
+//messmer
 $Event(21012800, Restart, function() {
     EndIf(EventFlag(21010800));
     WaitFor(CharacterHPValue(21010800) <= 0);
@@ -456,9 +457,15 @@ $Event(21012800, Restart, function() {
     HandleBossDefeatAndDisplayBanner(21010800, TextBannerType.DemigodFelled);
     DisableHit(21013891);
     ChangeCamera(-1, -1);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302523, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(21012810, Restart, function() {
@@ -1917,6 +1924,3 @@ $Event(21010740, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(CharacterHPValue(X0_4) <= 0 || CharacterDead(X0_4));
     DisableCharacterAI(X4_4);
 });
-
-
-

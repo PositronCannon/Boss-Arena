@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
-    
     InitializeCommonEvent(0, 9005810, 310, 1052380000, 1052380950, 1052381950, 1084227584);
     InitializeEvent(0, 1052382699, 0);
     InitializeCommonEvent(0, 90005646, 76422, 1052382690, 1052382691, 1052381690, 1050362690, 2372156);
@@ -709,6 +707,7 @@ $Event(1052382699, Restart, function() {
     DisableCharacterCollision(1052380699);
 });
 
+//radahn
 $Event(1252382800, Restart, function() {
     EndIf(EventFlag(1252380800));
     WaitFor(CharacterHPValue(1052380800) <= 0);
@@ -724,7 +723,14 @@ $Event(1252382800, Restart, function() {
     SetNetworkUpdateRate(1052380800, false, CharacterUpdateFrequency.AlwaysUpdate);
     HandleBossDefeatAndDisplayBanner(1052380800, TextBannerType.DemigodFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302503, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);  
 });
 
 $Event(1252382810, Restart, function() {

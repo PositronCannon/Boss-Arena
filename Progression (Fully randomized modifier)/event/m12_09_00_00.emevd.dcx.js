@@ -179,6 +179,7 @@ L0:
     WarpPlayer(12, 2, 0, 0, 12022201, 0);
 });
 
+//regal ancestor spirit
 $Event(12092800, Default, function() {
     EndIf(EventFlag(12090800));
     WaitFor(HPRatio(12090800) <= 0);
@@ -190,7 +191,6 @@ $Event(12092800, Default, function() {
     PlaySE(12090800, SoundType.SFX, 77777777);
     WaitFor(CharacterDead(12090800));
     HandleBossDefeatAndDisplayBanner(12090800, TextBannerType.LegendFelled);
-    //boss rewards (3 bonus items + guaranteed flag)
     //boss rewards (3 bonus items + guaranteed flag)
     InitializeCommonEvent(0,90001033,1049304188,-1,-1,1049304087,1049304800,1049304801,1049304802,1049304803,1049305241,1049305246,1049305251,1049305253,1049300188);
     WaitFixedTimeSeconds(6);

@@ -823,6 +823,7 @@ $Event(10003500, Restart, function(X0_4) {
     RestartEvent();
 });
 
+//godrick
 $Event(10002800, Default, function() {
     EndIf(EventFlag(10000800));
     WaitFor(HPRatio(10000800) <= 0);
@@ -833,12 +834,17 @@ $Event(10002800, Default, function() {
     SpawnMapSFX(10003822);
     WaitFixedTimeSeconds(4);
     PlaySE(10000800, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(10000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(10000800));
+    WaitFor(CharacterDead(10000800));
     HandleBossDefeatAndDisplayBanner(10000800, TextBannerType.DemigodFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302500, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(10002810, Restart, function() {

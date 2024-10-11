@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     RegisterBonfire(14000002, 14001952, 0, 0, 0, 5);
     RegisterBonfire(14000003, 14001953, 0, 0, 0, 5);
     InitializeCommonEvent(0, 9005810, 14000800, 14000000, 14000950, 14001950, 1084227584);
@@ -642,6 +641,7 @@ L0:
     EndEvent();
 });
 
+//rennala
 $Event(14002800, Restart, function() {
     if (EventFlag(14000804)) {
         ReproduceAssetAnimation(14001841, 0);
@@ -651,18 +651,21 @@ $Event(14002800, Restart, function() {
         EndEvent();
     }
 L1:
-    if (!EventFlag(14000800)) {
-        WaitFor(CharacterHPValue(14000800) <= 0);
-        WaitFixedTimeSeconds(4);
-        PlaySE(14008000, SoundType.SFX, 888880000);
-        WaitFor(
-            (PlayerIsInOwnWorld() && CharacterDead(14000800) && !CharacterHasSpEffect(10000, 9646))
-                || EventFlag(14000800));
-        ForceCharacterDeath(14005810, false);
-        HandleBossDefeatAndDisplayBanner(14000800, TextBannerType.LegendFelled);
-        WaitFixedTimeSeconds(6);
-        WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    WaitFor(CharacterHPValue(14000800) <= 0);
+    WaitFixedTimeSeconds(4);
+    PlaySE(14008000, SoundType.SFX, 888880000);
+    WaitFor(CharacterDead(14000800));
+    ForceCharacterDeath(14005810, false);
+    HandleBossDefeatAndDisplayBanner(14000800, TextBannerType.LegendFelled);
+    WaitFixedTimeSeconds(6);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302501, ON);
+        InitializeCommonEvent(0, 90009920, 0);
     }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);  
 });
 
 $Event(14002810, Restart, function() {
@@ -2825,5 +2828,3 @@ L20:
     WaitFor(!EventFlag(3806));
     RestartEvent();
 });
-
-

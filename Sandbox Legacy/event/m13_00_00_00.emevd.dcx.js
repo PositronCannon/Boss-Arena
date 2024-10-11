@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     RegisterBonfire(13000003, 13001953, 0, 0, 0, 5);
     RegisterBonfire(13000004, 13001954, 0, 0, 0, 5);
     RegisterBonfire(13000005, 13001955, 0, 0, 0, 5);
@@ -377,6 +376,7 @@ S1:
     flag2 = !EventFlag(X8_4);
 });
 
+//maliketh
 $Event(13002800, Restart, function() {
     if (EventFlag(13000800)) {
         EndIf(!PlayerIsInOwnWorld());
@@ -389,13 +389,18 @@ L0:
     ForceCharacterDeath(13000800, false);
     WaitFixedTimeSeconds(4);
     PlaySE(13008000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(13000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(13000800));
+    WaitFor(CharacterDead(13000800));
     EnableCharacterDefaultBackread(13000800);
     HandleBossDefeatAndDisplayBanner(13000800, TextBannerType.LegendFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302509, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(13002805, Restart, function() {
@@ -525,6 +530,7 @@ $Event(13002829, Restart, function() {
     InitializeCommonEvent(0, 9005822, 13000800, 211000, 13002805, 13002806, 0, 13002802, 1, 1);
 });
 
+//placidusax
 $Event(13002830, Restart, function() {
     EndIf(EventFlag(13000830));
     WaitFor(CharacterHPValue(13000830) <= 0);
@@ -534,7 +540,14 @@ $Event(13002830, Restart, function() {
     WaitFor(CharacterDead(13000830));
     HandleBossDefeatAndDisplayBanner(13000830, TextBannerType.LegendFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302511, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(13002834, Restart, function() {
@@ -643,6 +656,7 @@ $Event(13002849, Restart, function() {
     InitializeCommonEvent(0, 9005822, 13000830, 452000, 13002835, 13002836, 0, 13002832, 0, 1);
 });
 
+//godskin duo
 $Event(13002850, Restart, function() {
     EndIf(EventFlag(13000850));
     WaitFor(CharacterHPValue(13000850) <= 0);
@@ -1133,5 +1147,3 @@ L2:
     SetEventFlagID(13002721, ON);
     EndEvent();
 });
-
-

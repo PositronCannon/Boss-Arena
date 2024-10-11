@@ -707,6 +707,7 @@ $Event(1052382699, Restart, function() {
     DisableCharacterCollision(1052380699);
 });
 
+//radahn
 $Event(1252382800, Restart, function() {
     EndIf(EventFlag(1252380800));
     WaitFor(CharacterHPValue(1052380800) <= 0);

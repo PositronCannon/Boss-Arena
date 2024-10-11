@@ -545,6 +545,7 @@ $Event(22002300, Restart, function(X0_4, X4_4) {
     RestartEvent();
 });
 
+//putrescent
 $Event(22000800, Restart, function() {
     EndIf(EventFlag(22000800));
     WaitFor(CharacterHPValue(22000800) <= 0);
@@ -555,9 +556,15 @@ $Event(22000800, Restart, function() {
     DisableCharacter(22000801);
     DisableCharacterCollision(22000801);
     HandleBossDefeatAndDisplayBanner(22000800, TextBannerType.LegendFelled);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302520, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(22002810, Restart, function() {
@@ -1024,6 +1031,3 @@ $Event(22000717, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     SetEventFlagID(X8_4, ON);
     EndEvent();
 });
-
-
-

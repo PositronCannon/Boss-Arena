@@ -199,6 +199,7 @@ $Event(11002503, Default, function() {
     RestartEvent();
 });
 
+//morgott
 $Event(11002800, Restart, function() {
     EndIf(EventFlag(11000800));
     WaitFor(CharacterHPValue(11000800) <= 0);
@@ -284,6 +285,7 @@ $Event(11002829, Restart, function() {
     InitializeCommonEvent(0, 9005822, 11000800, 213001, 11002805, 11002806, 0, 11002802, 0, 0);
 });
 
+//godfrey (golden shade)
 $Event(11002850, Restart, function() {
     EndIf(EventFlag(11000850));
     WaitFor(CharacterHPValue(11000850) <= 0);

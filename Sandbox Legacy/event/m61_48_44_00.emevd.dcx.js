@@ -66,6 +66,7 @@ $Event(2048442200, Restart, function(X0_4) {
     }
 });
 
+//rellana
 $Event(2048442800, Default, function() {
     EndIf(EventFlag(2048440800));
     WaitFor(CharacterHPValue(2048440800) <= 0);
@@ -73,9 +74,15 @@ $Event(2048442800, Default, function() {
     PlaySE(2048440800, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(2048440800));
     HandleBossDefeatAndDisplayBanner(2048440800, TextBannerType.LegendFelled);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302518, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(2048442810, Restart, function() {
@@ -141,6 +148,3 @@ $Event(2048440716, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(EventFlag(X4_4) || EventFlag(X8_4));
     SetEventFlagID(X0_4, OFF);
 });
-
-
-

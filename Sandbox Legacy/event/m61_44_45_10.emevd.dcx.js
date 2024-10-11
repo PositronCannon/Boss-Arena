@@ -36,6 +36,7 @@ $Event(2044452510, Default, function() {
     InitializeCommonEvent(0, 90005500, 2044450515, 2044450516, 2, 2044451515, 2044451516, 2044453516, 2044451517, 2044453517, 2044452516, 2044452517, 2044450517, 2044450518, 0);
 });
 
+//romina
 $Event(2044450800, Default, function() {
     if (EventFlag(2044450800)) {
         EndEvent();
@@ -44,13 +45,17 @@ L0:
     WaitFor(CharacterHPValue(2044450800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(2044450800, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(2044450800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(2044450800));
+    WaitFor(CharacterDead(2044450800));
     HandleBossDefeatAndDisplayBanner(2044450800, TextBannerType.LegendFelled);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302525, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(2044452810, Restart, function() {
@@ -150,5 +155,3 @@ $Event(2044452849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2044450800, 2044451801, 5, 0);
     InitializeCommonEvent(0, 9005822, 2044450800, 503000, 2044452805, 2044452806, 2044452805, 2044452802, 0, 0);
 });
-
-

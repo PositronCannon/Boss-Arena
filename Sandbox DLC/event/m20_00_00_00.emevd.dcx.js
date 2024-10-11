@@ -7,15 +7,6 @@
 // @version    3.4.2
 // ==/EMEVD==
 
-// ==EMEVD==
-// @docs    er-common.emedf.json
-// @compress    DCX_KRAK
-// @game    Sekiro
-// @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
-// @linked    [0,82]
-// @version    3.4.2
-// ==/EMEVD==
-
 $Event(0, Default, function() {
     InitializeEvent(0, 20002150, 0);
     InitializeCommonEvent(0, 9005810, 20000800, 20000000, 20000950, 20001950, 1084227584);
@@ -380,22 +371,27 @@ L0:
     ForceAnimationPlayback(X4_4, X20_4, false, false, false);
 });
 
+//divine beast
 $Event(20002800, Restart, function() {
     EndIf(EventFlag(20000800));
     WaitFor(CharacterHPValue(20000800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(20008000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(20000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(20000800));
+    WaitFor(CharacterDead(20000800));
     HandleBossDefeatAndDisplayBanner(20000800, TextBannerType.LegendFelled);
     ChangeWeather(Weather.Default, 1, false);
     ClearSpEffect(10000, 20004220);
     ClearSpEffect(10000, 20004221);
     ClearSpEffect(10000, 20004222);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302517, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(20002810, Restart, function() {
@@ -1057,6 +1053,3 @@ L0:
     DeleteAssetfollowingSFX(X0_4, true);
     RestartEvent();
 });
-
-
-

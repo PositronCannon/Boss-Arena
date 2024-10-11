@@ -341,6 +341,9 @@ L0:
     DisableCharacter(12030814);
     DisableAssetTreasure(12031490);
     DisableAsset(12031810);
+    //move forward to begin battle
+    if (EventFlag(1049308032))
+        DisplayBlinkingMessage(2081023);
     WaitFor(PlayerIsInOwnWorld() && InArea(10000, 12032801));
     SetEventFlagID(12030801, ON);
     SetEventFlagID(12032803, ON);
@@ -624,6 +627,10 @@ $Event(12032849, Restart, function() {
 $Event(12032859, Restart, function() {
     DisableCharacter(12030850);
     EndIf(EventFlag(12030850));
+    //move forward to begin battle
+    if (EventFlag(1049308005))
+        DisplayBlinkingMessage(2081023);
+    WaitFor(PlayerIsInOwnWorld() && InArea(10000, 12032801));
     SetEventFlagID(9021, ON);
     WaitFixedTimeSeconds(2);
     FadeToBlack(1, 1, true, 1);

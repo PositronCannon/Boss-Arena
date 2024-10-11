@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     RegisterBonfire(71251, 12051951, 0, 0, 0, 5);
     RegisterBonfire(71252, 12051952, 0, 0, 0, 5);
     RegisterBonfire(71253, 12051953, 0, 0, 0, 5);
@@ -375,17 +374,23 @@ $Event(12052690, Restart, function() {
     RestartEvent();
 });
 
+//mohg lord of blood
 $Event(12052800, Restart, function() {
     EndIf(EventFlag(12050800));
     WaitFor(CharacterHPValue(12050800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(12050800, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(12050800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(12050800));
+    WaitFor(CharacterDead(12050800));
     HandleBossDefeatAndDisplayBanner(12050800, TextBannerType.DemigodFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302515, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(12052810, Restart, function() {
@@ -619,5 +624,3 @@ $Event(12053712, Restart, function() {
     SetEventFlagID(1042369259, ON);
     EndEvent();
 });
-
-

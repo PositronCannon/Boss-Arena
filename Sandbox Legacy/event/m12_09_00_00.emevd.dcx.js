@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     InitializeEvent(0, 12092849, 0);
     InitializeEvent(0, 12092800, 0);
     InitializeEvent(0, 12092810, 0);
@@ -180,6 +179,7 @@ L0:
     WarpPlayer(12, 2, 0, 0, 12022201, 0);
 });
 
+//regal ancestor
 $Event(12092800, Default, function() {
     EndIf(EventFlag(12090800));
     WaitFor(HPRatio(12090800) <= 0);
@@ -192,7 +192,14 @@ $Event(12092800, Default, function() {
     WaitFor(CharacterDead(12090800));
     HandleBossDefeatAndDisplayBanner(12090800, TextBannerType.LegendFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302502, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);  
 });
 
 $Event(12092810, Restart, function() {
@@ -802,5 +809,3 @@ S3:
 S4:
     RestartEvent();
 });
-
-

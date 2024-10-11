@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(200, Default, function() {
-    
-    
     InitializeEvent(0, 1052520800, 0);
     InitializeEvent(0, 1052522810, 0);
     InitializeEvent(0, 1052522811, 0);
@@ -20,6 +18,7 @@ $Event(200, Default, function() {
     InitializeEvent(0, 1052522849, 0);
 });
 
+//fire giant
 $Event(1052520800, Restart, function() {
     EndIf(EventFlag(1252520800));
     WaitFor(CharacterHPValue(1052520800) <= 0);
@@ -29,7 +28,14 @@ $Event(1052520800, Restart, function() {
     WaitFixedTimeSeconds(4);
     HandleBossDefeatAndDisplayBanner(1052520800, TextBannerType.LegendFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302508, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(1052522810, Restart, function() {

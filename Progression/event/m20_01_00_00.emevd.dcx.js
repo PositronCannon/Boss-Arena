@@ -658,19 +658,18 @@ $Event(20010610, Default, function() {
     }
 });
 
+//consort
 $Event(20012800, Restart, function() {
     EndIf(EventFlag(20010800));
     WaitFor(CharacterHPValue(20010800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(20018000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(20010800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(20010800));
+    WaitFor(CharacterDead(20010800));
     SetSpEffect(10000, 19684);
     HandleBossDefeatAndDisplayBanner(20010800, TextBannerType.GodSlain);
     ChangeCamera(-1, -1);
     //boss rewards (5 bonus items, DLC version)
-InitializeCommonEvent(0,90001045,1049304305,1049304156,1049304162,1049307341,1049307342,1049307343,1049307344,1049307345,1049307346,1049306685,1049306688,1049306690,1049306692,1049306698,1049306700,1049300305);
+    InitializeCommonEvent(0,90001045,1049304305,1049304156,1049304162,1049307341,1049307342,1049307343,1049307344,1049307345,1049307346,1049306685,1049306688,1049306690,1049306692,1049306698,1049306700,1049300305);
     //roundtable warp
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
@@ -898,6 +897,7 @@ $Event(20012849, Restart, function() {
     InitializeCommonEvent(0, 9005822, 20010800, 522000, 20012805, 20012806, 0, 20012802, 0, 0);
 });
 
+//leda
 $Event(20012850, Restart, function() {
     EndIf(EventFlag(20010850));
     WaitFor(
@@ -2372,7 +2372,3 @@ $Event(20010763, Restart, function(X0_4, X4_4, X8_4) {
     WaitFixedTimeSeconds(20);
     DisableCharacter(X0_4);
 });
-
-
-
-

@@ -823,6 +823,7 @@ $Event(10003500, Restart, function(X0_4) {
     RestartEvent();
 });
 
+//godrick
 $Event(10002800, Default, function() {
     EndIf(EventFlag(10000800));
     WaitFor(HPRatio(10000800) <= 0);
@@ -833,14 +834,10 @@ $Event(10002800, Default, function() {
     SpawnMapSFX(10003822);
     WaitFixedTimeSeconds(4);
     PlaySE(10000800, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(10000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(10000800));
+    WaitFor(CharacterDead(10000800));
     HandleBossDefeatAndDisplayBanner(10000800, TextBannerType.DemigodFelled);
     //boss rewards (5 bonus items)
     InitializeCommonEvent(0,90001025,1049304127,-1,-1,1049304066,1049304484,1049304518,1049304519,1049304520,1049304521,1049304522,1049304488,1049304490,1049304495,1049304497,1049304407,1049300127);
-    
-    
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
@@ -1029,6 +1026,7 @@ $Event(10002849, Restart, function() {
     InitializeCommonEvent(0, 9005822, 10000800, 475000, 10002805, 10002806, 0, 10002802, 1, 1);
 });
 
+//margit
 $Event(10002850, Default, function() {
     EndIf(EventFlag(10000850));
     WaitFor(CharacterHPValue(10000850) <= 0);
@@ -1039,8 +1037,6 @@ $Event(10002850, Default, function() {
     HandleBossDefeatAndDisplayBanner(10000850, TextBannerType.GreatEnemyFelled);
     //boss rewards (4 bonus items)
     InitializeCommonEvent(0,90001024,1049304126,-1,-1,1049304038,1049304474,1049304513,1049304514,1049304515,1049304516,1049304476,1049304478,1049304480,1049304482,1049300126);
-    
-    
     WaitFixedTimeSeconds(6);
     WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });

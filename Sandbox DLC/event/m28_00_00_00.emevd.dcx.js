@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
-    
     InitializeCommonEvent(0, 9005810, 28000800, 28000000, 28000950, 28001950, 1084227584);
     RegisterBonfire(28000001, 28001951, 0, 0, 0, 5);
     RegisterBonfire(28000002, 28001952, 0, 0, 0, 5);
@@ -226,6 +224,7 @@ L0:
     EndEvent();
 });
 
+//midra
 $Event(28000800, Restart, function() {
     EndIf(EventFlag(28000800));
     WaitFor(CharacterHPValue(28000800) <= 0);
@@ -233,9 +232,15 @@ $Event(28000800, Restart, function() {
     PlaySE(28000800, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(28000800));
     HandleBossDefeatAndDisplayBanner(28000800, TextBannerType.LegendFelled);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302524, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(28002810, Restart, function() {

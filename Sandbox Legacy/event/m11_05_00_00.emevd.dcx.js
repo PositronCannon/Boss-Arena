@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     RegisterBonfire(11050002, 11051952, 0, 0, 0, 8);
     RegisterBonfire(11050003, 11051953, 0, 0, 0, 8);
     RegisterBonfire(11050004, 11051954, 0, 0, 0, 8);
@@ -66,17 +65,23 @@ $Event(0, Default, function() {
     InitializeEvent(0, 11053731, 11050730);
 });
 
+//hoarah loux
 $Event(11052800, Default, function() {
     EndIf(EventFlag(11050800));
     WaitFor(CharacterHPValue(11050800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(11058000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(11050800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(11050800));
+    WaitFor(CharacterDead(11050800));
     HandleBossDefeatAndDisplayBanner(11050800, TextBannerType.LegendFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302510, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(11052810, Restart, function() {
@@ -211,6 +216,7 @@ $Event(11053720, Restart, function() {
     EndEvent();
 });
 
+//gideon
 $Event(11052850, Restart, function() {
     EndIf(EventFlag(11050850));
     WaitFor(CharacterHPValue(11050850) <= 0);

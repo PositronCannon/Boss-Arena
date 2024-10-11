@@ -641,6 +641,7 @@ L0:
     EndEvent();
 });
 
+//rennala
 $Event(14002800, Restart, function() {
     if (EventFlag(14000804)) {
         ReproduceAssetAnimation(14001841, 0);
@@ -654,15 +655,11 @@ L1:
         WaitFor(CharacterHPValue(14000800) <= 0);
         WaitFixedTimeSeconds(4);
         PlaySE(14008000, SoundType.SFX, 888880000);
-        WaitFor(
-            (PlayerIsInOwnWorld() && CharacterDead(14000800) && !CharacterHasSpEffect(10000, 9646))
-                || EventFlag(14000800));
+        WaitFor(CharacterDead(14000800));
         ForceCharacterDeath(14005810, false);
         HandleBossDefeatAndDisplayBanner(14000800, TextBannerType.LegendFelled);
         //boss rewards (6 bonus items, no upgrade mats)
-InitializeCommonEvent(0,90001026,1049304155,1049304063,1049304832,1049304645,1049304646,1049304647,1049304648,1049304649,1049304650,1049304835,1049304837,1049304839,1049304846,1049304848,1049304850,1049300155);
-        
-
+        InitializeCommonEvent(0,90001026,1049304155,1049304063,1049304832,1049304645,1049304646,1049304647,1049304648,1049304649,1049304650,1049304835,1049304837,1049304839,1049304846,1049304848,1049304850,1049300155);
         WaitFixedTimeSeconds(6);
         WarpPlayer(11, 10, 0, 0, 11102021, 0);
     }
@@ -1002,6 +999,7 @@ $Event(14002849, Restart, function() {
     InitializeCommonEvent(0, 9005822, 14000800, 203000, 14002805, 14002806, 0, 14002803, 1, 0);
 });
 
+//red wolf
 $Event(14002850, Restart, function() {
     EndIf(EventFlag(14000850));
     WaitFor(HPRatio(14000850) <= 0);

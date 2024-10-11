@@ -157,6 +157,7 @@ $Event(0, Default, function() {
     InitializeEvent(7, 20010750, 20010750, 4400, 4408, 90102);
     InitializeCommonEvent(0, 90005750, 20011750, 4350, 106220, 400624, 400624, 4408, 6102);
     InitializeCommonEvent(0, 90005715, 20010800, 0, 20010800, 20012805, 1125515264);
+    InitializeEvent(0, 20019990, 0);
 });
 
 $Event(50, Default, function() {
@@ -205,6 +206,15 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005261, 20010453, 20012453, 1065353216, 0, -1);
     InitializeCommonEvent(0, 90005261, 20010455, 20012455, 1065353216, 0, -1);
     InitializeCommonEvent(0, 90005261, 20010470, 20012470, 1065353216, 0, -1);
+});
+
+//apply miquella's great rune effect when infinite hp is on
+$Event(20019990, Restart, function() {
+    WaitFor(CharacterHasSpEffect(10000, 10493010));
+    WaitFor(CharacterHasSpEffect(10000, 19681));
+    SetSpEffect(10000, 19683);
+    WaitFixedTimeSeconds(1);
+    RestartEvent();
 });
 
 $Event(20010197, Default, function() {
@@ -658,20 +668,25 @@ $Event(20010610, Default, function() {
     }
 });
 
+//consort
 $Event(20012800, Restart, function() {
     EndIf(EventFlag(20010800));
     WaitFor(CharacterHPValue(20010800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(20018000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(20010800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(20010800));
+    WaitFor(CharacterDead(20010800));
     SetSpEffect(10000, 19684);
     HandleBossDefeatAndDisplayBanner(20010800, TextBannerType.GodSlain);
     ChangeCamera(-1, -1);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302527, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(20012810, Restart, function() {
@@ -2370,6 +2385,3 @@ $Event(20010763, Restart, function(X0_4, X4_4, X8_4) {
     WaitFixedTimeSeconds(20);
     DisableCharacter(X0_4);
 });
-
-
-

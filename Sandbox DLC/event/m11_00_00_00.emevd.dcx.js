@@ -199,6 +199,7 @@ $Event(11002503, Default, function() {
     RestartEvent();
 });
 
+//morgott
 $Event(11002800, Restart, function() {
     EndIf(EventFlag(11000800));
     WaitFor(CharacterHPValue(11000800) <= 0);
@@ -207,7 +208,14 @@ $Event(11002800, Restart, function() {
     WaitFor(CharacterDead(11000800));
     HandleBossDefeatAndDisplayBanner(11000800, TextBannerType.DemigodFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302506, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);  
 });
 
 $Event(11002810, Restart, function() {
@@ -282,6 +290,7 @@ $Event(11002829, Restart, function() {
     InitializeCommonEvent(0, 9005822, 11000800, 213001, 11002805, 11002806, 0, 11002802, 0, 0);
 });
 
+//godfrey (golden shade)
 $Event(11002850, Restart, function() {
     EndIf(EventFlag(11000850));
     WaitFor(CharacterHPValue(11000850) <= 0);

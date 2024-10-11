@@ -389,9 +389,7 @@ L0:
     ForceCharacterDeath(13000800, false);
     WaitFixedTimeSeconds(4);
     PlaySE(13008000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(13000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(13000800));
+    WaitFor(CharacterDead(13000800));
     EnableCharacterDefaultBackread(13000800);
     HandleBossDefeatAndDisplayBanner(13000800, TextBannerType.LegendFelled);
     //boss rewards (4 bonus items + guaranteed flag)

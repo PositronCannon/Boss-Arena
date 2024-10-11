@@ -68,6 +68,7 @@ $Event(12042680, Restart, function() {
     RestartEvent();
 });
 
+//astel
 $Event(12042800, Default, function() {
     EndIf(EventFlag(12040800));
     WaitFor(HPRatio(12040800) <= 0);

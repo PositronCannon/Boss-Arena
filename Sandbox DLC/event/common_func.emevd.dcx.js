@@ -7,6 +7,452 @@
 // @version    3.4.2
 // ==/EMEVD==
 
+//boss rush scripts
+
+//custom boss rush slot 1
+$Event(90009910, Default, function() {
+    DisplayBlinkingMessage(2081024); //remove this line if you use this slot
+});
+
+//custom boss rush slot 2
+$Event(90009911, Default, function() {
+    DisplayBlinkingMessage(2081024); //remove this line if you use this slot
+});
+
+//custom boss rush slot 3
+$Event(90009912, Default, function() {
+    DisplayBlinkingMessage(2081024); //remove this line if you use this slot
+});
+
+//boss rush: remembrance + dlc main
+$Event(90009900, Default, function() {
+    //Godrick the Grafted
+    if (EventFlag(1049302750)) { //flag used to trigger the first boss in a boss rush sequence
+        SetEventFlagID(1049302750, OFF); //turn flag off to prevent godrick from being selected again
+        SetEventFlagID(10000800, OFF); //part of godrick's warp script
+        SetPlayerRespawnPoint(10002899); //part of godrick's warp script
+        WarpPlayer(10, 0, 0, 0, 10002899, 0); //part of godrick's warp script
+    }
+    //Rennala, Queen of the Full Moon
+    else if (EventFlag(1049302500)) { //defeat flag for godrick
+        SetEventFlagID(1049302500, OFF); //turn flag off to prevent rennala from being selected again
+        SetEventFlagID(14000800, OFF); //part of rennala's warp script
+        SetPlayerRespawnPoint(14000099); //part of rennala's warp script
+        WarpPlayer(14, 0, 0, 0, 14000099, 0); //part of rennala's warp script
+    }
+    //Regal Ancestor Spirit
+    else if (EventFlag(1049302501)) { //defeat flag for rennala
+        SetEventFlagID(1049302501, OFF);
+        SetEventFlagID(12090800, OFF);
+        SetPlayerRespawnPoint(12090099);
+        WarpPlayer(12, 9, 0, 0, 12090099, 0);
+    }
+    //Starscourge Radahn
+    else if (EventFlag(1049302502)) {
+        SetEventFlagID(1049302502, OFF);
+        SetEventFlagID(1052380800, OFF);
+        SetPlayerRespawnPoint(60513799);
+        WarpPlayer(60, 51, 37, 0, 60513799, 0);
+    }
+    //Astel, Naturalborn of the Void
+    else if (EventFlag(1049302503)) {
+        SetEventFlagID(1049302503, OFF);
+        SetEventFlagID(12040800, OFF);
+        SetPlayerRespawnPoint(12040099);
+        WarpPlayer(12, 4, 0, 0, 12040099, 0);
+    }
+    //Lichdragon Fortissax
+    else if (EventFlag(1049302504)) {
+        SetEventFlagID(1049302504, OFF);
+        SetEventFlagID(12030800, ON);
+        SetEventFlagID(12030850, OFF);
+        SetPlayerRespawnPoint(12030099);
+        WarpPlayer(12, 3, 0, 0, 12030099, 0);
+    }
+    //Morgott, the Omen King
+    else if (EventFlag(1049302505)) {
+        SetEventFlagID(1049302505, OFF);
+        SetEventFlagID(11000800, OFF);
+        SetPlayerRespawnPoint(11000099);
+        WarpPlayer(11, 0, 0, 0, 11000099, 0);
+    }
+    //Rykard, Lord of Blasphemy
+    else if (EventFlag(1049302506)) {
+        SetEventFlagID(1049302506, OFF);
+        SetEventFlagID(16000800, OFF);
+        SetPlayerRespawnPoint(16000099);
+        WarpPlayer(16, 0, 0, 0, 16000099, 0);
+    }
+    //Fire Giant
+    else if (EventFlag(1049302507)) {
+        SetEventFlagID(1049302507, OFF);
+        SetEventFlagID(1052520800, OFF);
+        SetPlayerRespawnPoint(1052530099);
+        WarpPlayer(60, 52, 53, 0, 1052530099, 0);
+    }
+    //Beast Clergyman / Maliketh
+    else if (EventFlag(1049302508)) {
+        SetEventFlagID(1049302508, OFF);
+        SetEventFlagID(13000800, OFF);
+        SetPlayerRespawnPoint(13000099);
+        WarpPlayer(13, 0, 0, 0, 13000099, 0);
+    }
+    //Godfrey / Hoarah Loux
+    else if (EventFlag(1049302509)) {
+        SetEventFlagID(1049302509, OFF);
+        SetEventFlagID(11050800, OFF);
+        SetPlayerRespawnPoint(11050099);
+        WarpPlayer(11, 5, 0, 0, 11050099, 0);
+    }
+    //Dragonlord Placidusax
+    else if (EventFlag(1049302510)) {
+        SetEventFlagID(1049302510, OFF);
+        SetEventFlagID(13000830, OFF);
+        SetPlayerRespawnPoint(13000098);
+        WarpPlayer(13, 0, 0, 0, 13000098, 0);
+    }
+    //Radagon / Elden Beast
+    else if (EventFlag(1049302511)) {
+        SetEventFlagID(1049302511, OFF);
+        SetEventFlagID(19000800, OFF);
+        SetEventFlagID(1049300040, OFF);
+        SetEventFlagID(1049300041, ON);
+        SetPlayerRespawnPoint(19000098);
+        WarpPlayer(19, 0, 0, 0, 19000098, 0);
+    }
+    //Mohg, Lord of Blood
+    else if (EventFlag(1049302512)) {
+        SetEventFlagID(1049302512, OFF);
+        SetEventFlagID(12050800, OFF);
+        SetPlayerRespawnPoint(12050099);
+        WarpPlayer(12, 5, 0, 0, 12050099, 0);
+    }
+    //Malenia, Blade of Miquella
+    else if (EventFlag(1049302515)) {
+        SetEventFlagID(1049302515, OFF);
+        SetEventFlagID(15000800, OFF);
+        SetPlayerRespawnPoint(15000099);
+        WarpPlayer(15, 0, 0, 0, 15000099, 0);
+    }
+    //Divine Beast Dancing Lion
+    else if (EventFlag(1049302516)) {
+        SetEventFlagID(1049302516, OFF);
+        SetEventFlagID(20000800, OFF);
+        SetPlayerRespawnPoint(20000099);
+        WarpPlayer(20, 0, 0, 0, 20000099, 0);
+    }
+    //Rellana, Twin Moon Knight
+    else if (EventFlag(1049302517)) {
+        SetEventFlagID(1049302517, OFF);
+        SetEventFlagID(2048440800, OFF);
+        SetPlayerRespawnPoint(2048442099);
+        WarpPlayer(61, 48, 44, 0, 2048442099, 0);
+    }
+    //Golden Hippopotamus
+    else if (EventFlag(1049302518)) {
+        SetEventFlagID(1049302518, OFF);
+        SetEventFlagID(21000850, OFF);
+        SetPlayerRespawnPoint(21000099);
+        WarpPlayer(21, 0, 0, 0, 21000099, 0);
+    }
+    //Putrescent Knight
+    else if (EventFlag(1049302519)) {
+        SetEventFlagID(1049302519, OFF);
+        SetEventFlagID(22000800, OFF);
+        SetPlayerRespawnPoint(22000099);
+        WarpPlayer(22, 0, 0, 0, 22000099, 0);
+    }
+    //Scadutree Avatar
+    else if (EventFlag(1049302520)) {
+        SetEventFlagID(1049302520, OFF);
+        SetEventFlagID(2050480800, OFF);
+        SetPlayerRespawnPoint(21000098);
+        WarpPlayer(21, 0, 0, 0, 21000098, 0);
+    }
+    //Commander Gaius
+    else if (EventFlag(1049302521)) {
+        SetEventFlagID(1049302521, OFF);
+        SetEventFlagID(2049480800, OFF);
+        SetPlayerRespawnPoint(2049482099);
+        WarpPlayer(61, 49, 48, 0, 2049482099, 0);
+    }
+    //Messmer the Impaler
+    else if (EventFlag(1049302522)) {
+        SetEventFlagID(1049302522, OFF);
+        SetEventFlagID(21010800, OFF);
+        SetPlayerRespawnPoint(21010099);
+        WarpPlayer(21, 1, 0, 0, 21010099, 0);
+    }
+    //Midra, Lord of Frenzied Flame
+    else if (EventFlag(1049302523)) {
+        SetEventFlagID(1049302523, OFF);
+        SetEventFlagID(28000800, OFF);
+        SetPlayerRespawnPoint(28000099);
+        WarpPlayer(28, 0, 0, 0, 28000099, 0);
+    }
+    //Romina, Saint of the Bud
+    else if (EventFlag(1049302524)) {
+        SetEventFlagID(1049302524, OFF);
+        SetEventFlagID(2044450800, OFF);
+        SetEventFlagID(330, OFF);
+        SetPlayerRespawnPoint(2044462099);
+        WarpPlayer(61, 44, 46, 0, 2044462099, 0);
+    }
+    //Metyr, Mother of Fingers
+    else if (EventFlag(1049302525)) {
+        SetEventFlagID(1049302525, OFF);
+        SetEventFlagID(25000800, OFF);
+        SetPlayerRespawnPoint(25000099);
+        WarpPlayer(25, 0, 0, 0, 25000099, 0);
+    }
+    //Radahn, Consort of Miquella
+    else if (EventFlag(1049302526)) {
+        SetEventFlagID(1049302526, OFF);
+        SetEventFlagID(20010800, OFF);
+        SetPlayerRespawnPoint(20010099);
+        WarpPlayer(20, 1, 0, 0, 20010099, 0);
+    }
+    //Bayle the Dread
+    else if (EventFlag(1049302527)) {
+        SetEventFlagID(1049302527, OFF);
+        SetEventFlagID(2054390800, OFF);
+        SetPlayerRespawnPoint(2054392099);
+        WarpPlayer(61, 54, 39, 0, 2054392099, 0);
+    }
+    //Roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11100000, 0);
+});
+
+//boss rush: remembrance (base game only)
+$Event(90009901, Default, function() {
+        //Godrick the Grafted
+    if (EventFlag(1049302750)) {
+        SetEventFlagID(1049302750, OFF);
+        SetEventFlagID(10000800, OFF);
+        SetPlayerRespawnPoint(10002899);
+        WarpPlayer(10, 0, 0, 0, 10002899, 0);
+    }
+    //Rennala, Queen of the Full Moon
+    else if (EventFlag(1049302500)) {
+        SetEventFlagID(1049302500, OFF);
+        SetEventFlagID(14000800, OFF);
+        SetPlayerRespawnPoint(14000099);
+        WarpPlayer(14, 0, 0, 0, 14000099, 0);
+    }
+    //Regal Ancestor Spirit
+    else if (EventFlag(1049302501)) {
+        SetEventFlagID(1049302501, OFF);
+        SetEventFlagID(12090800, OFF);
+        SetPlayerRespawnPoint(12090099);
+        WarpPlayer(12, 9, 0, 0, 12090099, 0);
+    }
+    //Starscourge Radahn
+    else if (EventFlag(1049302502)) {
+        SetEventFlagID(1049302502, OFF);
+        SetEventFlagID(1052380800, OFF);
+        SetPlayerRespawnPoint(60513799);
+        WarpPlayer(60, 51, 37, 0, 60513799, 0);
+    }
+    //Astel, Naturalborn of the Void
+    else if (EventFlag(1049302503)) {
+        SetEventFlagID(1049302503, OFF);
+        SetEventFlagID(12040800, OFF);
+        SetPlayerRespawnPoint(12040099);
+        WarpPlayer(12, 4, 0, 0, 12040099, 0);
+    }
+    //Lichdragon Fortissax
+    else if (EventFlag(1049302504)) {
+        SetEventFlagID(1049302504, OFF);
+        SetEventFlagID(12030800, ON);
+        SetEventFlagID(12030850, OFF);
+        SetPlayerRespawnPoint(12030099);
+        WarpPlayer(12, 3, 0, 0, 12030099, 0);
+    }
+    //Morgott, the Omen King
+    else if (EventFlag(1049302505)) {
+        SetEventFlagID(1049302505, OFF);
+        SetEventFlagID(11000800, OFF);
+        SetPlayerRespawnPoint(11000099);
+        WarpPlayer(11, 0, 0, 0, 11000099, 0);
+    }
+    //Rykard, Lord of Blasphemy
+    else if (EventFlag(1049302506)) {
+        SetEventFlagID(1049302506, OFF);
+        SetEventFlagID(16000800, OFF);
+        SetPlayerRespawnPoint(16000099);
+        WarpPlayer(16, 0, 0, 0, 16000099, 0);
+    }
+    //Fire Giant
+    else if (EventFlag(1049302507)) {
+        SetEventFlagID(1049302507, OFF);
+        SetEventFlagID(1052520800, OFF);
+        SetPlayerRespawnPoint(1052530099);
+        WarpPlayer(60, 52, 53, 0, 1052530099, 0);
+    }
+    //Beast Clergyman / Maliketh
+    else if (EventFlag(1049302508)) {
+        SetEventFlagID(1049302508, OFF);
+        SetEventFlagID(13000800, OFF);
+        SetPlayerRespawnPoint(13000099);
+        WarpPlayer(13, 0, 0, 0, 13000099, 0);
+    }
+    //Godfrey / Hoarah Loux
+    else if (EventFlag(1049302509)) {
+        SetEventFlagID(1049302509, OFF);
+        SetEventFlagID(11050800, OFF);
+        SetPlayerRespawnPoint(11050099);
+        WarpPlayer(11, 5, 0, 0, 11050099, 0);
+    }
+    //Dragonlord Placidusax
+    else if (EventFlag(1049302510)) {
+        SetEventFlagID(1049302510, OFF);
+        SetEventFlagID(13000830, OFF);
+        SetPlayerRespawnPoint(13000098);
+        WarpPlayer(13, 0, 0, 0, 13000098, 0);
+    }
+    //Radagon / Elden Beast
+    else if (EventFlag(1049302511)) {
+        SetEventFlagID(1049302511, OFF);
+        SetEventFlagID(19000800, OFF);
+        SetEventFlagID(1049300040, OFF);
+        SetEventFlagID(1049300041, ON);
+        SetPlayerRespawnPoint(19000098);
+        WarpPlayer(19, 0, 0, 0, 19000098, 0);
+    }
+    //Mohg, Lord of Blood
+    else if (EventFlag(1049302512)) {
+        SetEventFlagID(1049302512, OFF);
+        SetEventFlagID(12050800, OFF);
+        SetPlayerRespawnPoint(12050099);
+        WarpPlayer(12, 5, 0, 0, 12050099, 0);
+    }
+    //Malenia, Blade of Miquella
+    else if (EventFlag(1049302515)) {
+        SetEventFlagID(1049302515, OFF);
+        SetEventFlagID(15000800, OFF);
+        SetPlayerRespawnPoint(15000099);
+        WarpPlayer(15, 0, 0, 0, 15000099, 0);
+    }
+    //Roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11100000, 0);
+});
+
+//boss rush: dlc main
+$Event(90009902, Default, function() {
+    //Divine Beast Dancing Lion
+    if (EventFlag(1049302750)) {
+        SetEventFlagID(1049302750, OFF);
+        SetEventFlagID(20000800, OFF);
+        SetPlayerRespawnPoint(20000099);
+        WarpPlayer(20, 0, 0, 0, 20000099, 0);
+    }
+    //Rellana, Twin Moon Knight
+    else if (EventFlag(1049302517)) {
+        SetEventFlagID(1049302517, OFF);
+        SetEventFlagID(2048440800, OFF);
+        SetPlayerRespawnPoint(2048442099);
+        WarpPlayer(61, 48, 44, 0, 2048442099, 0);
+    }
+    //Golden Hippopotamus
+    else if (EventFlag(1049302518)) {
+        SetEventFlagID(1049302518, OFF);
+        SetEventFlagID(21000850, OFF);
+        SetPlayerRespawnPoint(21000099);
+        WarpPlayer(21, 0, 0, 0, 21000099, 0);
+    }
+    //Putrescent Knight
+    else if (EventFlag(1049302519)) {
+        SetEventFlagID(1049302519, OFF);
+        SetEventFlagID(22000800, OFF);
+        SetPlayerRespawnPoint(22000099);
+        WarpPlayer(22, 0, 0, 0, 22000099, 0);
+    }
+    //Scadutree Avatar
+    else if (EventFlag(1049302520)) {
+        SetEventFlagID(1049302520, OFF);
+        SetEventFlagID(2050480800, OFF);
+        SetPlayerRespawnPoint(21000098);
+        WarpPlayer(21, 0, 0, 0, 21000098, 0);
+    }
+    //Commander Gaius
+    else if (EventFlag(1049302521)) {
+        SetEventFlagID(1049302521, OFF);
+        SetEventFlagID(2049480800, OFF);
+        SetPlayerRespawnPoint(2049482099);
+        WarpPlayer(61, 49, 48, 0, 2049482099, 0);
+    }
+    //Messmer the Impaler
+    else if (EventFlag(1049302522)) {
+        SetEventFlagID(1049302522, OFF);
+        SetEventFlagID(21010800, OFF);
+        SetPlayerRespawnPoint(21010099);
+        WarpPlayer(21, 1, 0, 0, 21010099, 0);
+    }
+    //Midra, Lord of Frenzied Flame
+    else if (EventFlag(1049302523)) {
+        SetEventFlagID(1049302523, OFF);
+        SetEventFlagID(28000800, OFF);
+        SetPlayerRespawnPoint(28000099);
+        WarpPlayer(28, 0, 0, 0, 28000099, 0);
+    }
+    //Romina, Saint of the Bud
+    else if (EventFlag(1049302524)) {
+        SetEventFlagID(1049302524, OFF);
+        SetEventFlagID(2044450800, OFF);
+        SetEventFlagID(330, OFF);
+        SetPlayerRespawnPoint(2044462099);
+        WarpPlayer(61, 44, 46, 0, 2044462099, 0);
+    }
+    //Metyr, Mother of Fingers
+    else if (EventFlag(1049302525)) {
+        SetEventFlagID(1049302525, OFF);
+        SetEventFlagID(25000800, OFF);
+        SetPlayerRespawnPoint(25000099);
+        WarpPlayer(25, 0, 0, 0, 25000099, 0);
+    }
+    //Radahn, Consort of Miquella
+    else if (EventFlag(1049302526)) {
+        SetEventFlagID(1049302526, OFF);
+        SetEventFlagID(20010800, OFF);
+        SetPlayerRespawnPoint(20010099);
+        WarpPlayer(20, 1, 0, 0, 20010099, 0);
+    }
+    //Bayle the Dread
+    else if (EventFlag(1049302527)) {
+        SetEventFlagID(1049302527, OFF);
+        SetEventFlagID(2054390800, OFF);
+        SetPlayerRespawnPoint(2054392099);
+        WarpPlayer(61, 54, 39, 0, 2054392099, 0);
+    }
+    //Roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11100000, 0);
+});
+
+//boss rush initialization
+$Event(90009920, Default, function() {
+    //remembrance+dlc main
+    if (EventFlag(1049308250))
+        InitializeCommonEvent(0, 90009900, 0);
+    //remembrance (base game)
+    else if (EventFlag(1049308251))
+        InitializeCommonEvent(0, 90009901, 0);
+    //dlc main
+    else if (EventFlag(1049308252))
+        InitializeCommonEvent(0, 90009902, 0);
+    //custom 1
+    else if (EventFlag(1049308260))
+        InitializeCommonEvent(0, 90009910, 0);
+    //custom 2
+    else if (EventFlag(1049308261))
+        InitializeCommonEvent(0, 90009911, 0);
+    //custom 3
+    else if (EventFlag(1049308262))
+        InitializeCommonEvent(0, 90009912, 0);
+});
+
 //character initialization (sandbox DLC)
 $Event(10010001, Default, function() {
     SetEventFlagID(100, ON);

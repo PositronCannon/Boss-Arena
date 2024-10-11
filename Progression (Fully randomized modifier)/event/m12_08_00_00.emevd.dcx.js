@@ -34,6 +34,7 @@ L0:
     WarpPlayer(12, 2, 0, 0, 12022200, 0);
 });
 
+//ancestor spirit
 $Event(12082800, Default, function() {
     EndIf(EventFlag(12080800));
     WaitFor(HPRatio(12080800) <= 0);

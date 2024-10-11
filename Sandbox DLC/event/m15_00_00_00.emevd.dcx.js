@@ -8,7 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
     DisableAsset(15001702);
     InitializeCommonEvent(0, 9005810, 15000800, 15000000, 15000950, 15001950, 0);
     InitializeCommonEvent(0, 9005810, 15000850, 15000005, 15000955, 15001955, 0);
@@ -338,17 +337,23 @@ $Event(15002680, Restart, function() {
     RegisterLadder(15000698, 15000699, 15001698);
 });
 
+//malenia
 $Event(15002800, Restart, function() {
     EndIf(EventFlag(15000800));
     WaitFor(CharacterHPValue(15000800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(15008000, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(15000800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(15000800));
+    WaitFor(CharacterDead(15000800));
     HandleBossDefeatAndDisplayBanner(15000800, TextBannerType.DemigodFelled);
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, -11100);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302516, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(15002810, Restart, function() {
@@ -580,6 +585,7 @@ $Event(15002849, Restart, function() {
     InitializeCommonEvent(0, 9005822, 15002800, 212000, 15002805, 15002806, 0, 15002802, 1, 1);
 });
 
+//loretta
 $Event(15002850, Restart, function() {
     EndIf(EventFlag(15000850));
     WaitFor(CharacterHPValue(15000850) <= 0);
@@ -804,5 +810,3 @@ $Event(15000716, Restart, function() {
     SetNetworkconnectedEventFlagID(4198, ON);
     EndEvent();
 });
-
-

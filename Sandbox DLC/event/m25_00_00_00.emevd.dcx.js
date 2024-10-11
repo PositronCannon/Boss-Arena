@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
-    
     InitializeCommonEvent(0, 9005810, 25000800, 25000000, 25000950, 25001950, 1084227584);
     InitializeEvent(0, 25002800, 0);
     InitializeEvent(0, 25002810, 0);
@@ -68,6 +66,7 @@ $Event(25000701, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     EndEvent();
 });
 
+//metyr
 $Event(25002800, Restart, function() {
     EndIf(EventFlag(25000800));
     WaitFor(CharacterHPValue(25000800) <= 0);
@@ -90,9 +89,15 @@ $Event(25002800, Restart, function() {
     PlaySE(25000800, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(25000800));
     HandleBossDefeatAndDisplayBanner(25000800, TextBannerType.LegendFelled);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302526, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(25002810, Restart, function() {

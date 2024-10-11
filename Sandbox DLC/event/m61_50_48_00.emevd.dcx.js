@@ -70,6 +70,7 @@ $Event(2050482506, Default, function() {
     SetCharacterTalkRange(2050480104, 210);
 });
 
+//scadutree avatar
 $Event(2050480800, Default, function() {
     if (EventFlag(2050480800)) {
         EndIf(!PlayerIsInOwnWorld());
@@ -85,13 +86,17 @@ L0:
     }
     WaitFixedTimeSeconds(1);
     PlaySE(2050480800, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(2050480800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(2050480800));
+    WaitFor(CharacterDead(2050480800));
     HandleBossDefeatAndDisplayBanner(2050480800, TextBannerType.LegendFelled);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302521, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(2050482810, Restart, function() {
@@ -226,6 +231,3 @@ $Event(2050482849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2050480800, 2050481800, 5, 2050480801);
     InitializeCommonEvent(0, 9005824, 2050480800, 523000, 2050482805, 2050482806, 0, 2050482802, 2050482803, 0, 0);
 });
-
-
-

@@ -8,8 +8,6 @@
 // ==/EMEVD==
 
 $Event(0, Default, function() {
-    
-    
     RegisterBonfire(2054390000, 2054391950, 0, 0, 0, 5);
     InitializeCommonEvent(0, 900005610, 2054391501, 100, 800, 0);
     InitializeCommonEvent(0, 900005610, 2054391502, 100, 800, 0);
@@ -137,6 +135,7 @@ $Event(2054392400, Restart, function(X0_4, X4_4) {
     RestartEvent();
 });
 
+//bayle
 $Event(2054392800, Restart, function() {
     EndIf(EventFlag(2054390800));
     WaitFor(CharacterHPValue(2054390800) <= 0);
@@ -150,8 +149,14 @@ $Event(2054392800, Restart, function() {
     DeleteAssetfollowingSFX(2054396800, true);
     WaitFixedTimeSeconds(6);
     ForceAnimationPlayback(2054391811, 3, false, false, false);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302528, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
     //roundtable warp
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(2054392810, Restart, function() {

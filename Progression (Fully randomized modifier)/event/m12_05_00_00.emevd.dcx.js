@@ -374,14 +374,13 @@ $Event(12052690, Restart, function() {
     RestartEvent();
 });
 
+//mohg lord of blood
 $Event(12052800, Restart, function() {
     EndIf(EventFlag(12050800));
     WaitFor(CharacterHPValue(12050800) <= 0);
     WaitFixedTimeSeconds(4);
     PlaySE(12050800, SoundType.SFX, 888880000);
-    WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(12050800) && !CharacterHasSpEffect(10000, 9646))
-            || EventFlag(12050800));
+    WaitFor(CharacterDead(12050800));
     HandleBossDefeatAndDisplayBanner(12050800, TextBannerType.DemigodFelled);
     //boss rewards (4 bonus items + guaranteed flag)
     InitializeCommonEvent(0,90001034,1049304264,-1,-1,1049304060,1049307131,1049307132,1049307133,1049307134,1049307135,1049306122,1049306126,1049306128,1049306130,1049306132,1049300264);

@@ -537,6 +537,7 @@ $Event(21002600, Restart, function(X0_4, X4_4, X8_4) {
     AwardItemsIncludingClients(X8_4);
 });
 
+//golden hippo
 $Event(21002850, Restart, function() {
     EndIf(EventFlag(21000850));
     WaitFor(CharacterHPValue(21000850) <= 0);
@@ -544,9 +545,15 @@ $Event(21002850, Restart, function() {
     PlaySE(21000850, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(21000850));
     HandleBossDefeatAndDisplayBanner(21000850, TextBannerType.GreatEnemyFelled);
-    //roundtable warp
     WaitFixedTimeSeconds(6);
-    WarpPlayer(11, 10, 0, 0, 11102021, 0);
+    //boss rush
+    if (AnyBatchEventFlags(1049308250, 1049308275)) {
+        SetEventFlagID(1049302519, ON);
+        InitializeCommonEvent(0, 90009920, 0);
+    }
+    //roundtable warp
+    else
+        WarpPlayer(11, 10, 0, 0, 11102021, 0);
 });
 
 $Event(21002860, Restart, function() {
@@ -978,8 +985,3 @@ $Event(21000735, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(CharacterHPValue(X0_4) <= 0 || CharacterDead(X0_4));
     DisableCharacterAI(X4_4);
 });
-
-
-
-
-
